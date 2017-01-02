@@ -22,13 +22,13 @@ public class TextAreaLogHandler extends Handler {
 	@Override
 	public void publish(LogRecord record) {
 		if ( this.isLoggable(record) ) {
-			String text = record.getMessage();
+			String text = record.getMessage() +"\n";
 			mTextArea.appendText(text);
 			int currentLength = mTextArea.getLength();
 			if ( currentLength > mMaxLength ) {
 				int end = (mTextArea.getLength() - mMaxLength);
 				if ( end > 0 ) {
-					mTextArea.replaceText(0, end , "");
+					//mTextArea.replaceText(0, end , "");
 				}
 			}
 			/*

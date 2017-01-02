@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>{0}</title>
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+ 
+<script>
+/*
+var namespaceInfo = {
+		  "name" : "cache",
+		  "properties" : {
+		    "allow-xdr-writes" : "true",
+		    "migrate-tx-partitions-imbalance" : "0",
+		    "enable-xdr" : "false"
+		  },
+		  "freeDiskPercent" : 0
+		};
+*/
+
+function update(namespaceInfo) {
+	document.getElementById("title").textContent = (namespaceInfo.name);
+    
+    var table = document.getElementById("summary");
+    var text = "";
+    
+    for ( property in namespaceInfo ) {
+        if ( property != "properties" ) {
+            text += "<tr><td width=\"50%\">" + property + "</td><td align=\"right\">" + namespaceInfo[property] + "</td></tr>"
+        }
+    }
+    table.innerHTML = text;
+        
+    text = "";
+    table = document.getElementById("properties");
+    for ( property in namespaceInfo.properties ) {
+        text += "<tr><td width=\"50%\">" + property + "</td><td align=\"right\">" + namespaceInfo.properties[property] + "</td></tr>"
+    }
+
+    table.innerHTML = text;
+}
+
+/*    
+window.onload = function() {
+  update(namespaceInfo)
+};*/
+</script>
+</head>
+<body style="padding: 20px;">
+    
+<div class="container">    
+    <div class="row">
+        <div class="col-md-8">
+            <h2 id="title"></h2>
+        
+            <h4>Overview</h4>
+            <table id="summary" class="table table-striped table-bordered"></table>
+        
+            <h4>Properties</h4>
+            <table id="properties" class="table table-striped table-bordered"></table>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>    
+     
+</body>
+</html>
