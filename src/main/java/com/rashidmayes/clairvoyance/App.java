@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 public class App extends Application
 {
 	public static final Logger APP_LOGGER = Logger.getLogger("app");
+	static final ThreadGroup SCANS = new ThreadGroup("scans");
 	private static AerospikeClient client = null;
 	protected static String host = null;
 	protected static int port;

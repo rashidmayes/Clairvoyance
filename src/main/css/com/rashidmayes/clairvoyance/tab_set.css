@@ -1,0 +1,14 @@
+#pages {
+    -fx-background-color: #cccccc;
+    -fx-text-fill: #c31618;
+    -fx-font-size: 10px;
+}
+#recordDetails {
+    -fx-background-color: #cccccc;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-family: "Courier";
+}
+#recordDetails *.content {
+    -fx-background-color: #888888;
+}

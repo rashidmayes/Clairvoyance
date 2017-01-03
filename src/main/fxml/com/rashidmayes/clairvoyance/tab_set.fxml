@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+
+
+<?import javafx.collections.*?> 
+<?import javafx.geometry.Insets?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+
+<?import com.rashidmayes.clairvoyance.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<SplitPane xmlns:fx="http://javafx.com/fxml" id="rootPane" fx:id="rootPane" fx:controller="com.rashidmayes.clairvoyance.SetController" dividerPositions=".9">
+	<items>
+
+		<GridPane>
+			<children>
+			
+				<ListView id="pages" fx:id="pages" GridPane.columnIndex="0" GridPane.columnSpan="1" minWidth="50" prefWidth="50"/>
+		
+				<TableView id="dataTable" fx:id="dataTable"
+					GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+				</TableView>
+		
+		     </children>
+		</GridPane>	
+		
+		<TextArea id="recordDetails" fx:id="recordDetails"  wrapText="false" editable="false"/>
+	</items>
+
+
+	<stylesheets>
+		<URL value="@tab_set.css" />
+	</stylesheets>
+</SplitPane>
