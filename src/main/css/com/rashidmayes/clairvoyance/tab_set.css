@@ -2,6 +2,7 @@
     -fx-background-color: #cccccc;
     -fx-text-fill: #c31618;
     -fx-font-size: 10px;
+    -fx-font-family: "Courier";
 }
 #recordDetails {
     -fx-background-color: #cccccc;
@@ -11,4 +12,69 @@
 }
 #recordDetails *.content {
     -fx-background-color: #888888;
+}
+
+.list-cell:filled:selected:focused, .list-cell:filled:selected {
+    -fx-background-color: black;
+    -fx-text-fill: orange;
+}
+
+.list-cell { 
+	-fx-text-fill: #aaaaaa;
+}
+
+.list-cell:odd { 
+	-fx-background-color: #444444;
+}
+
+.list-cell:even { 
+	-fx-background-color: #444444;
+}
+
+.list-cell:filled:hover { 
+    -fx-background-color: #111111;
+    -fx-text-fill: #eeeeee;
+}
+
+/* The main scrollbar **track** CSS class  */
+#pages .scroll-bar:horizontal .track,
+#pages .scroll-bar:vertical .track{
+	-fx-background-color: black;
+	-fx-border-color: #aaaaaa;
+	-fx-background-radius: 0em;
+	-fx-border-radius:0em;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+#pages .scroll-bar:horizontal .increment-button ,
+#pages .scroll-bar:horizontal .decrement-button {
+    -fx-background-color:transparent;
+	-fx-background-radius: 0em;
+	-fx-padding:0 0 10 0;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+#pages .scroll-bar:vertical .increment-button ,
+#pages .scroll-bar:vertical .decrement-button {
+
+    -fx-background-color:transparent;
+	-fx-background-radius: 0em;
+	-fx-padding:0 10 0 0;
+
+}
+
+#pages  .scroll-bar .increment-arrow,
+#pages  .scroll-bar .decrement-arrow {
+	-fx-shape: " ";	
+	-fx-padding:0;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+#pages .scroll-bar:horizontal .thumb,
+#pages .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black,90%);
+	-fx-background-insets: 2, 0, 0;
+	-fx-background-radius: 0em;
+
 }

@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,16 +19,22 @@ public class ConnectController {
     @FXML private TextField port;
     @FXML private TextField username;
     @FXML private TextField password;
+    @FXML private Button connect;
+    @FXML private Button connectAlternate;
     
     @FXML protected void handleConnectAction(ActionEvent event) {
             	
     	try {
+    		event.getSource();
+    		
         	String user = username.getText();
         	String pass = password.getText();
         	int p = Integer.parseInt(port.getText());
         	String h = host.getText();
         	
-        	App.setConnectionInfo(h, p, user, pass);
+        	System.out.println(event.getSource() == connectAlternate);
+        	
+        	App.setConnectionInfo(h, p, user, pass, event.getSource() == connectAlternate);
         	App.getClient();
         	
 			Parent root = FXMLLoader.load(App.class.getResource("browser.fxml"));

@@ -1,9 +1,14 @@
 package com.rashidmayes.clairvoyance;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -19,6 +24,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -26,9 +32,20 @@ public class App extends Application
 {
 	public static final Logger APP_LOGGER = Logger.getLogger("app");
 	static final ThreadGroup SCANS = new ThreadGroup("scans");
+	static final ThreadGroup LOADS = new ThreadGroup("loads");
+	static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(3, new ThreadFactory() {
+        public Thread newThread(Runnable r) {
+            Thread t = Executors.defaultThreadFactory().newThread(r);
+            t.setDaemon(true);
+            return t;
+        }
+    });
+	static Preferences Config =  Preferences.systemNodeForPackage(App.class);
+	
 	private static AerospikeClient client = null;
 	protected static String host = null;
 	protected static int port;
+	protected static boolean useServicesAlternate;
 	private static String username = null;
 	private static String password = null;
 	
@@ -88,10 +105,10 @@ public class App extends Application
 			map = MapHelper.map(set, ":");
 			setInfo = new SetInfo();
 			setInfo.properties = map;
-			setInfo.bytesMemory = MapHelper.getLong(map,0,"n-bytes-memory");
-			setInfo.name = map.get("set_name");
-			setInfo.namespace = map.get("ns_name");
-			setInfo.objectCount = MapHelper.getLong(map,0,"n_objects");
+			setInfo.bytesMemory = MapHelper.getLong(map,0,"n-bytes-memory", "memory_data_bytes");
+			setInfo.name = MapHelper.getString(map,"","set_name","set");
+			setInfo.namespace =  MapHelper.getString(map, "", "ns_name", "ns");
+			setInfo.objectCount = MapHelper.getLong(map,0,"n_objects", "objects");
 
 			sets.add(setInfo);
 		}
@@ -99,25 +116,34 @@ public class App extends Application
 		return sets;
 	}
 	
-	public static void setConnectionInfo(String host, int port, String username, String password) {
+	public static void setConnectionInfo(String host, int port, String username, String password, boolean useServicesAlternate) {
 		App.host = host;
 		App.password = password;
 		App.username = username;
 		App.port = port;
+		App.useServicesAlternate = useServicesAlternate;
 	}
 	
 	public static AerospikeClient getClient() throws AerospikeException {
 		if ( client == null || !client.isConnected() ) {
 			
+    		ClientPolicy policy = new ClientPolicy();
+    		
+			
         	if ( StringUtils.isBlank(username) || StringUtils.isBlank(password) ) {
-        		
-        		ClientPolicy policy = new ClientPolicy();
         		policy.user = username;
         		policy.password = password;
         		client = new AerospikeClient(policy, host, port);
         	} else {
         		client = new AerospikeClient(host, port);
         	}
+        	
+        	
+        	client = new AerospikeClient(policy, host, port);
+        	String[] commands =  new String[] {"services", "services-alternate"};
+        	HashMap<String,String> infoMap = Info.request(client.getNodes()[0].getConnection(1000), commands );
+        	System.out.println(infoMap);
+        	policy.useServicesAlternate = true;
 			
 			client.writePolicyDefault.timeout = 4000;
 			client.readPolicyDefault.timeout = 4000;
@@ -142,13 +168,13 @@ public class App extends Application
             }
          });*/
     	
-    	
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setTitle("Clairvoyance");
         stage.setX(primaryScreenBounds.getMinX());
         stage.setY(primaryScreenBounds.getMinY());
         stage.setWidth(primaryScreenBounds.getWidth());
         stage.setHeight(primaryScreenBounds.getHeight());
+        stage.getIcons().add(new Image(App.class.getResourceAsStream("icon.png"))); 
         
         Parent root = FXMLLoader.load(getClass().getResource("connect.fxml"));
         Scene scene = new Scene(root);

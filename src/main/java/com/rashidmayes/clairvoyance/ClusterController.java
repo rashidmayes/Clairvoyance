@@ -1,7 +1,6 @@
 package com.rashidmayes.clairvoyance;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -135,6 +134,7 @@ public class ClusterController extends Service<String> implements EventHandler<W
                 		List<NodeInfo> list = new ArrayList<NodeInfo>();
                 		List<NamespaceInfo> namespaces;
                 		NodeInfo nodeInfo;
+
                 		for ( Node node : client.getNodes() ) {
                 			nodeInfo = App.getNodeInfo(node);
                 			list.add(nodeInfo);

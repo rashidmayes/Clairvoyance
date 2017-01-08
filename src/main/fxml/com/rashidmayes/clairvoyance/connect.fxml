@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.control.CheckBox?>
 
 
 <GridPane fx:controller="com.rashidmayes.clairvoyance.ConnectController"
@@ -24,7 +25,7 @@
 
 	<Label text="Host" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
-	<TextField fx:id="host" GridPane.columnIndex="1" GridPane.rowIndex="1" text="brilliancemobility.com"/>
+	<TextField fx:id="host" GridPane.columnIndex="1" GridPane.rowIndex="1" text="54.89.210.109"/>
 
 	<Label text="Port" GridPane.columnIndex="0" GridPane.rowIndex="2" />
 
@@ -39,7 +40,8 @@
 	<PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
 	<HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="5">
-		<Button text="Connect" onAction="#handleConnectAction" />
+		<Button fx:id="connect" text="Connect" onAction="#handleConnectAction" />
+		<Button fx:id="connectAlternate" text="Alternate" onAction="#handleConnectAction" />
 	</HBox>
 
 	<stylesheets>

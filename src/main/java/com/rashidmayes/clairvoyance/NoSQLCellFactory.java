@@ -20,6 +20,7 @@ public class NoSQLCellFactory implements Callback<CellDataFeatures<RecordRow,Str
     private TextAlignment alignment;
     private Format format;
     private String mBinName;
+    private int maxBinaryLen = 512;
     
     private static final Gson gson = new Gson();
 
@@ -51,18 +52,23 @@ public class NoSQLCellFactory implements Callback<CellDataFeatures<RecordRow,Str
     	if ( recordRow != null ) {
     		Record record = recordRow.getRecord();
     		if ( record != null ) {
-    			Map<String, Object> bins = record.bins;
-    			if ( bins != null ) {
-        			Object value = bins.get(mBinName);
-        			
-        			if ( value != null ) {
-        				if ( value instanceof String || value instanceof Number ) {
-        					return new SimpleStringProperty(value.toString());	
-        				} else if ( value instanceof byte[] ) {
-        					return new SimpleStringProperty(StringUtils.abbreviate(Base64.encode((byte[])value),1024));	
-        				} else {
-        					return new SimpleStringProperty(gson.toJson(value));	
-        				}
+    			
+    			if ( record == RecordRow.LOADING_RECORD ) {
+    				return new SimpleStringProperty("loading...");
+    			} else {
+        			Map<String, Object> bins = record.bins;
+        			if ( bins != null ) {
+            			Object value = bins.get(mBinName);
+            			
+            			if ( value != null ) {
+            				if ( value instanceof String || value instanceof Number ) {
+            					return new SimpleStringProperty(value.toString());	
+            				} else if ( value instanceof byte[] ) {
+            					return new SimpleStringProperty(StringUtils.abbreviate(Base64.encode((byte[])value),maxBinaryLen));	
+            				} else {
+            					return new SimpleStringProperty(gson.toJson(value));	
+            				}
+            			}	
         			}	
     			}
     		}

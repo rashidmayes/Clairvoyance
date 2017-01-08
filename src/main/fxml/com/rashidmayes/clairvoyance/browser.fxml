@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+
+<?import javafx.collections.*?> 
+<?import javafx.geometry.Insets?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+
+<?import com.rashidmayes.clairvoyance.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.rashidmayes.clairvoyance.Browser">
+	<children>
+
+	<MenuBar GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+		<menus>
+			<Menu mnemonicParsing="false" text="File">
+				<items>
+					<MenuItem mnemonicParsing="false" text="Reconnect" />
+					<MenuItem mnemonicParsing="false" text="Exit" />
+				</items>
+			</Menu>
+			<!-- <Menu mnemonicParsing="false" text="Help">
+				<items>
+					<MenuItem mnemonicParsing="false" text="Settings" />
+					<MenuItem mnemonicParsing="false" text="About" />
+				</items>
+			</Menu> -->
+		</menus>
+	</MenuBar>
+		
+		
+		<SplitPane dividerPositions=".8" orientation="VERTICAL"
+			GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+			<items>
+		
+				<SplitPane dividerPositions="0.15">
+		
+					<TreeView fx:id="namespacesTree" />
+					<TabPane id="tabs" fx:id="tabs"/>
+		
+				</SplitPane>
+		
+				<TextArea id="console" fx:id="console" wrapText="true"
+					editable="false" />
+		
+			</items>
+		
+			<stylesheets>
+				<URL value="@browser.css" />
+			</stylesheets>
+		</SplitPane>	
+		
+	</children>
+</GridPane>
