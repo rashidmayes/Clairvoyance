@@ -30,11 +30,11 @@ function update(nodes) {
     }
     
     table.innerHTML = text;
-    
+    text = "";
     table = document.getElementById("namespaces");
     for (var i = 0; i < nodes.length; i++) {
         node = nodes[i];
-        text = "<h4>" + node.host + "</h4>";
+        text += "<h4>" + node.host + "</h4>";
         text += "<table class=\"table table-striped table-bordered\"><tr><th>Name</th><th>Type</th><th align=right>Master</th><th align=right>Prole</th><th align=right>Used Memory</th><th align=right>Used Disk</th><th align=right>Memory</th><th align=right>Disk</th><th align=right>Free Mem</th><th align=right>Free Disk</th></tr>";
         for (var j = 0; j < node.namespaces.length; j++) {
             namespace = node.namespaces[j];
@@ -57,10 +57,10 @@ function update(nodes) {
 
     table.innerHTML = text;
 }
-/*
+
 window.onload = function() {
-  update(nodes)
-};*/
+  //update(nodes)
+};
 </script>
 </head>
 <body style="padding: 10px;">

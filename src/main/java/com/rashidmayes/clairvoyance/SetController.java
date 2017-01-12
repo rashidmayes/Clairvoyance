@@ -16,13 +16,16 @@ import java.util.logging.Level;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 
-import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.AerospikeException;
 import com.aerospike.client.Key;
 import com.aerospike.client.Record;
 import com.aerospike.client.ScanCallback;
+import com.aerospike.client.async.AsyncClient;
+import com.aerospike.client.cluster.Node;
 import com.aerospike.client.policy.Priority;
 import com.aerospike.client.policy.ScanPolicy;
+import com.aerospike.client.query.RecordSet;
+import com.aerospike.client.query.Statement;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -74,6 +77,7 @@ public class SetController implements ScanCallback {
     private ArrayList<byte[]> mKeyBuffer = new ArrayList<byte[]>(mMaxKeyBufferSize);
     
     private File mRootDir;
+    private boolean cancelled;
     
 
     public SetController() {
@@ -90,6 +94,7 @@ public class SetController implements ScanCallback {
     	    if (newScene == null) {
     	    	//stop scan
     	    	//clean files
+    	    	cancelled = true;
     	    	if ( mRootDir != null ) {
     	    		App.EXECUTOR.execute(new Runnable() {
     	    			public void run() {
@@ -176,19 +181,53 @@ public class SetController implements ScanCallback {
 				    	    	scanPolicy.concurrentNodes = true;
 				    	    	scanPolicy.priority = Priority.LOW;
 				    	    	scanPolicy.scanPercent = 100;
+				    	    	//scanPolicy.maxConcurrentNodes = 1;
+				    	    	
+				    	    	AsyncClient client = App.getClient();
 				    	    	
 				    	    	
-				    	    	AerospikeClient client = App.getClient();
+				    	    	Statement statement = new Statement();
+				    	    	statement.setNamespace(mSetInfo.namespace);
+				    	    	statement.setSetName(mSetInfo.name);
+
+
+				    	    	for ( Node node : client.getNodes() ) {
+				    	    		if ( mScanThread != null && rootPane.getScene() != null && !cancelled ) {
+
+						    	    	App.APP_LOGGER.info(mSetInfo.name + " start scan on " + node.getHost());
+						    	    	RecordSet rs = client.queryNode(null, statement, node);
+						    	    	try {
+						    	    	    while (!cancelled && mScanThread != null && rootPane.getScene() != null && rs.next()) {
+						    	    	        Key key = rs.getKey();
+						    	    	        Record record = rs.getRecord();
+						    	    	        //System.out.println(key + " " + record);
+						    	    	        SetController.this.scanCallback(key, record);
+						    	    	    }
+						    	    	}
+						    	    	finally {
+						    	    	    rs.close();
+						    	    	    App.APP_LOGGER.info(mSetInfo.name + " scan complete on " + node.getHost());	
+						    	    	}
+				    	    		}
+				    	    	}
 				    	    	
-				    	    	App.APP_LOGGER.info(mSetInfo.name + " start scan");	
-				    	    	client.scanAll(scanPolicy, mSetInfo.namespace, mSetInfo.name, SetController.this);	
+
+				    	    	/*
+				    	    	for ( Node node : client.getNodes() ) {
+				    	    		if ( mScanThread != null && rootPane.getScene() != null && !cancelled ) {
+						    	    	App.APP_LOGGER.info(mSetInfo.name + " start scan on " + node.getHost());	
+						    	    	client.scanNode(null, node, mSetInfo.namespace, mSetInfo.name, SetController.this);
+						    	    	App.APP_LOGGER.info(mSetInfo.name + " scan complete on " + node.getHost());	
+				    	    		}
+				    	    	}*/
+
 							} catch (AerospikeException.ScanTerminated e) {
 								App.APP_LOGGER.info(e.getMessage());
 								return;
 							} catch (Exception e) {
 								App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
 							} finally {
-								App.APP_LOGGER.info(mSetInfo.name + " scan complete");	
+								App.APP_LOGGER.info(mSetInfo.name + " scans complete");	
 							}
 							
 							flushColumns();
@@ -304,7 +343,7 @@ public class SetController implements ScanCallback {
     @Override
 	public void scanCallback(Key key, Record record) throws AerospikeException {
 
-		if ( mScanThread == null || rootPane.getScene() == null ) {
+		if ( mScanThread == null || rootPane.getScene() == null || cancelled ) {
 			throw new AerospikeException.ScanTerminated();
 		}
 		
@@ -330,7 +369,7 @@ public class SetController implements ScanCallback {
     }
     
     private void flushKeys() {
-    	
+ 
     	final int pageNumber = mPageCount++;
     	final File file = new File(mRootDir,pageNumber + ".data");
 
@@ -339,11 +378,14 @@ public class SetController implements ScanCallback {
     	
     	FileOutputStream fos = null;
     	DataOutputStream dos = null;
-    	try {
+    	try {        	
     		fos = new FileOutputStream(file);
     		dos = new DataOutputStream(fos);
     		
     		for ( byte[] digest : keys ) {
+    			if ( cancelled ) {
+    				return;
+    			}
     			dos.write(digest);
     		}
     		
@@ -351,11 +393,15 @@ public class SetController implements ScanCallback {
     		
     		Platform.runLater(new Runnable() {
     			public void run() {
-    				pages.getItems().add(pageNumber);
+    				try {
+    					pages.getItems().add(pageNumber);
+    				} catch (Exception e) {
+    					
+    				}
     			}
     		});
     		
-		} catch (IOException e) {
+		} catch (Exception e) {
 			App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		} finally {
 			try {
@@ -385,18 +431,22 @@ public class SetController implements ScanCallback {
     	
 		Platform.runLater(new Runnable() {
 			public void run() {
-				TableColumn<RecordRow, String> column;
-				
-				for ( String s : columns ) {
-					if ( !mKnownColumns.contains(s) ) {
-						
-						column = new TableColumn<RecordRow, String>(s);
-						column.setMinWidth(50);
-						column.setCellValueFactory(new NoSQLCellFactory(s));
-						
-						mKnownColumns.add(s);
-						dataTable.getColumns().add(column);
+				try {
+					TableColumn<RecordRow, String> column;
+					
+					for ( String s : columns ) {
+						if ( !mKnownColumns.contains(s) ) {
+							
+							column = new TableColumn<RecordRow, String>(s);
+							column.setMinWidth(50);
+							column.setCellValueFactory(new NoSQLCellFactory(s));
+							
+							mKnownColumns.add(s);
+							dataTable.getColumns().add(column);
+						}	
 					}	
+				} catch (Exception e) {
+					App.APP_LOGGER.log(Level.SEVERE,e.getMessage(),e);
 				}
 			}
 		});

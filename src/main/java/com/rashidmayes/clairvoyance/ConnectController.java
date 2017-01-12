@@ -22,6 +22,13 @@ public class ConnectController {
     @FXML private Button connect;
     @FXML private Button connectAlternate;
     
+    @FXML public void initialize() {
+    	
+    	host.setText(App.Config.get("last.host", null));
+    	port.setText(App.Config.get("last.port", "3000"));
+   
+    }
+    
     @FXML protected void handleConnectAction(ActionEvent event) {
             	
     	try {
@@ -43,6 +50,10 @@ public class ConnectController {
 	        Stage stage = (Stage)(host.getScene().getWindow());
 	        stage.setScene(scene);
 	        //stage.centerOnScreen();
+	        
+			App.Config.put("last.host", h);
+			App.Config.putInt("last.port", p);
+			
     	} catch (Exception e) {
     		App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
 			Alert alert = new Alert(AlertType.ERROR, String.format("Error connecting: %s", e.getMessage()));

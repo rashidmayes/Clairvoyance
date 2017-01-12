@@ -1,25 +1,26 @@
 package com.rashidmayes.clairvoyance;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.logging.Logger;
+import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.AerospikeException;
 import com.aerospike.client.Info;
+import com.aerospike.client.async.AsyncClient;
+import com.aerospike.client.async.AsyncClientPolicy;
 import com.aerospike.client.cluster.Node;
-import com.aerospike.client.policy.ClientPolicy;
 import com.rashidmayes.clairvoyance.util.MapHelper;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
@@ -27,6 +28,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class App extends Application
 {
@@ -40,9 +42,9 @@ public class App extends Application
             return t;
         }
     });
-	static Preferences Config =  Preferences.systemNodeForPackage(App.class);
+	static final Preferences Config =  Preferences.userNodeForPackage(App.class);
 	
-	private static AerospikeClient client = null;
+	private static AsyncClient client = null;
 	protected static String host = null;
 	protected static int port;
 	protected static boolean useServicesAlternate;
@@ -124,30 +126,30 @@ public class App extends Application
 		App.useServicesAlternate = useServicesAlternate;
 	}
 	
-	public static AerospikeClient getClient() throws AerospikeException {
+	public static AsyncClient getClient() throws AerospikeException {
 		if ( client == null || !client.isConnected() ) {
 			
-    		ClientPolicy policy = new ClientPolicy();
-    		
+    		AsyncClientPolicy policy = new AsyncClientPolicy();
+    		policy.useServicesAlternate = App.useServicesAlternate;
 			
         	if ( StringUtils.isBlank(username) || StringUtils.isBlank(password) ) {
         		policy.user = username;
         		policy.password = password;
-        		client = new AerospikeClient(policy, host, port);
+        		client = new AsyncClient(policy, host, port);
         	} else {
-        		client = new AerospikeClient(host, port);
+        		client = new AsyncClient(host, port);
         	}
         	
         	
-        	client = new AerospikeClient(policy, host, port);
-        	String[] commands =  new String[] {"services", "services-alternate"};
+        	client = new AsyncClient(policy, host, port);
+        	/*String[] commands =  new String[] {"services", "services-alternate"};
         	HashMap<String,String> infoMap = Info.request(client.getNodes()[0].getConnection(1000), commands );
-        	System.out.println(infoMap);
-        	policy.useServicesAlternate = true;
+        	System.out.println(infoMap);*/
+        	
 			
 			client.writePolicyDefault.timeout = 4000;
 			client.readPolicyDefault.timeout = 4000;
-			client.queryPolicyDefault.timeout = 4000;
+			client.queryPolicyDefault.timeout = Integer.MAX_VALUE;
 		}
 		
 		return client;
@@ -159,14 +161,18 @@ public class App extends Application
     
     @Override
     public void start(Stage stage) throws Exception {
-    	/*
+    	
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
-            public void handle(WindowEvent e) {
-               Platform.exit();
+            public void handle(WindowEvent event) {
+               try {
+            	   Config.sync();
+				} catch (BackingStoreException e) {
+					e.printStackTrace();
+				}
                System.exit(0);
             }
-         });*/
+         });
     	
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setTitle("Clairvoyance");

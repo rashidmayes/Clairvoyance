@@ -25,7 +25,7 @@
 
 	<Label text="Host" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 
-	<TextField fx:id="host" GridPane.columnIndex="1" GridPane.rowIndex="1" text="54.89.210.109"/>
+	<TextField fx:id="host" GridPane.columnIndex="1" GridPane.rowIndex="1" text=""/>
 
 	<Label text="Port" GridPane.columnIndex="0" GridPane.rowIndex="2" />
 
