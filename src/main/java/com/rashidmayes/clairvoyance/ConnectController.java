@@ -32,14 +32,10 @@ public class ConnectController {
     @FXML protected void handleConnectAction(ActionEvent event) {
             	
     	try {
-    		event.getSource();
-    		
         	String user = username.getText();
         	String pass = password.getText();
         	int p = Integer.parseInt(port.getText());
         	String h = host.getText();
-        	
-        	System.out.println(event.getSource() == connectAlternate);
         	
         	App.setConnectionInfo(h, p, user, pass, event.getSource() == connectAlternate);
         	App.getClient();

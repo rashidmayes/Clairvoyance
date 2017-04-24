@@ -3,3 +3,46 @@
    -fx-font-family: "Courier";
    -fx-fill: #818181;
 }
+
+/* The main scrollbar **track** CSS class  */
+#pages .scroll-bar:horizontal .track,
+#pages .scroll-bar:vertical .track{
+	-fx-background-color: black;
+	-fx-border-color: #aaaaaa;
+	-fx-background-radius: 0em;
+	-fx-border-radius:0em;
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+#pages .scroll-bar:horizontal .increment-button ,
+#pages .scroll-bar:horizontal .decrement-button {
+    -fx-background-color:transparent;
+	-fx-background-radius: 0em;
+	-fx-padding:0 0 10 0;
+
+}
+
+/* The increment and decrement button CSS class of scrollbar */
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+
+    -fx-background-color:transparent;
+	-fx-background-radius: 0em;
+	-fx-padding:0 10 0 0;
+
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+	-fx-shape: " ";	
+	-fx-padding:0;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: derive(black,90%);
+	-fx-background-insets: 2, 0, 0;
+	-fx-background-radius: 0em;
+
+}

@@ -137,24 +137,6 @@ public class SetController implements ScanCallback {
 				});
 				dataTable.getColumns().add(StringColumn);
 				
-				/*
-				column = new TableColumn<RecordRow, Number>("TTL");
-				column.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RecordRow, Number>, ObservableValue<Number>>() {
-
-				    @Override
-				    public ObservableValue<Number> call(TableColumn.CellDataFeatures<RecordRow, Number> param) {
-				    	RecordRow recordRow = param.getValue();
-				    	if ( recordRow != null ) {
-				    		return new SimpleIntegerProperty(recordRow.getRecord().expiration);
-				    	}  
-				    	return new SimpleIntegerProperty(0);	
-				    }
-				});
-				
-				dataTable.getColumns().add(column);*/
-				
-				
-
 				pages.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>()
 		        {
 		            @Override

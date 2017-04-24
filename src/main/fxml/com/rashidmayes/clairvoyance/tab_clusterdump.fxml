@@ -37,17 +37,11 @@
 					<MenuItem mnemonicParsing="false" id="http://www.aerospike.com/docs/connectors/" text="Connectors" onAction="#handleWeb"/>
 					<MenuItem mnemonicParsing="false" id="http://www.aerospike.com/docs/operations/plan/capacity/" text="Capacity Planning" onAction="#handleWeb"/>
 					<MenuItem mnemonicParsing="false" id="http://www.aerospike.com/docs/guide/limitations.html" text="Limitations" onAction="#handleWeb"/>
-					<MenuItem mnemonicParsing="false" id="http://www.aerospike.com/datamodeling/modeling-data-aerospike" text="Data Modeling" onAction="#handleWeb"/>
-				</items>
-			</Menu>
-			<Menu mnemonicParsing="false" text="Tools">
-				<items>
-					<MenuItem mnemonicParsing="false" text="Data Creator" onAction="#handleCreateData"/>
 				</items>
 			</Menu>
 			<Menu mnemonicParsing="false" text="Help">
 				<items>
-					<!-- <MenuItem mnemonicParsing="false" text="Settings" onAction="#handleSettings"/> -->
+					<MenuItem mnemonicParsing="false" text="Settings" onAction="#handleSettings"/>
 					<MenuItem mnemonicParsing="false" text="Full Report" onAction="#handleClusterDump"/>
 					<MenuItem mnemonicParsing="false" text="About" onAction="#handleAbout"/>
 				</items>

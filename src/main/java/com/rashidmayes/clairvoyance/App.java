@@ -127,7 +127,11 @@ public class App extends Application
 	}
 	
 	public static AsyncClient getClient() throws AerospikeException {
-		if ( client == null || !client.isConnected() ) {
+		return getClient(false);
+	}
+	
+	public static AsyncClient getClient(boolean create) throws AerospikeException {
+		if ( client == null || create || !client.isConnected() ) {
 			
     		AsyncClientPolicy policy = new AsyncClientPolicy();
     		policy.useServicesAlternate = App.useServicesAlternate;
@@ -142,10 +146,6 @@ public class App extends Application
         	
         	
         	client = new AsyncClient(policy, host, port);
-        	/*String[] commands =  new String[] {"services", "services-alternate"};
-        	HashMap<String,String> infoMap = Info.request(client.getNodes()[0].getConnection(1000), commands );
-        	System.out.println(infoMap);*/
-        	
 			
 			client.writePolicyDefault.timeout = 4000;
 			client.readPolicyDefault.timeout = 4000;

@@ -1,5 +1,6 @@
 package com.rashidmayes.clairvoyance;
 
+import java.io.File;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -7,9 +8,15 @@ import java.util.logging.Level;
 
 import javax.swing.text.TableView;
 
+import org.apache.commons.io.FileUtils;
+
 import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.cluster.Node;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rashidmayes.clairvoyance.util.FileUtil;
+import com.rashidmayes.clairvoyance.util.Platform;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,6 +24,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
@@ -25,17 +34,12 @@ import javafx.scene.control.TreeView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 
 public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode>>, EventHandler<MouseEvent> {
 	
-	private static final String NAMESPACE_LINE_FORMAT = "%-10s %10s %2d %16d %16d %16d %16d %8s %8s %8d%% %8d%%\n";
-	private static final String NAMESPACE_HEADINGS = String.format("%-10s %10s %2s %16s %16s %16s %16s %8s %8s %9s %9s\n"
-			,"Name", "Type", "RF", "Master", "Prole", "Used Memory", "Used Disk", "Memory", "Disk", "Free Mem", "Free Disk");
-	private static final String SET_LINE_FORMAT = "%-16s %-16s %16d %16s\n";
-	private static final String SET_HEADINGS = String.format("%-16s %-16s %16s %16s\n"
-			,"Set", "Namespace", "Objects", "Bytes Memory");
 	private static final String NAME_FORMAT = "%s (%s)";
-	
 	
     private final ImageView rootIcon = new ImageView(new Image(getClass().getResourceAsStream("ic_cluster.png")));
     private final Image namespaceIcon = new Image(getClass().getResourceAsStream("ic_storage.png"));
@@ -53,8 +57,14 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
     
     private Thread mThread;
     private boolean cancel = false;
+    
+	private ObjectMapper mObjectMapper = new ObjectMapper();
+	private ObjectWriter mObjectWriter;
+
 
     public Browser() {
+    	mObjectMapper.setSerializationInclusion(Include.NON_NULL);
+    	mObjectWriter = mObjectMapper.writerWithDefaultPrettyPrinter();
     }
 
     @FXML
@@ -119,9 +129,170 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
 
     
     @FXML protected void handleAction(ActionEvent event) {
+    	App.APP_LOGGER.info(event.getSource().toString());
+    }
+    
+    @FXML protected void handleClusterDump(ActionEvent event) {
     	
-    	App.APP_LOGGER.info(event.toString());
     	
+    	try {
+    		MenuItem item = (MenuItem) event.getSource();
+	        Tab tab = new Tab();
+	        tab.setId(item.getId());
+	        tab.setText(item.getText());
+	            	        
+	        Parent root = FXMLLoader.load(getClass().getResource("tab_cluster.fxml"));
+	        tab.setContent(root);
+    		
+	        tabs.getTabs().add(tab);
+	        tabs.getSelectionModel().select(tab);	
+	        
+		} catch (Exception e) {
+			App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+		}
+    	
+		App.EXECUTOR.execute(new Runnable() {
+			
+			public void run() {
+		    	try {
+		    		AerospikeClient client = App.getClient();
+					App.APP_LOGGER.info(mObjectWriter.writeValueAsString(client));
+					NodeInfo nodeInfo;
+					for ( Node node : client.getNodes() ) {
+						nodeInfo = App.getNodeInfo(node);
+						nodeInfo.namespaces = App.getNamespaceInfo(node).toArray(new NamespaceInfo[0]);
+						for ( NamespaceInfo ni : nodeInfo.namespaces ) {
+							ni.sets = App.getSetInfo(node, ni.name).toArray(new SetInfo[0]);
+						}
+						
+						
+						App.APP_LOGGER.info(mObjectWriter.writeValueAsString(nodeInfo));
+					}
+				} catch (Exception e) {
+					App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+				}		
+			}
+
+		});
+    	
+    }
+    
+    @FXML protected void handleReconnect(ActionEvent event) {
+    	try {
+			App.APP_LOGGER.info(mObjectWriter.writeValueAsString(App.getClient(true)));
+		} catch (Exception e) {
+			App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+		}
+    }
+    
+    @FXML protected void handleClearCache(ActionEvent event) {
+    	//move off UI thread
+    	try {
+        	File mRootDir = new File(System.getProperty("java.io.tmpdir"));
+            mRootDir = new File(mRootDir,"clairvoyance");
+            FileUtils.deleteDirectory(mRootDir);
+		} catch (Exception e) {
+			App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+		}
+    }
+    
+    @FXML protected void handleExit(ActionEvent event) {
+    	System.exit(0);
+    }
+    
+    @FXML protected void handleSettings(ActionEvent event) {
+    	try {
+    		MenuItem item = (MenuItem) event.getSource();
+	        Tab tab = new Tab();
+	        tab.setId(item.getId());
+	        tab.setText(item.getText());
+	            	        
+	        Parent root = FXMLLoader.load(getClass().getResource("tab_settings.fxml"));
+	        tab.setContent(root);
+    		
+	        tabs.getTabs().add(tab);
+	        tabs.getSelectionModel().select(tab);	
+	        
+		} catch (Exception e) {
+			App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+		}
+    }
+    
+    
+    @FXML protected void handleCreateData(ActionEvent event) {
+    	try {
+    		Tab tab = null;
+    		MenuItem item = (MenuItem) event.getSource();
+    		for (Tab temp : tabs.getTabs()) {
+    			if ( temp.getId().equals(item.getId()) ) {
+    				tab = temp;
+    				break;
+    			}
+    		}
+    		
+    		if ( tab == null ) {
+    			tab = new Tab();
+				tab.setId(item.getId());
+				tab.setText(item.getText());
+				
+		        Parent root = FXMLLoader.load(getClass().getResource("tab_data_creator.fxml"));
+		        tab.setContent(root);
+		        
+		        tabs.getTabs().add(tab);
+    		}
+
+	        tabs.getSelectionModel().select(tab);	
+	        
+		} catch (Exception e) {
+			App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+		}
+    }
+    
+    @FXML protected void handleAbout(ActionEvent event) {
+    	try {
+    		MenuItem item = (MenuItem) event.getSource();
+    		
+	        Tab tab = new Tab();
+	        tab.setId(item.getId());
+	        tab.setText(item.getText());
+	            	        
+	        Parent root = FXMLLoader.load(getClass().getResource("tab_about.fxml"));
+	        tab.setContent(root);
+
+	        tabs.getTabs().add(tab);
+	        tabs.getSelectionModel().select(tab);	
+	        
+		} catch (Exception e) {
+			App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+		}
+    }
+    
+    
+    @FXML protected void handleWeb(ActionEvent event) {
+    	
+    	if ( event.getSource() instanceof MenuItem ) {
+    		
+        	try {
+        		MenuItem item = (MenuItem) event.getSource();
+        		App.APP_LOGGER.info("opening " + item.getId());
+        		
+    	        Tab tab = new Tab();
+    	        tab.setId(item.getId());
+    	        tab.setText(item.getText());
+    	            	        
+    	        Parent root = FXMLLoader.load(getClass().getResource("tab_web.fxml"));
+    	        tab.setContent(root);
+
+        		WebEngine engine = ((WebView)root).getEngine();
+        		engine.load(item.getId());	
+        		
+    	        tabs.getTabs().add(tab);
+    	        tabs.getSelectionModel().select(tab);	
+    	        
+    		} catch (Exception e) {
+    			App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+    		}
+    	}
     }
     
     public void run() {
@@ -228,83 +399,11 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
 				} catch (Exception e) {
 					App.APP_LOGGER.severe(e.getMessage());
 				}
-
-
-    	   		
-    	   		///debugout
-
-    			try {
-            		StringBuffer buffer = new StringBuffer();
-            		//list namespaces
-            		List<NamespaceInfo> namespaces;
-        			for (Node node : client.getNodes() ) {
-
-        				namespaces = App.getNamespaceInfo(node);
-        				buffer.append("\n").append(node.getHost())
-        				.append("\n\n");
-        				
-        				buffer.append(NAMESPACE_HEADINGS);
-        				
-        				for (NamespaceInfo namespace : namespaces) {
-        					    					
-        					buffer.append(String.format(
-        							NAMESPACE_LINE_FORMAT, 
-        							namespace.name
-        							,namespace.getType()
-        							,namespace.getReplicationFactor()
-        							
-        							,namespace.getMasterObjects()
-        							,namespace.getProleObjects()
-        							
-        							,namespace.getUsedBytesMemory()
-        							,namespace.getUsedBytesDisk()
-        							
-        							,FileUtil.getSizeString(namespace.getTotalBytesMemory(), Locale.US)
-        							,FileUtil.getSizeString(namespace.getTotalBytesDisk(), Locale.US)
-
-        							,namespace.getFreeMemoryPercent()
-        							,namespace.getFreeDiskPercent()
-        							));
-        				}
-        				buffer.append("\n");
-        			}	
-        			App.APP_LOGGER.info(buffer.toString());
-        			buffer.setLength(0);
-        			
-        			List<SetInfo> sets;
-        			for (Node node : client.getNodes() ) {
-
-        				namespaces = App.getNamespaceInfo(node);
-        				buffer.append("\n").append(node.getHost())
-        				.append("\n\n");
-        				
-        				buffer.append(SET_HEADINGS);
-        						
-        				for (NamespaceInfo namespace : namespaces) {
-
-        					
-        					sets = App.getSetInfo(node,namespace.name);
-        					for (SetInfo setInfo : sets) {
-
-        						buffer.append(String.format(
-        								SET_LINE_FORMAT, 
-        								setInfo.name
-        								,namespace.name
-        								,setInfo.objectCount
-        								,FileUtil.getSizeString(setInfo.bytesMemory,Locale.US)
-        								));
-        					}
-        					
-        				}
-        				buffer.append("\n");
-        			}
-        			App.APP_LOGGER.info(buffer.toString());
-        			buffer.setLength(0);
-
-    			} catch (Exception e) {
-    				App.APP_LOGGER.warning(e.toString());
-    			}
-        		
+				
+				Runtime runtime = Runtime.getRuntime();
+				App.APP_LOGGER.info("Free memory: " + FileUtils.byteCountToDisplaySize(runtime.freeMemory()));
+				App.APP_LOGGER.info(mObjectWriter.writeValueAsString(new Platform()));
+				
         	} catch (Exception e) {
         		App.APP_LOGGER.severe(e.getMessage());
         	}
