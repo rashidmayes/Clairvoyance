@@ -40,7 +40,7 @@ public class ConnectController {
         	App.setConnectionInfo(h, p, user, pass, event.getSource() == connectAlternate);
         	App.getClient();
         	
-			Parent root = FXMLLoader.load(App.class.getResource("browser.fxml"));
+			Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("browser.fxml"));
 	        Scene scene = new Scene(root);
 	        
 	        Stage stage = (Stage)(host.getScene().getWindow());

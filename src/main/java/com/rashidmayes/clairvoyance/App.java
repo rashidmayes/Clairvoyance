@@ -180,9 +180,9 @@ public class App extends Application
         stage.setY(primaryScreenBounds.getMinY());
         stage.setWidth(primaryScreenBounds.getWidth());
         stage.setHeight(primaryScreenBounds.getHeight());
-        stage.getIcons().add(new Image(App.class.getResourceAsStream("icon.png"))); 
+        stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.png")));
         
-        Parent root = FXMLLoader.load(getClass().getResource("connect.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("connect.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
