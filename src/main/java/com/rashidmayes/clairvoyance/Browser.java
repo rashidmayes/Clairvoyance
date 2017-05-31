@@ -41,9 +41,9 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
 	
 	private static final String NAME_FORMAT = "%s (%s)";
 	
-    private final ImageView rootIcon = new ImageView(new Image(getClass().getResourceAsStream("ic_cluster.png")));
-    private final Image namespaceIcon = new Image(getClass().getResourceAsStream("ic_storage.png"));
-    private final Image setIcon = new Image(getClass().getResourceAsStream("ic_set.png"));
+    private final ImageView rootIcon = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream("ic_cluster.png")));
+    private final Image namespaceIcon = new Image(getClass().getClassLoader().getResourceAsStream("ic_storage.png"));
+    private final Image setIcon = new Image(getClass().getClassLoader().getResourceAsStream("ic_set.png"));
 	
     private boolean tick = false;
     private NumberFormat mNumberFormat = NumberFormat.getNumberInstance();
@@ -111,11 +111,11 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
 		        Identifiable identifiable = newValue.getValue().value;
 		        
 		        if ( identifiable instanceof NamespaceInfo ) {
-		        	tab.setContent( (javafx.scene.Node) FXMLLoader.load(this.getClass().getResource("tab_namespace.fxml")) );
+		        	tab.setContent( (javafx.scene.Node) FXMLLoader.load(getClass().getClassLoader().getResource("tab_namespace.fxml")) );
 		        } else if ( identifiable instanceof SetInfo ) {
-		        	tab.setContent( (javafx.scene.Node) FXMLLoader.load(this.getClass().getResource("tab_set.fxml")) );
+		        	tab.setContent( (javafx.scene.Node) FXMLLoader.load(getClass().getClassLoader().getResource("tab_set.fxml")) );
 		        } else {
-		        	tab.setContent( (javafx.scene.Node) FXMLLoader.load(this.getClass().getResource("tab_cluster.fxml")) );
+		        	tab.setContent( (javafx.scene.Node) FXMLLoader.load(getClass().getClassLoader().getResource("tab_cluster.fxml")) );
 		        }
 		        tab.getContent().setUserData(identifiable);
 		        tabs.getTabs().add(tab);
@@ -141,7 +141,7 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
 	        tab.setId(item.getId());
 	        tab.setText(item.getText());
 	            	        
-	        Parent root = FXMLLoader.load(getClass().getResource("tab_cluster.fxml"));
+	        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("tab_cluster.fxml"));
 	        tab.setContent(root);
     		
 	        tabs.getTabs().add(tab);
@@ -207,7 +207,7 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
 	        tab.setId(item.getId());
 	        tab.setText(item.getText());
 	            	        
-	        Parent root = FXMLLoader.load(getClass().getResource("tab_settings.fxml"));
+	        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("tab_settings.fxml"));
 	        tab.setContent(root);
     		
 	        tabs.getTabs().add(tab);
@@ -235,7 +235,7 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
 				tab.setId(item.getId());
 				tab.setText(item.getText());
 				
-		        Parent root = FXMLLoader.load(getClass().getResource("tab_data_creator.fxml"));
+		        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("tab_data_creator.fxml"));
 		        tab.setContent(root);
 		        
 		        tabs.getTabs().add(tab);
@@ -256,7 +256,7 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
 	        tab.setId(item.getId());
 	        tab.setText(item.getText());
 	            	        
-	        Parent root = FXMLLoader.load(getClass().getResource("tab_about.fxml"));
+	        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("tab_about.fxml"));
 	        tab.setContent(root);
 
 	        tabs.getTabs().add(tab);
@@ -280,7 +280,7 @@ public class Browser implements Runnable, ChangeListener<TreeItem<SimpleTreeNode
     	        tab.setId(item.getId());
     	        tab.setText(item.getText());
     	            	        
-    	        Parent root = FXMLLoader.load(getClass().getResource("tab_web.fxml"));
+    	        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("tab_web.fxml"));
     	        tab.setContent(root);
 
         		WebEngine engine = ((WebView)root).getEngine();
