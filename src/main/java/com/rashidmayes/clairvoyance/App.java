@@ -133,19 +133,16 @@ public class App extends Application
 	public static AsyncClient getClient(boolean create) throws AerospikeException {
 		if ( client == null || create || !client.isConnected() ) {
 			
-    		AsyncClientPolicy policy = new AsyncClientPolicy();
-    		policy.useServicesAlternate = App.useServicesAlternate;
+			AsyncClientPolicy policy = new AsyncClientPolicy();
+			policy.useServicesAlternate = App.useServicesAlternate;
 			
-        	if ( StringUtils.isBlank(username) || StringUtils.isBlank(password) ) {
-        		policy.user = username;
-        		policy.password = password;
-        		client = new AsyncClient(policy, host, port);
-        	} else {
-        		client = new AsyncClient(host, port);
-        	}
-        	
-        	
-        	client = new AsyncClient(policy, host, port);
+			if ( StringUtils.isBlank(username) || StringUtils.isBlank(password) ) {
+				client = new AsyncClient(host, port);
+			} else {
+				policy.user = username;
+				policy.password = password;
+				client = new AsyncClient(policy, host, port);
+			}
 			
 			client.writePolicyDefault.timeout = 4000;
 			client.readPolicyDefault.timeout = 4000;
