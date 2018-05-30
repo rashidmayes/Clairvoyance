@@ -1,5 +1,7 @@
 # Clairvoyance
 
+Builds available at https://www.clairvoyance.app
+
 ## Build and start
 mvn clean package
 
