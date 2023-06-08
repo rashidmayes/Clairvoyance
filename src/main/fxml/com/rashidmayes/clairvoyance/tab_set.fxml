@@ -18,7 +18,7 @@
 <?import com.rashidmayes.clairvoyance.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml" id="rootPane" fx:id="rootPane" fx:controller="com.rashidmayes.clairvoyance.SetController">
+<GridPane xmlns:fx="http://javafx.com/fxml" id="rootPane" fx:id="rootPane" fx:controller="com.rashidmayes.clairvoyance.controller.SetController">
 	<children>
 
         <ToolBar GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="NEVER">

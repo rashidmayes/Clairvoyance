@@ -17,6 +17,6 @@
 
 <?import com.rashidmayes.clairvoyance.*?>
 
-<WebView xmlns:fx="http://javafx.com/fxml" id="webView" fx:id="webView" fx:controller="com.rashidmayes.clairvoyance.AboutController">
+<WebView xmlns:fx="http://javafx.com/fxml" id="webView" fx:id="webView" fx:controller="com.rashidmayes.clairvoyance.controller.AboutController">
 
 </WebView>

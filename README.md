@@ -1,5 +1,7 @@
 # Clairvoyance
 
+run with <code>mvn clean compile javafx:run</code>
+
 Builds available at https://www.clairvoyance.app
 
 ## Build and start

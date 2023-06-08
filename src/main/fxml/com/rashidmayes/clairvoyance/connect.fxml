@@ -9,7 +9,7 @@
 <?import javafx.scene.control.CheckBox?>
 
 
-<GridPane fx:controller="com.rashidmayes.clairvoyance.ConnectController"
+<GridPane fx:controller="com.rashidmayes.clairvoyance.controller.ConnectController"
 	xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
 	styleClass="root">
 	<padding>
