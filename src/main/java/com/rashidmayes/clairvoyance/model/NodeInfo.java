@@ -1,11 +1,19 @@
 package com.rashidmayes.clairvoyance.model;
 
-import com.rashidmayes.clairvoyance.model.Identifiable;
-import com.rashidmayes.clairvoyance.model.NamespaceInfo;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Map;
 
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class NodeInfo implements Identifiable {
+
     public String nodeId;
     public String build;
     public String edition;
@@ -13,12 +21,12 @@ public class NodeInfo implements Identifiable {
     public String name;
     public String host;
     public String address;
-    public NamespaceInfo[] namespaces;
+    public List<NamespaceInfo> namespaces;
 
     public Map<String, String> statistics;
 
     @Override
-    public Object getId() {
+    public String getId() {
         return "$node." + nodeId;
     }
 }

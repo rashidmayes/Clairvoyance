@@ -1,10 +1,18 @@
 package com.rashidmayes.clairvoyance.model;
 
-import com.rashidmayes.clairvoyance.model.Identifiable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SetInfo implements Identifiable {
+
     public String namespace;
     public String name;
     public long objectCount;
@@ -12,7 +20,8 @@ public class SetInfo implements Identifiable {
     public Map<String, String> properties;
 
     @Override
-    public Object getId() {
+    public String getId() {
         return "$set." + namespace + "." + name;
     }
+
 }

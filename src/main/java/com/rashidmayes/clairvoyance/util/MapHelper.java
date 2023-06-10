@@ -18,22 +18,6 @@ public class MapHelper {
         return map;
     }
 
-    public static String getValue(Map<?, ?> map, String... keys) {
-        if (map == null) {
-            return null;
-        } else {
-            Object value = null;
-            for (String key : keys) {
-                value = map.get(key);
-                if (value != null) {
-                    break;
-                }
-            }
-
-            return (value == null) ? null : value.toString();
-        }
-    }
-
     public static String getProperty(Map<String, String> properties, String... keys) {
         if (properties != null) {
             String value;
@@ -60,7 +44,7 @@ public class MapHelper {
             try {
                 return Long.parseLong(value);
             } catch (NumberFormatException nfe) {
-
+                ClairvoyanceLogger.logger.warning(nfe.getMessage());
             }
         }
 

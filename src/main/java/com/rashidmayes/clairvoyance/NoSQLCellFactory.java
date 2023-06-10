@@ -45,12 +45,10 @@ public class NoSQLCellFactory implements Callback<CellDataFeatures<RecordRow, St
 
     @Override
     public ObservableValue<String> call(CellDataFeatures<RecordRow, String> param) {
-
         RecordRow recordRow = param.getValue();
         if (recordRow != null) {
             Record record = recordRow.getRecord();
             if (record != null) {
-
                 if (record == RecordRow.LOADING_RECORD) {
                     return new SimpleStringProperty("loading...");
                 } else {

@@ -22,12 +22,14 @@ public class TextAreaLogHandler extends Handler {
         if (this.isLoggable(record)) {
             var debug = record.getSourceClassName() + "$" + record.getSourceMethodName();
             String text = debug + " " + "$> " + record.getMessage() + "\n";
-            textArea.appendText(text);
-            int currentLength = textArea.getLength();
-            if (currentLength > maxLength) {
-                int end = (textArea.getLength() - maxLength);
-                if (end > 0) {
-                    //mTextArea.replaceText(0, end , "");
+            if(this.textArea != null) {
+                textArea.appendText(text);
+                int currentLength = textArea.getLength();
+                if (currentLength > maxLength) {
+                    int end = (textArea.getLength() - maxLength);
+                    if (end > 0) {
+                        //mTextArea.replaceText(0, end , "");
+                    }
                 }
             }
         }

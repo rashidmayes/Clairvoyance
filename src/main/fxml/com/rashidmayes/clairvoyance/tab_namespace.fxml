@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
-
-
-<?import javafx.collections.*?> 
-<?import javafx.geometry.Insets?>
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
-
-<?import com.rashidmayes.clairvoyance.*?>
-
-<WebView xmlns:fx="http://javafx.com/fxml" id="webView" fx:id="webView" fx:controller="com.rashidmayes.clairvoyance.controller.NamespaceController">
-
-</WebView>
+<?import javafx.scene.text.Font?>
+<GridPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.rashidmayes.clairvoyance.controller.NamespaceController">
+    <TextArea id="namespaceTextArea" fx:id="namespaceTextArea" editable="false" wrapText="true" GridPane.halignment="CENTER"
+              GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+        <font>
+            <Font name="Monospaced Regular" size="14.0"/>
+        </font>
+    </TextArea>
+</GridPane>

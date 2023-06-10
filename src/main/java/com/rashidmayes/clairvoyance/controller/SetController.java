@@ -13,10 +13,10 @@ import com.aerospike.client.query.Statement;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.rashidmayes.clairvoyance.App;
-import com.rashidmayes.clairvoyance.NoSQLCellFactory;
-import com.rashidmayes.clairvoyance.RecordRow;
+import com.rashidmayes.clairvoyance.*;
+import com.rashidmayes.clairvoyance.model.ApplicationModel;
 import com.rashidmayes.clairvoyance.model.SetInfo;
+import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import com.rashidmayes.clairvoyance.util.FileUtil;
 import gnu.crypto.util.Base64;
 import javafx.application.Platform;
@@ -90,7 +90,7 @@ public class SetController implements ScanCallback {
                 //clean files
                 cancelled = true;
                 if (tmpRootDir != null) {
-                    App.EXECUTOR.execute(() -> {
+                    ApplicationModel.INSTANCE.runInBackground(() -> {
                         // delete tmp directory
                         FileUtils.deleteQuietly(tmpRootDir);
                     });
@@ -103,7 +103,7 @@ public class SetController implements ScanCallback {
                 column.setCellValueFactory(param -> {
                     RecordRow recordRow = param.getValue();
                     if (recordRow != null) {
-                        return new SimpleIntegerProperty(recordRow.index);
+                        return new SimpleIntegerProperty(recordRow.getIndex());
                     }
                     return new SimpleIntegerProperty(0);
                 });
@@ -123,7 +123,7 @@ public class SetController implements ScanCallback {
                 pages.setCellFactory(listView -> new PageRootCell());
 
 
-                mScanThread = new Thread(App.SCANS, () -> {
+                mScanThread = new Thread(ClairvoyanceFxApplication.SCANS, () -> {
                     if (mScanThread != null && rootPane.getScene() != null) {
                         try {
                             tmpRootDir = new File(System.getProperty("java.io.tmpdir"));
@@ -132,7 +132,7 @@ public class SetController implements ScanCallback {
                             tmpRootDir = new File(tmpRootDir, FileUtil.prettyFileName(mSetInfo.name, null, false));
                             tmpRootDir.mkdirs();
 
-                            App.APP_LOGGER.info(tmpRootDir.getPath());
+                            ClairvoyanceLogger.logger.info("created tmp directory " + tmpRootDir.getPath());
 
                             ScanPolicy scanPolicy = new ScanPolicy();
                             scanPolicy.concurrentNodes = true;
@@ -140,7 +140,7 @@ public class SetController implements ScanCallback {
                             scanPolicy.scanPercent = 100;
                             //scanPolicy.maxConcurrentNodes = 1;
 
-                            AsyncClient client = App.getClient();
+                            AsyncClient client = ClairvoyanceFxApplication.getClient();
 
 
                             Statement statement = new Statement();
@@ -151,7 +151,7 @@ public class SetController implements ScanCallback {
                             for (Node node : client.getNodes()) {
                                 if (mScanThread != null && rootPane.getScene() != null && !cancelled) {
 
-                                    App.APP_LOGGER.info(mSetInfo.name + " start scan on " + node.getHost());
+                                    ClairvoyanceLogger.logger.info(mSetInfo.name + " start scan on " + node.getHost());
                                     RecordSet rs = client.queryNode(null, statement, node);
                                     try {
                                         while (!cancelled && mScanThread != null && rootPane.getScene() != null && rs.next()) {
@@ -162,7 +162,7 @@ public class SetController implements ScanCallback {
                                         }
                                     } finally {
                                         rs.close();
-                                        App.APP_LOGGER.info(mSetInfo.name + " scan complete on " + node.getHost());
+                                        ClairvoyanceLogger.logger.info(mSetInfo.name + " scan complete on " + node.getHost());
                                     }
                                 }
                             }
@@ -178,12 +178,12 @@ public class SetController implements ScanCallback {
                             }*/
 
                         } catch (AerospikeException.ScanTerminated e) {
-                            App.APP_LOGGER.info(e.getMessage());
+                            ClairvoyanceLogger.logger.info(e.getMessage());
                             return;
                         } catch (Exception e) {
-                            App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
                         } finally {
-                            App.APP_LOGGER.info(mSetInfo.name + " scans complete");
+                            ClairvoyanceLogger.logger.info(mSetInfo.name + " scans complete");
                         }
 
                         flushColumns();
@@ -203,7 +203,7 @@ public class SetController implements ScanCallback {
                 try {
                     recordDetails.setText(mObjectWriter.writeValueAsString(newValue));
                 } catch (Exception e) {
-                    App.APP_LOGGER.warning(e.getMessage());
+                    ClairvoyanceLogger.logger.warning(e.getMessage());
                 }
             }
         });
@@ -218,7 +218,7 @@ public class SetController implements ScanCallback {
 
 
     private void loadPage(final int pageNumber) {
-        App.APP_LOGGER.info("Load requested for " + pageNumber);
+        ClairvoyanceLogger.logger.info("Load requested for " + pageNumber);
 
         //mRowBuffer = new ArrayList<RecordRow>();
         //final List<RecordRow> list = mRowBuffer;
@@ -227,7 +227,7 @@ public class SetController implements ScanCallback {
             dataTable.getItems().clear();
             dataTable.getItems().removeAll(dataTable.getItems());
 
-            Thread thread = new Thread(App.LOADS, new Runnable() {
+            Thread thread = new Thread(ClairvoyanceFxApplication.LOADS, new Runnable() {
                 public void run() {
                     if (Thread.currentThread() == mCurrentLoader && rootPane.getScene() != null) {
 
@@ -253,7 +253,7 @@ public class SetController implements ScanCallback {
                                 //record = client.get(null, key);
 
                                 recordRow = new RecordRow(key, record);
-                                recordRow.index = recordIndex++;
+                                recordRow.setIndex(recordIndex++);
                                 if (Thread.currentThread() == mCurrentLoader) {
                                     mRowBuffer.add(recordRow);
                                 }
@@ -269,9 +269,9 @@ public class SetController implements ScanCallback {
                             } while (Thread.currentThread() == mCurrentLoader);
 
                         } catch (EOFException eof) {
-                            App.APP_LOGGER.info("Reached end of " + file.getAbsolutePath());
+                            ClairvoyanceLogger.logger.info("Reached end of " + file.getAbsolutePath());
                         } catch (IOException e) {
-                            App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
                         }
                         flush(Thread.currentThread());
                     }
@@ -294,9 +294,9 @@ public class SetController implements ScanCallback {
         mColumns.addAll(record.bins.keySet());
 
         RecordRow recordRow = new RecordRow(key, record);
-        recordRow.index = mRecordCount++;
+        recordRow.setIndex(mRecordCount++);
 
-        if (mScanThread == mCurrentLoader && recordRow.index <= mMaxPageZeroSize) {
+        if (mScanThread == mCurrentLoader && recordRow.getIndex() <= mMaxPageZeroSize) {
             mRowBuffer.add(recordRow);
         }
 
@@ -336,13 +336,13 @@ public class SetController implements ScanCallback {
                 }
             });
         } catch (Exception e) {
-            App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
         } finally {
 
             try {
                 FileUtils.forceDeleteOnExit(file);
             } catch (IOException e) {
-                App.APP_LOGGER.log(Level.SEVERE, e.getMessage());
+                ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage());
             }
         }
     }
@@ -359,7 +359,7 @@ public class SetController implements ScanCallback {
                 for (String s : columnsCopy) {
                     if (!mKnownColumns.contains(s)) {
 
-                        column = new TableColumn<RecordRow, String>(s);
+                        column = new TableColumn<>(s);
                         column.setMinWidth(50);
                         column.setCellValueFactory(new NoSQLCellFactory(s));
 
@@ -368,7 +368,7 @@ public class SetController implements ScanCallback {
                     }
                 }
             } catch (Exception e) {
-                App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
             }
         });
     }
@@ -390,14 +390,14 @@ public class SetController implements ScanCallback {
                     }
                 }
             } catch (Exception e) {
-                App.APP_LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
             }
         });
     }
 
     @FXML
     protected void handleAction(ActionEvent event) {
-        App.APP_LOGGER.info(event.toString());
+        ClairvoyanceLogger.logger.info(event.toString());
     }
 
     static class PageRootCell extends ListCell<Integer> {

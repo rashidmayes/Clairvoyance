@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.control.CheckBox?>
-
+<?import java.net.URL?>
 
 <GridPane fx:controller="com.rashidmayes.clairvoyance.controller.ConnectController"
-	xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
-	styleClass="root">
-	<padding>
-		<Insets top="25" right="25" bottom="25" left="25" />
-	</padding>
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10"
+          styleClass="root">
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
 
-	<ImageView GridPane.columnIndex="0" GridPane.rowIndex="0"
-		GridPane.columnSpan="2"  fitHeight="300" fitWidth="250" preserveRatio="true">
-		<image>
-			<Image url="@splash.png" />
-		</image>
-	</ImageView>
+    <ImageView GridPane.columnIndex="0" GridPane.rowIndex="0"
+               GridPane.columnSpan="2" fitHeight="300" fitWidth="250" preserveRatio="true">
+        <image>
+            <Image url="@splash.png"/>
+        </image>
+    </ImageView>
 
-	<Label text="Host" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label text="Host" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
-	<TextField fx:id="host" GridPane.columnIndex="1" GridPane.rowIndex="1" text=""/>
+    <TextField fx:id="hostField" GridPane.columnIndex="1" GridPane.rowIndex="1" text=""/>
 
-	<Label text="Port" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label text="Port" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
-	<TextField fx:id="port" GridPane.columnIndex="1" GridPane.rowIndex="2"  text="3000"/>
+    <TextField fx:id="portField" GridPane.columnIndex="1" GridPane.rowIndex="2" text="3000"/>
 
-	<Label text="Username" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label text="Username" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 
-	<TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
-	<Label text="Password" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Label text="Password" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
 
-	<PasswordField fx:id="password" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
-	<HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="5">
-		<Button fx:id="connect" text="Connect" onAction="#handleConnectAction" />
-		<Button fx:id="connectAlternate" text="Alternate" onAction="#handleConnectAction" />
-	</HBox>
+    <HBox spacing="10" alignment="bottom_right" GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <Button fx:id="connectButton" text="Connect" onAction="#handleConnectAction"/>
+        <Button fx:id="connectAlternateButton" text="Alternate" onAction="#handleConnectAction"/>
+    </HBox>
 
-	<stylesheets>
-		<URL value="@connect.css" />
-	</stylesheets>
+    <stylesheets>
+        <URL value="@connect.css"/>
+    </stylesheets>
 
 </GridPane>

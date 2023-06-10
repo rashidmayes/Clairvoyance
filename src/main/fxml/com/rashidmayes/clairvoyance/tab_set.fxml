@@ -1,58 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
+
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
+<?import java.net.URL?>
+<GridPane xmlns:fx="http://javafx.com/fxml" id="rootPane" fx:id="rootPane"
+          fx:controller="com.rashidmayes.clairvoyance.controller.SetController">
+    <children>
 
-
-<?import javafx.collections.*?> 
-<?import javafx.geometry.Insets?>
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
-
-<?import com.rashidmayes.clairvoyance.*?>
-<?import javafx.scene.layout.BorderPane?>
-
-<GridPane xmlns:fx="http://javafx.com/fxml" id="rootPane" fx:id="rootPane" fx:controller="com.rashidmayes.clairvoyance.controller.SetController">
-	<children>
-
-        <ToolBar GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+        <ToolBar GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0"
+                 GridPane.vgrow="NEVER">
             <HBox>
                 <Button text="Stop"/>
             </HBox>
         </ToolBar>
 
 
+        <SplitPane dividerPositions=".8" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS"
+                   GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+            <items>
 
-	<SplitPane dividerPositions=".8" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
-		<items>
-	
-			<GridPane>
-				<children>
-				
-					<TableView id="dataTable" fx:id="dataTable"
-						GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
-					</TableView>
-			
-			     </children>
-			</GridPane>	
-			
-			<TextArea id="recordDetails" fx:id="recordDetails"  wrapText="false" editable="false"/>
-		</items>
-	
-	</SplitPane>
+                <GridPane>
+                    <children>
 
-	<ListView id="pages" fx:id="pages" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1" minWidth="50" prefWidth="50"/>
-		
+                        <TableView id="dataTable" fx:id="dataTable"
+                                   GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS"
+                                   GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                        </TableView>
 
-	</children>
-	
-	<stylesheets>
-		<URL value="@tab_set.css" />
-	</stylesheets>
+                    </children>
+                </GridPane>
+
+                <TextArea id="recordDetails" fx:id="recordDetails" wrapText="false" editable="false"/>
+            </items>
+
+        </SplitPane>
+
+        <ListView id="pages" fx:id="pages" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.rowIndex="1"
+                  minWidth="50" prefWidth="50"/>
+
+
+    </children>
+
+    <stylesheets>
+        <URL value="@tab_set.css"/>
+    </stylesheets>
 </GridPane>

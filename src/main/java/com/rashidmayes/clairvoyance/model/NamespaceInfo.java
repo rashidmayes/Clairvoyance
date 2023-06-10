@@ -1,16 +1,25 @@
 package com.rashidmayes.clairvoyance.model;
 
 import com.rashidmayes.clairvoyance.util.MapHelper;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class NamespaceInfo implements Identifiable {
 
+    @Getter
     public String name;
-    public Map<String, String> properties = new HashMap<String, String>();
-    public String[] bins;
-    public SetInfo[] sets;
+    public Map<String, String> properties = new HashMap<>();
+    @Getter
+    public List<SetInfo> sets;
 
     public long getObjects() {
         return MapHelper.getLong(properties, 0, "objects");
@@ -57,7 +66,7 @@ public class NamespaceInfo implements Identifiable {
     }
 
     @Override
-    public Object getId() {
+    public String getId() {
         return "$namespace." + name;
     }
 }

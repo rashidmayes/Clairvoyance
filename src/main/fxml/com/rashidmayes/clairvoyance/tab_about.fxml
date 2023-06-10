@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.web.*?>
-
-
-<?import javafx.collections.*?> 
-<?import javafx.geometry.Insets?>
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.control.cell.*?>
-
-<?import com.rashidmayes.clairvoyance.*?>
-
-<WebView xmlns:fx="http://javafx.com/fxml" id="webView" fx:id="webView" fx:controller="com.rashidmayes.clairvoyance.controller.AboutController">
-
-</WebView>
+<GridPane prefHeight="66.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rashidmayes.clairvoyance.controller.AboutController">
+    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0"
+           prefWidth="491.0"
+           text="This project is a fork of repository https://github.com/rashidmayes/Clairvoyance done by Radek"
+           textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER"
+           GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
+</GridPane>
