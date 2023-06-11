@@ -9,10 +9,8 @@ import java.util.logging.SimpleFormatter;
 public class TextAreaLogHandler extends Handler {
 
     private final TextArea textArea;
-    private final int maxLength;
 
-    TextAreaLogHandler(TextArea textArea, int maxLength) {
-        this.maxLength = maxLength;
+    TextAreaLogHandler(TextArea textArea) {
         this.textArea = textArea;
         this.setFormatter(new SimpleFormatter());
     }
@@ -24,24 +22,17 @@ public class TextAreaLogHandler extends Handler {
             String text = debug + " " + "$> " + record.getMessage() + "\n";
             if(this.textArea != null) {
                 textArea.appendText(text);
-                int currentLength = textArea.getLength();
-                if (currentLength > maxLength) {
-                    int end = (textArea.getLength() - maxLength);
-                    if (end > 0) {
-                        //mTextArea.replaceText(0, end , "");
-                    }
-                }
+                // todo: if there is no space for new logs - remove oldest part of text in the console
             }
         }
     }
 
     @Override
     public void flush() {
-
     }
 
     @Override
     public void close() throws SecurityException {
-
     }
+
 }

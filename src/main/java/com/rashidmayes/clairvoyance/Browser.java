@@ -4,9 +4,6 @@ import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.AerospikeException;
 import com.aerospike.client.async.AsyncClient;
 import com.aerospike.client.cluster.Node;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import com.rashidmayes.clairvoyance.model.*;
 import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import com.rashidmayes.clairvoyance.util.FileUtil;
@@ -25,9 +22,7 @@ import javafx.scene.web.WebView;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.net.URL;
 import java.text.NumberFormat;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
@@ -47,9 +42,6 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
                 return thread;
             }
     );
-
-    private static final String FULL_FORMAT = "%s (object count: %s, size: %s)";
-    private static final String FULL_FORMAT_MEM = "%s (object count: %s, size: %s, memory: %s)";
 
     private final ImageView rootIcon;
     private final Image namespaceIcon;
@@ -84,7 +76,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
 
     @FXML
     public void initialize() {
-        TextAreaLogHandler textAreaLogHandler = new TextAreaLogHandler(console, 5 * 1024);
+        TextAreaLogHandler textAreaLogHandler = new TextAreaLogHandler(console);
         ClairvoyanceLogger.logger.addHandler(textAreaLogHandler);
 
         namespacesTree.getSelectionModel()
@@ -225,6 +217,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
         System.exit(0);
     }
 
+    // TODO: 10/06/2023 this has to be refactored
     public Runnable updateClusterTreeView() {
         return () -> Platform.runLater(() -> {
             ClairvoyanceLogger.logger.log(Level.INFO, "refreshing cluster tree view");
@@ -237,10 +230,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
                 var treeRoot = namespacesTree.getRoot();
                 if (treeRoot == null) {
                     // create root item
-                    SimpleTreeNode rootNode = new SimpleTreeNode(
-                            ApplicationModel.INSTANCE.getConnectionInfo().toString(),
-                            nodeInfo
-                    );
+                    var rootNode = new SimpleTreeNode(ApplicationModel.INSTANCE.getConnectionInfo().toString(), nodeInfo);
                     treeRoot = new TreeItem<>(rootNode, rootIcon);
                     treeRoot.setExpanded(true);
                     namespacesTree.setRoot(treeRoot);
@@ -248,70 +238,41 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
 
                 for (NamespaceInfo namespace : nodeInfo.getNamespaces()) {
                     TreeItem<SimpleTreeNode> namespaceNode = null;
-                    for (TreeItem<SimpleTreeNode> tempNode : treeRoot.getChildren()) {
 
-                        if (tempNode.getValue().value.getId().equals(namespace.getId())) {
-                            namespaceNode = tempNode;
-                            namespaceNode.getValue().value = namespace;
-
-                            namespaceNode.getValue().displayName = String.format(
-                                    FULL_FORMAT_MEM,
-                                    namespace.name,
-                                    numberFormat.format(namespace.getMasterObjects()),
-                                    FileUtil.getSizeString(namespace.getUsedBytesDisk(), Locale.US),
-                                    FileUtil.getSizeString(namespace.getUsedBytesMemory(), Locale.US)
-                            );
+                    // update if namespace is already present in the tree
+                    for (TreeItem<SimpleTreeNode> namespacesTreeNode : treeRoot.getChildren()) {
+                        if (namespacesTreeNode.getValue().value.getId().equals(namespace.getId())) {
+                            namespaceNode = namespacesTreeNode;
+                            namespaceNode.setValue(createNamespaceInfoTreeNode(namespace));
                             break;
                         }
                     }
 
+                    // if namespace is not present - add it to the tree
                     if (namespaceNode == null) {
-                        SimpleTreeNode s = new SimpleTreeNode();
-                        s.displayName = String.format(
-                                FULL_FORMAT_MEM,
-                                namespace.name,
-                                numberFormat.format(namespace.getMasterObjects()),
-                                FileUtil.getSizeString(namespace.getUsedBytesDisk(), Locale.US),
-                                FileUtil.getSizeString(namespace.getUsedBytesMemory(), Locale.US)
-                        );
-                        s.value = namespace;
-                        namespaceNode = new TreeItem<>(s, new ImageView(namespaceIcon));
+                        SimpleTreeNode namespaceInfoTreeNode = createNamespaceInfoTreeNode(namespace);
+                        namespaceNode = new TreeItem<>(namespaceInfoTreeNode, new ImageView(namespaceIcon));
                         namespaceNode.setExpanded(true);
                         treeRoot.getChildren().add(namespaceNode);
                     }
 
-                    List<SetInfo> sets = namespace.getSets();
-                    for (SetInfo setInfo : sets) {
 
+                    for (SetInfo setInfo : namespace.getSets()) {
                         TreeItem<SimpleTreeNode> setNode = null;
-                        for (TreeItem<SimpleTreeNode> tempNode : namespaceNode.getChildren()) {
 
+                        // update if set is already present in the tree
+                        for (TreeItem<SimpleTreeNode> tempNode : namespaceNode.getChildren()) {
                             if (tempNode.getValue().value.getId().equals(setInfo.getId())) {
                                 setNode = tempNode;
-                                setNode.getValue().value = setInfo;
-
-
-                                setNode.getValue().displayName =
-                                        String.format(
-                                                FULL_FORMAT,
-                                                setInfo.name,
-                                                numberFormat.format(setInfo.objectCount),
-                                                FileUtil.getSizeString(setInfo.bytesMemory, Locale.US)
-                                        );
+                                setNode.setValue(createSetInfoTreeNode(setInfo));
                                 break;
                             }
                         }
 
+                        // if set is not present - add it to the tree
                         if (setNode == null) {
-                            SimpleTreeNode s = new SimpleTreeNode();
-                            s.displayName = String.format(
-                                    FULL_FORMAT,
-                                    setInfo.name,
-                                    numberFormat.format(setInfo.objectCount),
-                                    FileUtil.getSizeString(setInfo.bytesMemory, Locale.US)
-                            );
-                            s.value = setInfo;
-                            setNode = new TreeItem<>(s, new ImageView(setIcon));
+                            var setInfoTreeNode = createSetInfoTreeNode(setInfo);
+                            setNode = new TreeItem<>(setInfoTreeNode, new ImageView(setIcon));
                             namespaceNode.getChildren().add(setNode);
                         }
                     }
@@ -322,6 +283,31 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
             }
         });
 
+    }
+
+    private SimpleTreeNode createSetInfoTreeNode(SetInfo setInfo) {
+        return new SimpleTreeNode(
+                String.format(
+                        "%s (object count: %s, size: %s)",
+                        setInfo.name,
+                        numberFormat.format(setInfo.objectCount),
+                        FileUtil.getSizeString(setInfo.bytesMemory, Locale.US)
+                ),
+                setInfo
+        );
+    }
+
+    private SimpleTreeNode createNamespaceInfoTreeNode(NamespaceInfo namespaceInfo) {
+        return new SimpleTreeNode(
+                String.format(
+                        "%s (object count: %s, size: %s, memory: %s)",
+                        namespaceInfo.name,
+                        numberFormat.format(namespaceInfo.getMasterObjects()),
+                        FileUtil.getSizeString(namespaceInfo.getUsedBytesDisk(), Locale.US),
+                        FileUtil.getSizeString(namespaceInfo.getUsedBytesMemory(), Locale.US)
+                ),
+                namespaceInfo
+        );
     }
 
     private Optional<Tab> getTab(String tabId) {

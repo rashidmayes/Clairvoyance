@@ -4,9 +4,7 @@ import com.aerospike.client.async.AsyncClient;
 import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import com.rashidmayes.clairvoyance.util.Result;
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;

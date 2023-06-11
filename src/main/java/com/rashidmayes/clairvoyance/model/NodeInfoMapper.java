@@ -27,12 +27,13 @@ public class NodeInfoMapper {
     }
 
     public List<NamespaceInfo> getNamespaceInfo(Node node) {
-        // TODO: 09/06/2023 stream
         var namespaces = new ArrayList<NamespaceInfo>();
-        for (String namespace : StringUtils.split(Info.request(null, node, "namespaces"), ";")) {
+        var info = Info.request(null, node, "namespaces");
+        for (String namespace : StringUtils.split(info, ";")) {
+            var oneStringNamespaceInfo = Info.request(null, node, "namespace/" + namespace);
             var namespaceInfo = NamespaceInfo.builder()
                     .name(namespace)
-                    .properties(MapHelper.map(Info.request(null, node, "namespace/" + namespace), ";"))
+                    .properties(MapHelper.map(oneStringNamespaceInfo, ";"))
                     .sets(getSetInfo(node, namespace))
                     .build();
             namespaces.add(namespaceInfo);
@@ -41,10 +42,10 @@ public class NodeInfoMapper {
     }
 
     public static List<SetInfo> getSetInfo(Node node, String namespace) {
-        // TODO: 09/06/2023 stream
         var sets = new ArrayList<SetInfo>();
-        for (String set : StringUtils.split(Info.request(null, node, "sets/" + namespace), ";")) {
-            Map<String, String> map = MapHelper.map(set, ":");
+        var oneStringSetInfo = Info.request(null, node, "sets/" + namespace);
+        for (String set : StringUtils.split(oneStringSetInfo, ";")) {
+            var map = MapHelper.map(set, ":");
             var setInfo = SetInfo.builder()
                     .namespace(MapHelper.getString(map, "", "ns_name", "ns"))
                     .name(MapHelper.getString(map, "", "set_name", "set"))
@@ -54,7 +55,6 @@ public class NodeInfoMapper {
                     .build();
             sets.add(setInfo);
         }
-
         return sets;
     }
 

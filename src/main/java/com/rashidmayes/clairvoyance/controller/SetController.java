@@ -48,8 +48,6 @@ public class SetController implements ScanCallback {
     private TextArea recordDetails;
     @FXML
     private TableView<RecordRow> dataTable;
-    @FXML
-    private TabPane tabs;
 
     private ObjectMapper mObjectMapper = new ObjectMapper();
     private ObjectWriter mObjectWriter;
@@ -62,13 +60,12 @@ public class SetController implements ScanCallback {
     private Set<String> mColumns = new HashSet<>();
     private Set<String> mKnownColumns = new HashSet<>();
 
-
     private int mMaxBufferSize = 500;
     private int mMaxKeyBufferSize = 50000;
     private int mMaxPageZeroSize = 200000;
 
-    private ArrayList<RecordRow> mRowBuffer = new ArrayList<>(mMaxBufferSize);
-    private ArrayList<byte[]> mKeyBuffer = new ArrayList<>(mMaxKeyBufferSize);
+    private List<RecordRow> mRowBuffer = new ArrayList<>(mMaxBufferSize);
+    private List<byte[]> mKeyBuffer = new ArrayList<>(mMaxKeyBufferSize);
 
     private File tmpRootDir;
     private volatile boolean cancelled;
@@ -84,7 +81,6 @@ public class SetController implements ScanCallback {
         mObjectWriter = mObjectMapper.writerWithDefaultPrettyPrinter();
 
         rootPane.sceneProperty().addListener((obs, oldScene, newScene) -> {
-
             if (newScene == null) {
                 //stop scan
                 //clean files
