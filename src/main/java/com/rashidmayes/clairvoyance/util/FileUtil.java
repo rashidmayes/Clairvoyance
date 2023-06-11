@@ -1,7 +1,11 @@
 package com.rashidmayes.clairvoyance.util;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.logging.Level;
 
 public final class FileUtil {
 
@@ -48,4 +52,17 @@ public final class FileUtil {
 
         return name;
     }
+
+    public static void clearCache() {
+        try {
+            ClairvoyanceLogger.logger.log(Level.INFO, "deleting tmp clairvoyance directory");
+            File mRootDir = new File(System.getProperty("java.io.tmpdir"));
+            mRootDir = new File(mRootDir, "clairvoyance");
+            FileUtils.deleteDirectory(mRootDir);
+            ClairvoyanceLogger.logger.log(Level.INFO, "clairvoyance tmp directory has been deleted");
+        } catch (Exception e) {
+            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
+        }
+    }
+
 }

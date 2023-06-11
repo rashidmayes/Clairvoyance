@@ -19,9 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import org.apache.commons.io.FileUtils;
 
-import java.io.File;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Objects;
@@ -43,7 +41,8 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
             }
     );
 
-    private final ImageView rootIcon;
+    private final Image rootIcon;
+    // TODO: 11/06/2023 fix this icon
     private final Image nodeIcon;
     private final Image namespaceIcon;
     private final Image setIcon;
@@ -64,7 +63,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
 
         var rootIconImage = classLoader.getResourceAsStream("ic_cluster.png");
         Objects.requireNonNull(rootIconImage, "ic_cluster.png is missing");
-        this.rootIcon = new ImageView(new Image(rootIconImage));
+        this.rootIcon = new Image(rootIconImage);
 
         var nodeIconImage = classLoader.getResourceAsStream("node.png");
         Objects.requireNonNull(nodeIconImage, "node.png is missing");
@@ -134,17 +133,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
 
     @FXML
     protected void handleClearCache(ActionEvent event) {
-        ApplicationModel.INSTANCE.runInBackground(() -> {
-            try {
-                ClairvoyanceLogger.logger.log(Level.INFO, "deleting tmp clairvoyance directory");
-                File mRootDir = new File(System.getProperty("java.io.tmpdir"));
-                mRootDir = new File(mRootDir, "clairvoyance");
-                FileUtils.deleteDirectory(mRootDir);
-                ClairvoyanceLogger.logger.log(Level.INFO, "clairvoyance tmp directory has been deleted");
-            } catch (Exception e) {
-                ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
-            }
-        });
+        ApplicationModel.INSTANCE.runInBackground(FileUtil::clearCache);
     }
 
     @FXML
@@ -232,71 +221,114 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
                 ClairvoyanceLogger.logger.severe(e.getMessage());
             }
         });
-
     }
 
     private void updateTreeView(AerospikeClient client) {
+        buildRoot(client);
+    }
+
+    private void buildRoot(AerospikeClient client) {
+        var rootNode = createRootModelNode(ApplicationModel.INSTANCE.getConnectionInfo());
         if (namespacesTree.getRoot() == null) {
-            var rootNode = createRootModelNode(ApplicationModel.INSTANCE.getConnectionInfo());
-            var treeRoot = new TreeItem<>(rootNode, rootIcon);
-            treeRoot.setExpanded(true);
-            namespacesTree.setRoot(treeRoot);
+            var treeRootView = new TreeItem<>(rootNode, new ImageView(rootIcon));
+            treeRootView.setExpanded(true);
+            namespacesTree.setRoot(treeRootView);
+        } else {
+            namespacesTree.getRoot().setValue(rootNode);
         }
+        buildNodes(client);
+    }
 
-        // todo: why only first node?!
-        Node node = client.getNodes()[0];
-        NodeInfo nodeInfo = nodeInfoMapper.getNodeInfo(node);
+    private void buildNodes(AerospikeClient client) {
+        for (Node node : client.getNodes()) {
+            buildNode(node);
+        }
+    }
 
+    private void buildNode(Node node) {
+        var nodeInfo = nodeInfoMapper.getNodeInfo(node);
+        var nodeViewNodeResult = findViewNodeInChildren(nodeInfo.getId(), namespacesTree.getRoot());
+        if (nodeViewNodeResult.isPresent()) {
+            var nodeModelNode = createNodeModelNode(nodeInfo);
+            var nodeViewNode = nodeViewNodeResult.get();
+            nodeViewNode.setValue(nodeModelNode);
 
-        var parent = namespacesTree.getRoot();
+            buildNamespaces(nodeInfo, nodeViewNode);
+        } else {
+            var nodeModelNode = createNodeModelNode(nodeInfo);
+            // todo: uncomment after fixing icon
+            var nodeViewNode = new TreeItem<>(nodeModelNode /*, new ImageView(nodeIcon)*/);
+            nodeViewNode.setExpanded(true);
+            namespacesTree.getRoot().getChildren().add(nodeViewNode);
 
-        buildNamespaces(nodeInfo, parent);
+            buildNamespaces(nodeInfo, nodeViewNode);
+        }
     }
 
     private void buildNamespaces(NodeInfo nodeInfo, TreeItem<SimpleTreeNode> parent) {
         for (NamespaceInfo namespace : nodeInfo.getNamespaces()) {
-            var namespaceNode = buildNamespaceNode(parent, namespace);
-            buildSets(namespace, namespaceNode);
+            buildNamespaceNode(parent, namespace);
         }
     }
 
-    private TreeItem<SimpleTreeNode> buildNamespaceNode(TreeItem<SimpleTreeNode> parent, NamespaceInfo namespace) {
+    private void buildNamespaceNode(TreeItem<SimpleTreeNode> parent, NamespaceInfo namespace) {
         var namespaceViewNodeResult = findViewNodeInChildren(namespace.getId(), parent);
+        var namespaceModelNode = createNamespaceModelNode(namespace);
         if (namespaceViewNodeResult.isPresent()) {
             var namespaceViewNode = namespaceViewNodeResult.get();
-            var namespaceModelNode = createNamespaceModelNode(namespace);
             namespaceViewNode.setValue(namespaceModelNode);
-            return namespaceViewNode;
+
+            buildSets(namespace, namespaceViewNode);
         } else {
-            var namespaceModelNode = createNamespaceModelNode(namespace);
             var namespaceViewNode = new TreeItem<>(namespaceModelNode, new ImageView(namespaceIcon));
             namespaceViewNode.setExpanded(true);
             parent.getChildren().add(namespaceViewNode);
-            return namespaceViewNode;
+
+            buildSets(namespace, namespaceViewNode);
         }
     }
 
     private void buildSets(NamespaceInfo namespace, TreeItem<SimpleTreeNode> namespaceNode) {
         for (SetInfo setInfo : namespace.getSets()) {
-            var setViewNodeResult = findViewNodeInChildren(setInfo.getId(), namespaceNode);
-            if (setViewNodeResult.isPresent()) {
-                var setViewNode = setViewNodeResult.get();
-                setViewNode.setValue(createSetModelNode(setInfo));
-            } else {
-                var setModelNode = createSetModelNode(setInfo);
-                var setViewNode = new TreeItem<>(setModelNode, new ImageView(setIcon));
-                namespaceNode.getChildren().add(setViewNode);
-            }
+            buildSetNode(namespaceNode, setInfo);
+        }
+    }
+
+    private void buildSetNode(TreeItem<SimpleTreeNode> namespaceNode, SetInfo setInfo) {
+        var setViewNodeResult = findViewNodeInChildren(setInfo.getId(), namespaceNode);
+        var setModelNode = createSetModelNode(setInfo);
+        if (setViewNodeResult.isPresent()) {
+            var setViewNode = setViewNodeResult.get();
+            setViewNode.setValue(setModelNode);
+        } else {
+            var setViewNode = new TreeItem<>(setModelNode, new ImageView(setIcon));
+            namespaceNode.getChildren().add(setViewNode);
         }
     }
 
     private Optional<TreeItem<SimpleTreeNode>> findViewNodeInChildren(String itemId, TreeItem<SimpleTreeNode> parent) {
-        for (TreeItem<SimpleTreeNode> namespacesTreeNode : parent.getChildren()) {
+        for (var namespacesTreeNode : parent.getChildren()) {
             if (namespacesTreeNode.getValue().getValue().getId().equals(itemId)) {
                 return Optional.of(namespacesTreeNode);
             }
         }
         return Optional.empty();
+    }
+
+    private SimpleTreeNode createRootModelNode(ConnectionInfo connectionInfo) {
+        var connectionString = connectionInfo.toString();
+        return new SimpleTreeNode(
+                connectionString,
+                new RootInfo(connectionString)
+        );
+    }
+
+    private SimpleTreeNode createNodeModelNode(NodeInfo nodeInfo) {
+        return new SimpleTreeNode(nodeInfo.getName(), nodeInfo);
+    }
+
+    private SimpleTreeNode createNamespaceModelNode(NamespaceInfo namespaceInfo) {
+        return new SimpleTreeNode(namespaceInfo.getName(), namespaceInfo);
     }
 
     private SimpleTreeNode createSetModelNode(SetInfo setInfo) {
@@ -311,29 +343,8 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
         );
     }
 
-    private SimpleTreeNode createNamespaceModelNode(NamespaceInfo namespaceInfo) {
-        return new SimpleTreeNode(
-                String.format(
-                        "%s (object count: %s, size: %s, memory: %s)",
-                        namespaceInfo.name,
-                        numberFormat.format(namespaceInfo.getMasterObjects()),
-                        FileUtil.getSizeString(namespaceInfo.getUsedBytesDisk(), Locale.US),
-                        FileUtil.getSizeString(namespaceInfo.getUsedBytesMemory(), Locale.US)
-                ),
-                namespaceInfo
-        );
-    }
-
-    private SimpleTreeNode createRootModelNode(ConnectionInfo connectionInfo) {
-        var connectionString = connectionInfo.toString();
-        return new SimpleTreeNode(
-                connectionString,
-                new RootInfo(connectionString)
-        );
-    }
-
     private Optional<Tab> getTab(String tabId) {
-        for (Tab tab : tabs.getTabs()) {
+        for (var tab : tabs.getTabs()) {
             if (tab.getId() != null && tab.getId().equals(tabId)) {
                 return Optional.of(tab);
             }
