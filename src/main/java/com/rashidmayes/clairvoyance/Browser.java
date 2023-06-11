@@ -44,6 +44,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
     );
 
     private final ImageView rootIcon;
+    private final Image nodeIcon;
     private final Image namespaceIcon;
     private final Image setIcon;
 
@@ -64,6 +65,10 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
         var rootIconImage = classLoader.getResourceAsStream("ic_cluster.png");
         Objects.requireNonNull(rootIconImage, "ic_cluster.png is missing");
         this.rootIcon = new ImageView(new Image(rootIconImage));
+
+        var nodeIconImage = classLoader.getResourceAsStream("node.png");
+        Objects.requireNonNull(nodeIconImage, "node.png is missing");
+        this.nodeIcon = new Image(nodeIconImage);
 
         var namespaceIconImage = classLoader.getResourceAsStream("ic_storage.png");
         Objects.requireNonNull(namespaceIconImage, "ic_storage.png is missing");
@@ -217,67 +222,12 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
         System.exit(0);
     }
 
-    // TODO: 10/06/2023 this has to be refactored
     public Runnable updateClusterTreeView() {
         return () -> Platform.runLater(() -> {
             ClairvoyanceLogger.logger.log(Level.INFO, "refreshing cluster tree view");
             try {
-                AerospikeClient client = ClairvoyanceFxApplication.getClient();
-                // todo: why only first node?!
-                Node node = client.getNodes()[0];
-                NodeInfo nodeInfo = nodeInfoMapper.getNodeInfo(node);
-
-                var treeRoot = namespacesTree.getRoot();
-                if (treeRoot == null) {
-                    // create root item
-                    var rootNode = new SimpleTreeNode(ApplicationModel.INSTANCE.getConnectionInfo().toString(), nodeInfo);
-                    treeRoot = new TreeItem<>(rootNode, rootIcon);
-                    treeRoot.setExpanded(true);
-                    namespacesTree.setRoot(treeRoot);
-                }
-
-                for (NamespaceInfo namespace : nodeInfo.getNamespaces()) {
-                    TreeItem<SimpleTreeNode> namespaceNode = null;
-
-                    // update if namespace is already present in the tree
-                    for (TreeItem<SimpleTreeNode> namespacesTreeNode : treeRoot.getChildren()) {
-                        if (namespacesTreeNode.getValue().value.getId().equals(namespace.getId())) {
-                            namespaceNode = namespacesTreeNode;
-                            namespaceNode.setValue(createNamespaceInfoTreeNode(namespace));
-                            break;
-                        }
-                    }
-
-                    // if namespace is not present - add it to the tree
-                    if (namespaceNode == null) {
-                        SimpleTreeNode namespaceInfoTreeNode = createNamespaceInfoTreeNode(namespace);
-                        namespaceNode = new TreeItem<>(namespaceInfoTreeNode, new ImageView(namespaceIcon));
-                        namespaceNode.setExpanded(true);
-                        treeRoot.getChildren().add(namespaceNode);
-                    }
-
-
-                    for (SetInfo setInfo : namespace.getSets()) {
-                        TreeItem<SimpleTreeNode> setNode = null;
-
-                        // update if set is already present in the tree
-                        for (TreeItem<SimpleTreeNode> tempNode : namespaceNode.getChildren()) {
-                            if (tempNode.getValue().value.getId().equals(setInfo.getId())) {
-                                setNode = tempNode;
-                                setNode.setValue(createSetInfoTreeNode(setInfo));
-                                break;
-                            }
-                        }
-
-                        // if set is not present - add it to the tree
-                        if (setNode == null) {
-                            var setInfoTreeNode = createSetInfoTreeNode(setInfo);
-                            setNode = new TreeItem<>(setInfoTreeNode, new ImageView(setIcon));
-                            namespaceNode.getChildren().add(setNode);
-                        }
-                    }
-                }
-
+                var client = ClairvoyanceFxApplication.getClient();
+                updateTreeView(client);
             } catch (Exception e) {
                 ClairvoyanceLogger.logger.severe(e.getMessage());
             }
@@ -285,7 +235,71 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
 
     }
 
-    private SimpleTreeNode createSetInfoTreeNode(SetInfo setInfo) {
+    private void updateTreeView(AerospikeClient client) {
+        if (namespacesTree.getRoot() == null) {
+            var rootNode = createRootModelNode(ApplicationModel.INSTANCE.getConnectionInfo());
+            var treeRoot = new TreeItem<>(rootNode, rootIcon);
+            treeRoot.setExpanded(true);
+            namespacesTree.setRoot(treeRoot);
+        }
+
+        // todo: why only first node?!
+        Node node = client.getNodes()[0];
+        NodeInfo nodeInfo = nodeInfoMapper.getNodeInfo(node);
+
+
+        var parent = namespacesTree.getRoot();
+
+        buildNamespaces(nodeInfo, parent);
+    }
+
+    private void buildNamespaces(NodeInfo nodeInfo, TreeItem<SimpleTreeNode> parent) {
+        for (NamespaceInfo namespace : nodeInfo.getNamespaces()) {
+            var namespaceNode = buildNamespaceNode(parent, namespace);
+            buildSets(namespace, namespaceNode);
+        }
+    }
+
+    private TreeItem<SimpleTreeNode> buildNamespaceNode(TreeItem<SimpleTreeNode> parent, NamespaceInfo namespace) {
+        var namespaceViewNodeResult = findViewNodeInChildren(namespace.getId(), parent);
+        if (namespaceViewNodeResult.isPresent()) {
+            var namespaceViewNode = namespaceViewNodeResult.get();
+            var namespaceModelNode = createNamespaceModelNode(namespace);
+            namespaceViewNode.setValue(namespaceModelNode);
+            return namespaceViewNode;
+        } else {
+            var namespaceModelNode = createNamespaceModelNode(namespace);
+            var namespaceViewNode = new TreeItem<>(namespaceModelNode, new ImageView(namespaceIcon));
+            namespaceViewNode.setExpanded(true);
+            parent.getChildren().add(namespaceViewNode);
+            return namespaceViewNode;
+        }
+    }
+
+    private void buildSets(NamespaceInfo namespace, TreeItem<SimpleTreeNode> namespaceNode) {
+        for (SetInfo setInfo : namespace.getSets()) {
+            var setViewNodeResult = findViewNodeInChildren(setInfo.getId(), namespaceNode);
+            if (setViewNodeResult.isPresent()) {
+                var setViewNode = setViewNodeResult.get();
+                setViewNode.setValue(createSetModelNode(setInfo));
+            } else {
+                var setModelNode = createSetModelNode(setInfo);
+                var setViewNode = new TreeItem<>(setModelNode, new ImageView(setIcon));
+                namespaceNode.getChildren().add(setViewNode);
+            }
+        }
+    }
+
+    private Optional<TreeItem<SimpleTreeNode>> findViewNodeInChildren(String itemId, TreeItem<SimpleTreeNode> parent) {
+        for (TreeItem<SimpleTreeNode> namespacesTreeNode : parent.getChildren()) {
+            if (namespacesTreeNode.getValue().getValue().getId().equals(itemId)) {
+                return Optional.of(namespacesTreeNode);
+            }
+        }
+        return Optional.empty();
+    }
+
+    private SimpleTreeNode createSetModelNode(SetInfo setInfo) {
         return new SimpleTreeNode(
                 String.format(
                         "%s (object count: %s, size: %s)",
@@ -297,7 +311,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
         );
     }
 
-    private SimpleTreeNode createNamespaceInfoTreeNode(NamespaceInfo namespaceInfo) {
+    private SimpleTreeNode createNamespaceModelNode(NamespaceInfo namespaceInfo) {
         return new SimpleTreeNode(
                 String.format(
                         "%s (object count: %s, size: %s, memory: %s)",
@@ -307,6 +321,14 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
                         FileUtil.getSizeString(namespaceInfo.getUsedBytesMemory(), Locale.US)
                 ),
                 namespaceInfo
+        );
+    }
+
+    private SimpleTreeNode createRootModelNode(ConnectionInfo connectionInfo) {
+        var connectionString = connectionInfo.toString();
+        return new SimpleTreeNode(
+                connectionString,
+                new RootInfo(connectionString)
         );
     }
 

@@ -2,8 +2,10 @@ package com.rashidmayes.clairvoyance;
 
 import com.rashidmayes.clairvoyance.model.Identifiable;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class SimpleTreeNode {
