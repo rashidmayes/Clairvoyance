@@ -1,62 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.net.URL?>
-<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.rashidmayes.clairvoyance.Browser">
-    <children>
 
-        <MenuBar GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0"
-                 GridPane.vgrow="NEVER">
-            <menus>
-                <Menu mnemonicParsing="false" text="File">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Reconnect" onAction="#handleReconnect"/>
-                        <MenuItem mnemonicParsing="false" text="Clear Cache" onAction="#handleClearCache"/>
-                        <MenuItem mnemonicParsing="false" text="Exit" onAction="#handleExit"/>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Documentation">
-                    <items>
-                        <MenuItem mnemonicParsing="false" id="http://www.aerospike.com/docs/" text="Overview"
-                                  onAction="#handleWeb"/>
-                        <MenuItem mnemonicParsing="false" id="http://www.aerospike.com/docs/deploy_guides/aws"
-                                  text="Deployment Guides" onAction="#handleWeb"/>
-                        <MenuItem mnemonicParsing="false" id="http://www.aerospike.com/download/client/" text="Clients"
-                                  onAction="#handleWeb"/>
-                        <MenuItem mnemonicParsing="false" id="http://www.aerospike.com/docs/connectors/"
-                                  text="Connectors" onAction="#handleWeb"/>
-                        <MenuItem mnemonicParsing="false" id="http://www.aerospike.com/docs/operations/plan/capacity/"
-                                  text="Capacity Planning" onAction="#handleWeb"/>
-                        <MenuItem mnemonicParsing="false" id="http://www.aerospike.com/docs/guide/limitations.html"
-                                  text="Limitations" onAction="#handleWeb"/>
-                        <MenuItem mnemonicParsing="false"
-                                  id="http://www.aerospike.com/datamodeling/modeling-data-aerospike"
-                                  text="Data Modeling" onAction="#handleWeb"/>
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                    <MenuItem mnemonicParsing="false" text="Full Report" onAction="#handleClusterDump"/>
-                    <MenuItem mnemonicParsing="false" text="About" onAction="#handleAbout"/>
-                </Menu>
-            </menus>
-        </MenuBar>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea"
+          fx:controller="com.rashidmayes.clairvoyance.controller.BrowserController">
+    <MenuBar GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0"
+             GridPane.vgrow="NEVER">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" onAction="#handleReconnect" text="Reconnect"/>
+            <MenuItem mnemonicParsing="false" onAction="#handleClearCache" text="Clear Cache"/>
+            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Documentation">
+            <MenuItem id="http://www.aerospike.com/docs/" mnemonicParsing="false" onAction="#handleWeb"
+                      text="Overview"/>
+            <MenuItem id="http://www.aerospike.com/docs/deploy_guides/aws" mnemonicParsing="false"
+                      onAction="#handleWeb" text="Deployment Guides"/>
+            <MenuItem id="http://www.aerospike.com/download/client/" mnemonicParsing="false"
+                      onAction="#handleWeb" text="Clients"/>
+            <MenuItem id="http://www.aerospike.com/docs/connectors/" mnemonicParsing="false"
+                      onAction="#handleWeb" text="Connectors"/>
+            <MenuItem id="http://www.aerospike.com/docs/operations/plan/capacity/" mnemonicParsing="false"
+                      onAction="#handleWeb" text="Capacity Planning"/>
+            <MenuItem id="http://www.aerospike.com/docs/guide/limitations.html" mnemonicParsing="false"
+                      onAction="#handleWeb" text="Limitations"/>
+            <MenuItem id="http://www.aerospike.com/datamodeling/modeling-data-aerospike" mnemonicParsing="false"
+                      onAction="#handleWeb" text="Data Modeling"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" onAction="#handleClusterDump" text="Full Report"/>
+            <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About"/>
+        </Menu>
+    </MenuBar>
 
-
-        <SplitPane dividerPositions=".8" orientation="VERTICAL"
-                   GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"
-                   GridPane.vgrow="ALWAYS">
-                <SplitPane dividerPositions="0.20">
-                    <TreeView fx:id="namespacesTree"/>
-                    <TabPane id="tabs" fx:id="tabs"/>
-                </SplitPane>
-
-                <TextArea id="console" fx:id="console" wrapText="true"
-                          editable="false"/>
-            <stylesheets>
-                <URL value="@browser.css"/>
-            </stylesheets>
+    <SplitPane dividerPositions="0.8, 0.5" orientation="VERTICAL" GridPane.columnIndex="0" GridPane.columnSpan="1"
+               GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+        <SplitPane dividerPositions="0.2">
+            <TreeView fx:id="namespacesTree"/>
+            <TabPane id="tabs" fx:id="tabs"/>
         </SplitPane>
+        <ToolBar prefHeight="40.0" prefWidth="200.0">
+            <Button mnemonicParsing="false" text="clear console" onAction="#clearConsole"/>
+        </ToolBar>
 
-    </children>
+        <TextArea id="console" fx:id="console" editable="false" wrapText="true"/>
+        <stylesheets>
+            <URL value="@browser.css"/>
+        </stylesheets>
+    </SplitPane>
+
 </GridPane>

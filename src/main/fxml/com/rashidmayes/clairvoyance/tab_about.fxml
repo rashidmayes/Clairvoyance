@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
-<GridPane prefHeight="66.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rashidmayes.clairvoyance.controller.AboutController">
+<GridPane prefHeight="66.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/17.0.2-ea">
     <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0"
            prefWidth="491.0"
            text="This project is a fork of repository https://github.com/rashidmayes/Clairvoyance done by Radek"

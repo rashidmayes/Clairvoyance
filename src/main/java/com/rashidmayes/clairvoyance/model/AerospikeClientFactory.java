@@ -6,8 +6,6 @@ import com.aerospike.client.async.AsyncClientPolicy;
 import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import com.rashidmayes.clairvoyance.util.Result;
 
-import java.util.logging.Level;
-
 public class AerospikeClientFactory {
 
     public Result<AsyncClient, String> create(ConnectionInfo connectionInfo) {
@@ -15,10 +13,10 @@ public class AerospikeClientFactory {
             var policy = createPolicy(connectionInfo);
             var client = new AsyncClient(policy, connectionInfo.host(), connectionInfo.port());
             setDefaultConnectionParameters(client);
-            ClairvoyanceLogger.logger.log(Level.INFO, "created new aerospike client");
+            ClairvoyanceLogger.logger.info("created new aerospike client");
             return Result.of(client);
         } catch (AerospikeException exception) {
-            ClairvoyanceLogger.logger.log(Level.SEVERE, "could not create aerospike client", exception);
+            ClairvoyanceLogger.logger.error("could not create aerospike client", exception);
             return Result.error("could not connect to cluster: " + exception.getMessage());
         }
     }

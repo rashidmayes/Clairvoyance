@@ -2,6 +2,7 @@ package com.rashidmayes.clairvoyance;
 
 import com.aerospike.client.Record;
 import com.google.gson.Gson;
+import com.rashidmayes.clairvoyance.model.RecordRow;
 import gnu.crypto.util.Base64;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;

@@ -1,9 +1,14 @@
-package com.rashidmayes.clairvoyance;
+package com.rashidmayes.clairvoyance.controller;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.AerospikeException;
 import com.aerospike.client.async.AsyncClient;
 import com.aerospike.client.cluster.Node;
+import com.rashidmayes.clairvoyance.ClairvoyanceFxApplication;
+import com.rashidmayes.clairvoyance.SimpleTreeNode;
 import com.rashidmayes.clairvoyance.model.*;
 import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import com.rashidmayes.clairvoyance.util.FileUtil;
@@ -19,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -27,15 +33,14 @@ import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
-public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
+public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode>> {
 
     private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(
             1,
             runnable -> {
-                var thread = new Thread(runnable);
-                thread.setName("update-cluster-info-scheduled-thread");
+                var thread = Executors.defaultThreadFactory().newThread(runnable);
+                thread.setName("update-cluster-info-scheduled-thread-" + thread.threadId());
                 thread.setDaemon(true);
                 return thread;
             }
@@ -58,7 +63,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
 
     private final NodeInfoMapper nodeInfoMapper = new NodeInfoMapper();
 
-    public Browser() {
+    public BrowserController() {
         var classLoader = getClass().getClassLoader();
 
         var rootIconImage = classLoader.getResourceAsStream("ic_cluster.png");
@@ -80,8 +85,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
 
     @FXML
     public void initialize() {
-        TextAreaLogHandler textAreaLogHandler = new TextAreaLogHandler(console);
-        ClairvoyanceLogger.logger.addHandler(textAreaLogHandler);
+        createLoggerAppenderForConsole();
 
         namespacesTree.getSelectionModel()
                 .selectedItemProperty()
@@ -117,7 +121,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
                 tabs.getSelectionModel().select(optionalTab.get());
             }
         } catch (Exception e) {
-            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
+            ClairvoyanceLogger.logger.error(e.getMessage(), e);
         }
     }
 
@@ -127,7 +131,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
             createNewClient();
             updateClusterTreeView().run();
         } catch (Exception e) {
-            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
+            ClairvoyanceLogger.logger.error(e.getMessage(), e);
         }
     }
 
@@ -156,7 +160,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
                 tabs.getSelectionModel().select(optionalTab.get());
             }
         } catch (Exception e) {
-            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
+            ClairvoyanceLogger.logger.error(e.getMessage(), e);
         }
     }
 
@@ -165,7 +169,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
         if (event.getSource() instanceof MenuItem) {
             try {
                 MenuItem item = (MenuItem) event.getSource();
-                ClairvoyanceLogger.logger.info("opening " + item.getId());
+                ClairvoyanceLogger.logger.info("opening {}", item.getId());
 
                 Tab tab = new Tab();
                 tab.setId(item.getId());
@@ -182,7 +186,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
                 tabs.getTabs().add(tab);
                 tabs.getSelectionModel().select(tab);
             } catch (Exception e) {
-                ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
+                ClairvoyanceLogger.logger.error(e.getMessage(), e);
             }
         }
     }
@@ -202,7 +206,7 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
             tabs.getTabs().add(tab);
             tabs.getSelectionModel().select(tab);
         } catch (Exception e) {
-            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
+            ClairvoyanceLogger.logger.error(e.getMessage(), e);
         }
     }
 
@@ -211,16 +215,41 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
         System.exit(0);
     }
 
+    @FXML
+    public void clearConsole(ActionEvent actionEvent) {
+        console.clear();
+    }
+
     public Runnable updateClusterTreeView() {
-        return () -> Platform.runLater(() -> {
-            ClairvoyanceLogger.logger.log(Level.INFO, "refreshing cluster tree view");
-            try {
-                var client = ClairvoyanceFxApplication.getClient();
-                updateTreeView(client);
-            } catch (Exception e) {
-                ClairvoyanceLogger.logger.severe(e.getMessage());
-            }
-        });
+        return () -> {
+            ClairvoyanceLogger.logger.info("submitting refresh cluster tree view task");
+            Platform.runLater(() -> {
+                ClairvoyanceLogger.logger.info("refreshing cluster tree view");
+                try {
+                    var client = ClairvoyanceFxApplication.getClient();
+                    updateTreeView(client);
+                } catch (Exception e) {
+                    ClairvoyanceLogger.logger.error(e.getMessage());
+                }
+            });
+        };
+    }
+
+    private void createLoggerAppenderForConsole() {
+        var loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
+        var patternLayoutEncoder = new PatternLayoutEncoder();
+
+        patternLayoutEncoder.setPattern("[%d{HH:mm:ss}] [%class{20}$%method] %msg%n");
+        patternLayoutEncoder.setContext(loggerContext);
+        patternLayoutEncoder.start();
+        var textAreaLogAppender = new TextAreaLogAppender(console);
+        textAreaLogAppender.setContext(loggerContext);
+        textAreaLogAppender.start();
+
+        ch.qos.logback.classic.Logger logger = (ch.qos.logback.classic.Logger) ClairvoyanceLogger.logger;
+        logger.addAppender(textAreaLogAppender);
+        logger.setLevel(Level.INFO);
+        logger.setAdditive(true);
     }
 
     private void updateTreeView(AerospikeClient client) {
@@ -361,5 +390,4 @@ public class Browser implements ChangeListener<TreeItem<SimpleTreeNode>> {
         }
         return aerospikeClientResult.getData();
     }
-
 }

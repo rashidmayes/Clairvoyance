@@ -22,47 +22,47 @@ public class NamespaceInfo implements Identifiable {
     public List<SetInfo> sets;
 
     public long getObjects() {
-        return MapHelper.getLong(properties, 0, "objects");
+        return MapHelper.getLong(properties, "objects");
     }
 
     public String getType() {
-        return MapHelper.getString(properties, "", "type", "storage-engine");
+        return MapHelper.getString(properties, "type", "storage-engine");
     }
 
     public long getProleObjects() {
-        return MapHelper.getLong(properties, 0, "prole-objects", "prole_objects");
+        return MapHelper.getLong(properties, "prole-objects", "prole_objects");
     }
 
     public long getUsedBytesMemory() {
-        return MapHelper.getLong(properties, 0, "used-bytes-memory", "memory_used_bytes");
+        return MapHelper.getLong(properties, "used-bytes-memory", "memory_used_bytes");
     }
 
     public long getReplicationFactor() {
-        return MapHelper.getLong(properties, 0, "repl-factor");
+        return MapHelper.getLong(properties, "repl-factor");
     }
 
     public long getUsedBytesDisk() {
-        return MapHelper.getLong(properties, 0, "used-bytes-disk", "device_used_bytes");
+        return MapHelper.getLong(properties, "used-bytes-disk", "device_used_bytes");
     }
 
     public long getMasterObjects() {
-        return MapHelper.getLong(properties, 0, "master-objects", "master_objects");
+        return MapHelper.getLong(properties, "master-objects", "master_objects");
     }
 
     public long getTotalBytesMemory() {
-        return MapHelper.getLong(properties, 0, "total-bytes-memory", "memory-size");
+        return MapHelper.getLong(properties, "total-bytes-memory", "memory-size");
     }
 
     public long getTotalBytesDisk() {
-        return MapHelper.getLong(properties, 0, "total-bytes-disk", "device_total_bytes");
+        return MapHelper.getLong(properties, "total-bytes-disk", "device_total_bytes");
     }
 
     public long getFreeMemoryPercent() {
-        return MapHelper.getLong(properties, 0, "free-pct-memory", "memory_free_pct");
+        return MapHelper.getLong(properties, "free-pct-memory", "memory_free_pct");
     }
 
     public long getFreeDiskPercent() {
-        return MapHelper.getLong(properties, 0, "free-pct-disk", "device_available_pct");
+        return MapHelper.getLong(properties, "free-pct-disk", "device_available_pct");
     }
 
     @Override

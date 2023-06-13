@@ -1,22 +1,10 @@
 package com.rashidmayes.clairvoyance.util;
 
-import java.io.IOException;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClairvoyanceLogger {
 
-    public static Logger logger = Logger.getLogger("app");
-
-    // todo: fixme
-//    static {
-//        try(var stream = ClairvoyanceLogger.class.getResourceAsStream("/logging.properties")) {
-//
-//            LogManager.getLogManager().readConfiguration(stream);
-//            logger = Logger.getLogger(ClairvoyanceLogger.class.getName());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public static Logger logger = LoggerFactory.getLogger("app");
 
 }

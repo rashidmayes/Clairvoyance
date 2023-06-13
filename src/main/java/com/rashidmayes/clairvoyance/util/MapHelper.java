@@ -8,46 +8,41 @@ import java.util.Map;
 public class MapHelper {
 
     public static Map<String, String> map(String in, String delim) {
-        Map<String, String> map = new HashMap<String, String>();
-        String[] kvPair;
+        var map = new HashMap<String, String>();
         for (String pair : StringUtils.split(in, delim)) {
-            kvPair = pair.split("=");
+            var kvPair = pair.split("=");
             map.put(kvPair[0], kvPair[1]);
         }
-
         return map;
     }
 
-    public static String getProperty(Map<String, String> properties, String... keys) {
-        if (properties != null) {
-            String value;
-            for (String key : keys) {
-                value = properties.get(key);
-                if (value != null) {
-                    return value;
-                }
-            }
-        }
-
-        return null;
-    }
-
-
-    public static String getString(Map<String, String> properties, String def, String... keys) {
+    public static String getString(Map<String, String> properties, String... keys) {
         String value = getProperty(properties, keys);
-        return (value == null) ? def : value;
+        return (value == null) ? "" : value;
     }
 
-    public static long getLong(Map<String, String> properties, long def, String... keys) {
+    public static long getLong(Map<String, String> properties, String... keys) {
         String value = getProperty(properties, keys);
         if (value != null) {
             try {
                 return Long.parseLong(value);
             } catch (NumberFormatException nfe) {
-                ClairvoyanceLogger.logger.warning(nfe.getMessage());
+                ClairvoyanceLogger.logger.warn(nfe.getMessage());
             }
         }
-
-        return def;
+        return 0L;
     }
+
+    public static String getProperty(Map<String, String> properties, String... keys) {
+        if (properties != null) {
+            for (String key : keys) {
+                var value = properties.get(key);
+                if (value != null) {
+                    return value;
+                }
+            }
+        }
+        return null;
+    }
+
 }

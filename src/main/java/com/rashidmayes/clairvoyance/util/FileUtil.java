@@ -5,7 +5,6 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.logging.Level;
 
 public final class FileUtil {
 
@@ -35,33 +34,25 @@ public final class FileUtil {
             sz = number;
             suffix = "B";
         }
-
-
         NumberFormat nf = NumberFormat.getNumberInstance(locale);
         nf.setMaximumFractionDigits(2);
-
         return nf.format(sz) + suffix;
     }
 
-    public static String prettyFileName(String fileName, String ext, boolean spaces) {
-        String pattern = (spaces) ? "[^a-zA-Z0-9\\.\\-\\_\\ ]+" : "[^a-zA-Z0-9\\.\\-\\_]+";
-        String name = fileName.replaceAll(pattern, "_").trim();
-        if (ext != null) {
-            name = name + "." + ext;
-        }
-
-        return name;
+    public static String prettyFileName(String fileName) {
+        String pattern = "[^a-zA-Z0-9\\.\\-\\_]+";
+        return fileName.replaceAll(pattern, "_").trim();
     }
 
     public static void clearCache() {
         try {
-            ClairvoyanceLogger.logger.log(Level.INFO, "deleting tmp clairvoyance directory");
-            File mRootDir = new File(System.getProperty("java.io.tmpdir"));
-            mRootDir = new File(mRootDir, "clairvoyance");
-            FileUtils.deleteDirectory(mRootDir);
-            ClairvoyanceLogger.logger.log(Level.INFO, "clairvoyance tmp directory has been deleted");
+            ClairvoyanceLogger.logger.info("deleting tmp clairvoyance directory");
+            var tmpRootDir = new File(System.getProperty("java.io.tmpdir"));
+            var clairvoyanceTmpDir = new File(tmpRootDir, "clairvoyance");
+            FileUtils.deleteDirectory(clairvoyanceTmpDir);
+            ClairvoyanceLogger.logger.info("clairvoyance tmp directory has been deleted");
         } catch (Exception e) {
-            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
+            ClairvoyanceLogger.logger.error(e.getMessage(), e);
         }
     }
 

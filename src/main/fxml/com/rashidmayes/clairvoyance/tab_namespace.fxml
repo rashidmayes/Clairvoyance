@@ -4,7 +4,9 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<GridPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+<GridPane xmlns="http://javafx.com/javafx/17.0.2-ea"
+          fx:id="namespaceGridPane"
+          xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="com.rashidmayes.clairvoyance.controller.NamespaceController">
     <TextArea id="namespaceTextArea" fx:id="namespaceTextArea" editable="false" wrapText="true" GridPane.halignment="CENTER"
               GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">

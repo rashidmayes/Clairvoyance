@@ -7,7 +7,6 @@ import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class NodeInfoMapper {
 
@@ -47,10 +46,10 @@ public class NodeInfoMapper {
         for (String set : StringUtils.split(oneStringSetInfo, ";")) {
             var map = MapHelper.map(set, ":");
             var setInfo = SetInfo.builder()
-                    .namespace(MapHelper.getString(map, "", "ns_name", "ns"))
-                    .name(MapHelper.getString(map, "", "set_name", "set"))
-                    .objectCount(MapHelper.getLong(map, 0, "n_objects", "objects"))
-                    .bytesMemory(MapHelper.getLong(map, 0, "n-bytes-memory", "memory_data_bytes"))
+                    .namespace(MapHelper.getString(map, "ns_name", "ns"))
+                    .name(MapHelper.getString(map, "set_name", "set"))
+                    .objectCount(MapHelper.getLong(map, "n_objects", "objects"))
+                    .bytesMemory(MapHelper.getLong(map, "n-bytes-memory", "memory_data_bytes"))
                     .properties(map)
                     .build();
             sets.add(setInfo);

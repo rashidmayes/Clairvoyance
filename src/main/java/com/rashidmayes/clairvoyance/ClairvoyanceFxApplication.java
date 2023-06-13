@@ -4,6 +4,7 @@ import com.aerospike.client.AerospikeException;
 import com.aerospike.client.async.AsyncClient;
 import com.rashidmayes.clairvoyance.model.ApplicationModel;
 import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
+import com.rashidmayes.clairvoyance.util.FileUtil;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -16,20 +17,17 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.util.logging.Level;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 public class ClairvoyanceFxApplication extends Application {
 
-    public static final ThreadGroup SCANS = new ThreadGroup("scans");
-    public static final ThreadGroup LOADS = new ThreadGroup("loads");
-
-    public static final Preferences Config = Preferences.userNodeForPackage(ClairvoyanceFxApplication.class);
+    public static final Preferences PREFERENCES = Preferences.userNodeForPackage(ClairvoyanceFxApplication.class);
 
     public static AsyncClient getClient() throws AerospikeException {
         var aerospikeClientResult = ApplicationModel.INSTANCE.getAerospikeClient();
         if (aerospikeClientResult.hasError()) {
+            // TODO: 12/06/2023 not sure if this can be run from any thread - probably only from FX thread
             new Alert(Alert.AlertType.ERROR, aerospikeClientResult.getError())
                     .showAndWait();
             throw new AerospikeException(aerospikeClientResult.getError());
@@ -43,6 +41,8 @@ public class ClairvoyanceFxApplication extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        ClairvoyanceLogger.logger.info("starting clairvoyance...");
+
         stage.setOnCloseRequest(onCloseEventHandler());
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -63,9 +63,10 @@ public class ClairvoyanceFxApplication extends Application {
     private EventHandler<WindowEvent> onCloseEventHandler() {
         return event -> {
             try {
-                Config.sync();
+                PREFERENCES.sync();
+                FileUtil.clearCache();
             } catch (BackingStoreException e) {
-                ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
+                ClairvoyanceLogger.logger.error(e.getMessage(), e);
             }
             System.exit(0);
         };

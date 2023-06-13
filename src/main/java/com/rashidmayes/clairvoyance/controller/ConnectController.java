@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Objects;
-import java.util.logging.Level;
 
 public class ConnectController {
 
@@ -37,8 +36,8 @@ public class ConnectController {
 
     @FXML
     public void initialize() {
-        hostField.setText(ClairvoyanceFxApplication.Config.get("last.host", null));
-        portField.setText(ClairvoyanceFxApplication.Config.get("last.port", "3000"));
+        hostField.setText(ClairvoyanceFxApplication.PREFERENCES.get("last.host", null));
+        portField.setText(ClairvoyanceFxApplication.PREFERENCES.get("last.port", "3000"));
     }
 
     @FXML
@@ -52,7 +51,7 @@ public class ConnectController {
         ApplicationModel.INSTANCE.setConnectionInfo(connectionInfoResult.getData());
         var aerospikeClientResult = ApplicationModel.INSTANCE.createNewAerospikeClient();
         if (aerospikeClientResult.hasError()) {
-            ClairvoyanceLogger.logger.warning("could not connect to cluster: " + aerospikeClientResult.getError());
+            ClairvoyanceLogger.logger.warn("could not connect to cluster: {}", aerospikeClientResult.getError());
             new Alert(Alert.AlertType.ERROR, "could not connect to cluster")
                     .showAndWait();
             return;
@@ -67,11 +66,11 @@ public class ConnectController {
             stage.setScene(scene);
             //stage.centerOnScreen();
 
-            ClairvoyanceFxApplication.Config.put("last.host", connectionInfoResult.getData().host());
-            ClairvoyanceFxApplication.Config.putInt("last.port", connectionInfoResult.getData().port());
+            ClairvoyanceFxApplication.PREFERENCES.put("last.host", connectionInfoResult.getData().host());
+            ClairvoyanceFxApplication.PREFERENCES.putInt("last.port", connectionInfoResult.getData().port());
 
         } catch (Exception e) {
-            ClairvoyanceLogger.logger.log(Level.SEVERE, e.getMessage(), e);
+            ClairvoyanceLogger.logger.error(e.getMessage(), e);
             Alert alert = new Alert(AlertType.ERROR, String.format("Error connecting: %s", e.getMessage()));
             alert.showAndWait();
         }

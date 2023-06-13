@@ -1,0 +1,900 @@
+[11:35:22.934] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:35:22.936] [set-controller-thread-51] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:35:22.936] [set-controller-thread-51] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:35:22.937] [set-controller-thread-51] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:35:22.939] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:35:22.939] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:35:22.940] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:35:23.001] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:35:23.020] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:35:23.021] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:35:23.021] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:35:23.021] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:35:23.021] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:35:23.021] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:35:23.021] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:35:23.022] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:35:23.022] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:35:24.476] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:35:24.488] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:39:45.688] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:39:47.264] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:39:47.633] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:39:47.678] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:39:47.804] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:39:47.805] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:39:49.155] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:39:49.156] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:39:49.157] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:39:49.157] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:39:49.157] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:39:49.163] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:39:49.163] [set-controller-thread-46] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:39:49.169] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:39:49.275] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:39:49.297] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:39:49.297] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:39:49.298] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:39:49.298] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:39:49.299] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:39:49.299] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:39:49.299] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:39:49.300] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[11:39:49.300] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:39:49.300] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:39:49.312] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[11:39:50.244] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:39:50.245] [set-controller-thread-48] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:39:50.245] [set-controller-thread-48] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:39:50.246] [set-controller-thread-48] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:39:50.247] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:39:50.247] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:39:50.248] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:39:50.335] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:39:50.336] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:39:50.336] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:39:50.337] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:39:50.337] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:39:50.338] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:39:50.338] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:39:50.338] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:39:50.341] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:39:50.342] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:39:51.452] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:39:51.464] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:40:45.323] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:40:46.485] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:40:46.866] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:40:46.907] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:40:47.030] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:40:47.030] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:40:49.091] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:40:49.092] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:40:49.092] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:40:49.093] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:40:49.093] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:40:49.098] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:40:49.099] [set-controller-thread-45] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:40:49.103] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:40:49.208] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:40:49.230] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:40:49.230] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:40:49.230] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:40:49.231] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:40:49.232] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:40:49.232] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:40:49.232] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:40:49.232] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[11:40:49.233] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:40:49.233] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:40:49.245] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[11:40:50.248] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:40:50.249] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:40:50.250] [set-controller-thread-46] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:40:50.250] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:40:50.314] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:40:50.337] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:40:50.337] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:40:50.337] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:40:50.338] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:40:50.338] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:40:50.338] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:40:50.339] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:40:50.339] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:40:50.339] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:40:51.780] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:40:51.807] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:41:28.021] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:41:29.442] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:41:29.899] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:41:29.944] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:41:30.066] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:41:30.067] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:41:31.782] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:41:31.782] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:41:31.783] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:41:31.783] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:41:31.784] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:41:31.789] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:41:31.789] [set-controller-thread-46] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:41:31.790] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:41:33.461] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:41:33.462] [set-controller-thread-48] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:41:33.463] [set-controller-thread-48] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:41:33.463] [set-controller-thread-48] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:41:34.861] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:41:34.887] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:42:03.200] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:42:04.803] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:42:06.150] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:42:06.191] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:42:06.319] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:42:06.320] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:42:07.507] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:42:07.508] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:42:07.508] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:42:07.509] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:42:07.509] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:42:07.514] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:42:07.515] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:42:08.445] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:42:08.446] [set-controller-thread-47] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:42:08.447] [set-controller-thread-47] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:42:09.931] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:42:09.956] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:42:40.688] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:42:43.659] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:42:44.530] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:42:44.571] [update-cluster-info-scheduled-thread-44] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:42:44.696] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:42:44.696] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:42:45.748] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:42:45.748] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:42:45.749] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:42:45.749] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:42:45.750] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set transaction-lock
+[11:42:45.754] [set-controller-thread-47] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:42:46.870] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.transaction-lock
+[11:42:46.872] [set-controller-thread-49] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:42:49.167] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:42:49.173] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:42:54.297] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:42:55.701] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:42:56.089] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:42:56.135] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:42:56.256] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:42:56.257] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:42:57.266] [JavaFX Application Thread] [ERROR] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - Error Code 11: java.net.SocketTimeoutException: Connect timed out
+[11:42:58.608] [application-background-task-thread-45] [INFO ] [c.r.c.c.ClusterController$lambda$initialize$1] - starting cluster dump
+[11:42:58.608] [application-background-task-thread-45] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:42:58.932] [application-background-task-thread-45] [INFO ] [c.r.c.c.ClusterController$lambda$initialize$1] - cluster dump completed
+[11:43:04.758] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:43:04.761] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:50:55.557] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:50:57.475] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:50:57.859] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:50:57.904] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:50:58.026] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:50:58.026] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:50:59.281] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:50:59.289] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:50:59.289] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:50:59.290] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:50:59.290] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:50:59.295] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:50:59.296] [set-controller-thread-45] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:50:59.300] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:50:59.421] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:50:59.442] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:50:59.443] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:50:59.443] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:50:59.443] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:50:59.444] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:50:59.445] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:50:59.445] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:50:59.445] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[11:50:59.446] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:50:59.446] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:50:59.458] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[11:51:00.736] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:51:00.737] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:51:00.737] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:51:02.590] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:51:02.592] [set-controller-thread-50] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:51:02.593] [set-controller-thread-50] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:51:02.594] [set-controller-thread-50] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:51:02.658] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:51:02.680] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:51:02.681] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:51:02.681] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:51:02.681] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:51:02.682] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:51:02.682] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:51:02.682] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:51:02.682] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:51:02.682] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:51:06.694] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:51:06.719] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:52:12.210] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:52:14.121] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:52:14.507] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:52:14.555] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:52:14.674] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:52:14.675] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:52:16.425] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:52:16.425] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:52:16.426] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:52:16.426] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:52:16.427] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:52:16.432] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:52:16.432] [set-controller-thread-46] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:52:16.436] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:52:16.830] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:52:16.853] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:52:16.854] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:52:16.854] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:52:16.855] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:52:16.856] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:52:16.856] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:52:16.856] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:52:16.857] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[11:52:16.857] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:52:16.857] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:52:16.873] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[11:52:17.857] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:52:17.858] [set-controller-thread-48] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:52:17.858] [set-controller-thread-48] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:52:17.859] [set-controller-thread-48] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:52:17.920] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:52:17.942] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:52:17.943] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:52:17.943] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:52:17.943] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:52:17.944] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:52:17.944] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:52:17.944] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:52:17.944] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:52:17.945] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:52:20.045] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:52:20.067] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:52:24.761] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:52:26.362] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:52:26.681] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:52:26.725] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:52:26.848] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:52:26.849] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:52:28.932] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:52:28.932] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:52:28.933] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:52:28.933] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:52:28.934] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:52:28.939] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:52:28.939] [set-controller-thread-46] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:52:28.943] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:52:29.052] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:52:29.074] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:52:29.075] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:52:29.075] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:52:29.076] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:52:29.076] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:52:29.076] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:52:29.080] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:52:29.080] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[11:52:29.081] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:52:29.081] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:52:29.095] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[11:52:31.740] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$cancelAction] - canceling scan if any active
+[11:52:32.781] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:52:32.783] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:52:32.784] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:52:34.002] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:52:34.005] [set-controller-thread-50] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:52:34.005] [set-controller-thread-50] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:52:34.006] [set-controller-thread-50] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:52:34.071] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:52:34.092] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:52:34.092] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:52:34.093] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:52:34.093] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:52:34.094] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:52:34.094] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:52:34.094] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:52:34.095] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:52:34.095] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:52:35.362] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:52:35.382] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:52:57.398] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:52:59.411] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:52:59.797] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:52:59.845] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:52:59.980] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:52:59.981] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:53:01.157] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:53:01.158] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:53:01.158] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:53:01.158] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:53:01.159] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:53:01.164] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:53:01.165] [set-controller-thread-45] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:53:01.169] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:53:01.276] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:53:01.296] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:53:01.296] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:53:01.296] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:53:01.297] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:53:01.298] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:53:01.298] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:53:01.298] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:53:01.299] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[11:53:01.299] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:53:01.299] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:53:01.312] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[11:53:02.190] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:02.723] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:02.893] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:03.051] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:03.218] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:03.376] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:03.534] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:03.694] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:03.850] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:04.013] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:53:05.057] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:53:05.082] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:54:19.657] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:54:21.068] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:54:21.453] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:54:21.495] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:54:21.614] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:54:21.615] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:54:22.849] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:54:22.849] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:54:22.850] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:54:22.850] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:54:22.850] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:54:22.856] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:54:22.856] [set-controller-thread-45] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:54:22.860] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:54:22.969] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:54:22.991] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:54:22.991] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:54:22.992] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:22.992] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:22.993] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:54:22.993] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:54:22.994] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:54:22.994] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[11:54:22.994] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:54:22.995] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:54:23.008] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[11:54:23.950] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:54:23.951] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:54:23.951] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:54:23.951] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:54:24.016] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:54:24.038] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:54:24.038] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:54:24.038] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:24.039] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:24.039] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:54:24.039] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:54:24.039] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:54:24.040] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:54:24.040] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:54:26.029] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:54:26.030] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:54:26.030] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:54:26.030] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:54:26.095] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:54:26.118] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:54:26.119] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:54:26.119] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:26.119] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:26.119] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:54:26.120] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:54:26.120] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:54:26.120] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:54:26.121] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:54:28.372] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:54:28.373] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:54:28.373] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:54:28.888] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:54:28.890] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:54:28.891] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:54:28.891] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:54:28.954] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:54:28.976] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:54:28.976] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:54:28.977] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:28.977] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:28.977] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:54:28.978] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:54:28.978] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:54:28.978] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:54:28.979] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:54:30.269] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:54:30.271] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:54:30.271] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:54:30.718] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:54:30.721] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:54:30.722] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:54:30.723] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:54:30.789] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:54:30.811] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:54:30.811] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:54:30.812] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:30.812] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:30.813] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:54:30.813] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:54:30.813] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:54:30.814] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:54:30.814] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:54:32.285] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:54:32.287] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:54:32.288] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:54:32.288] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:54:32.357] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:54:32.380] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:54:32.380] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:54:32.381] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:32.381] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:32.381] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:54:32.381] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:54:32.381] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:54:32.384] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:54:32.384] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:54:32.954] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:54:32.956] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:54:32.957] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:54:33.468] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:54:33.471] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:54:33.472] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:54:33.473] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:54:33.539] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:54:33.561] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:54:33.561] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:54:33.562] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:33.563] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:54:33.564] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:54:33.564] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:54:33.564] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:54:33.565] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:54:33.565] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:54:35.363] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - deleting tmp clairvoyance directory
+[11:54:35.390] [JavaFX Application Thread] [INFO ] [c.r.c.util.FileUtil$clearCache] - clairvoyance tmp directory has been deleted
+[11:56:15.167] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:56:16.702] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:56:17.074] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:56:17.115] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:56:17.237] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:56:17.238] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:56:19.753] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:56:19.753] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:56:19.754] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:56:19.754] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:56:19.754] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:56:19.759] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> true
+[11:56:19.760] [set-controller-thread-46] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:56:19.764] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:56:19.884] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:56:19.907] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:56:19.908] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:56:19.908] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:56:19.909] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:56:19.909] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:56:19.909] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:56:19.909] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:56:19.910] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[11:56:19.910] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:56:19.911] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:56:19.924] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[11:56:21.704] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:56:21.705] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:56:21.705] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:56:21.705] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:56:21.771] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:56:21.793] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:56:21.793] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:56:21.794] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:56:21.794] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:56:21.794] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:56:21.794] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:56:21.795] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:56:21.795] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:56:21.795] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:56:32.564] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:56:32.568] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:56:32.569] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:56:32.569] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:56:32.631] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:56:32.654] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:56:32.654] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:56:32.655] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:56:32.655] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:56:32.655] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:56:32.655] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:56:32.656] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:56:32.656] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:56:32.657] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:57:28.971] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[11:57:30.769] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[11:57:31.147] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[11:57:31.193] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:57:31.319] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:57:31.320] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:57:32.835] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[11:57:32.836] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:57:32.836] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[11:57:32.837] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[11:57:32.837] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[11:57:32.841] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:57:32.842] [set-controller-thread-46] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:57:32.846] [set-controller-thread-46] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:57:32.957] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:57:32.980] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:57:32.980] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:57:32.980] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:57:32.981] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:57:32.982] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:57:32.982] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:57:32.982] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:57:32.983] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[11:57:32.983] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:57:32.983] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:57:32.996] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[11:57:33.804] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:57:33.805] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:57:33.805] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[11:57:33.805] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:57:33.805] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:57:33.805] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:57:33.879] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:57:33.898] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:57:33.899] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:57:33.899] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:57:33.899] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:57:33.900] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:57:33.900] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:57:33.900] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:57:33.900] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:57:33.900] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:57:35.383] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[11:57:35.384] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[11:57:35.384] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[11:57:35.384] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[11:57:35.385] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[11:57:35.385] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[11:57:35.448] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[11:57:35.471] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[11:57:35.472] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[11:57:35.472] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:57:35.472] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[11:57:35.473] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[11:57:35.473] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[11:57:35.473] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[11:57:35.473] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[11:57:35.474] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[11:59:31.196] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[11:59:31.200] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[11:59:31.201] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:01:31.191] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[12:01:31.192] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[12:01:31.193] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:03:31.193] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[12:03:31.194] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[12:03:31.194] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:03:55.920] [JavaFX Application Thread] [INFO ] [c.r.c.ClairvoyanceFxApplication$start] - starting clairvoyance...
+[12:03:57.364] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$createNewAerospikeClient] - creating new aerospike client
+[12:03:57.742] [JavaFX Application Thread] [INFO ] [c.r.c.m.AerospikeClientFactory$create] - created new aerospike client
+[12:03:57.785] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[12:03:57.905] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[12:03:57.906] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:03:58.844] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[12:03:58.844] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:03:58.845] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[12:03:58.845] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[12:03:58.845] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set identifier
+[12:03:58.850] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[12:03:58.851] [set-controller-thread-45] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:03:58.855] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:03:58.987] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[12:03:59.009] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:03:59.010] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:03:59.010] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:03:59.010] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:03:59.011] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:03:59.011] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[12:03:59.016] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:03:59.017] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[12:03:59.017] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:03:59.017] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:03:59.030] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column value added to the table
+[12:04:00.625] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$cancelAction] - canceling scan if any active
+[12:04:01.351] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:01.351] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[12:04:01.352] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[12:04:02.076] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[12:04:02.077] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:02.077] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[12:04:02.077] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - record counter reset
+[12:04:02.078] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - IN_MEMORY_FILE_MOCK cleared
+[12:04:02.078] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[12:04:02.079] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:04:02.079] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:04:02.142] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[12:04:02.163] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:04:02.164] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:04:02.164] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:04:02.164] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:04:02.164] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:04:02.165] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:04:02.165] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[12:04:02.165] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:04:02.165] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:04:03.044] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[12:04:03.047] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:03.047] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[12:04:03.048] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - record counter reset
+[12:04:03.048] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - IN_MEMORY_FILE_MOCK cleared
+[12:04:03.049] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[12:04:03.049] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:04:03.050] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:04:03.120] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[12:04:03.142] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:04:03.142] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:04:03.143] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:04:03.143] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:04:03.144] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:04:03.144] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:04:03.144] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[12:04:03.144] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:04:03.145] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:04:04.055] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[12:04:04.056] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:04.057] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[12:04:04.057] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - record counter reset
+[12:04:04.057] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - IN_MEMORY_FILE_MOCK cleared
+[12:04:04.058] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[12:04:04.059] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:04:04.059] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:04:04.122] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[12:04:04.143] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:04:04.144] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:04:04.144] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:04:04.145] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:04:04.145] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:04:04.145] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:04:04.146] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[12:04:04.146] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:04:04.147] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:04:05.378] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:05.380] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[12:04:05.382] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[12:04:05.951] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$cancelAction] - canceling scan if any active
+[12:04:06.508] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.identifier
+[12:04:06.509] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:06.509] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[12:04:06.510] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - record counter reset
+[12:04:06.510] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - IN_MEMORY_FILE_MOCK cleared
+[12:04:06.510] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set identifier -> false
+[12:04:06.511] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:04:06.511] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:04:06.576] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468
+[12:04:06.599] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:04:06.599] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:04:06.599] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:04:06.600] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:04:06.601] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:04:06.601] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:04:06.601] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - identifier scans complete
+[12:04:06.602] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:04:06.602] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:04:08.716] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$selectPageClickedAction$13] - some page selected
+[12:04:08.718] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:08.718] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$loadPage] - load page requested for 0
+[12:04:08.719] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$loadPage] - buffer cleared
+[12:04:08.719] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$loadPage] - startIndex 0, endIndex 100
+[12:04:08.722] [set-controller-thread-57] [INFO ] [c.r.c.c.SetController$readSavedKeys] - reading saved keys from in memory mock
+[12:04:08.723] [set-controller-thread-57] [INFO ] [c.r.c.c.SetController$readSavedKeys] - returning saved keys from in memory mock
+[12:04:08.723] [set-controller-thread-57] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:04:08.770] [selector0] [INFO ] [c.r.c.c.SetController$1$onRecord] - record added to buffer (key COMMON:identifier:null:00670542ae42556efe30b6ec0ea81176bafad468)
+[12:04:08.771] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:04:08.772] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:04:21.332] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[12:04:21.333] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:21.333] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[12:04:21.333] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[12:04:21.334] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set current-id-container
+[12:04:21.334] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set current-id-container -> true
+[12:04:21.335] [set-controller-thread-45] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:04:21.335] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:04:21.398] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f
+[12:04:21.402] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904
+[12:04:21.422] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:04:21.423] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:04:21.423] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:04:21.423] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:04:21.424] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:04:21.424] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:04:21.424] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:04:21.424] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - current-id-container scans complete
+[12:04:21.424] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:04:21.425] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[12:04:21.425] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:04:21.426] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:04:21.426] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column currentId added to the table
+[12:04:23.252] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:23.255] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[12:04:23.256] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[12:04:24.193] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$cancelAction] - canceling scan if any active
+[12:04:24.944] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.current-id-container
+[12:04:24.946] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:24.947] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[12:04:24.948] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - record counter reset
+[12:04:24.948] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - IN_MEMORY_FILE_MOCK cleared
+[12:04:24.949] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set current-id-container -> false
+[12:04:24.950] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:04:24.951] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:04:25.010] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f
+[12:04:25.015] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904
+[12:04:25.036] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:04:25.037] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:04:25.037] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:04:25.037] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:04:25.038] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:04:25.038] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:04:25.038] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:04:25.038] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:04:25.038] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - current-id-container scans complete
+[12:04:25.039] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:04:25.039] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:04:26.450] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:04:27.389] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:04:28.828] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$selectPageClickedAction$13] - some page selected
+[12:04:28.829] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:28.830] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$loadPage] - load page requested for 0
+[12:04:28.830] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$loadPage] - buffer cleared
+[12:04:28.831] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$loadPage] - startIndex 0, endIndex 100
+[12:04:28.831] [set-controller-thread-57] [INFO ] [c.r.c.c.SetController$readSavedKeys] - reading saved keys from in memory mock
+[12:04:28.832] [set-controller-thread-57] [INFO ] [c.r.c.c.SetController$readSavedKeys] - returning saved keys from in memory mock
+[12:04:28.833] [set-controller-thread-57] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:04:28.877] [selector0] [INFO ] [c.r.c.c.SetController$1$onRecord] - record added to buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:04:28.878] [selector0] [INFO ] [c.r.c.c.SetController$1$onRecord] - record added to buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:04:28.880] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:04:28.880] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:04:28.881] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:04:33.643] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.current-id-container
+[12:04:33.646] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:04:33.647] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[12:04:33.648] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - record counter reset
+[12:04:33.649] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - IN_MEMORY_FILE_MOCK cleared
+[12:04:33.650] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set current-id-container -> false
+[12:04:33.651] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:04:33.652] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:04:33.711] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f
+[12:04:33.715] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904
+[12:04:33.735] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:04:33.735] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:04:33.736] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:04:33.736] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:04:33.737] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:04:33.737] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:04:33.737] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:04:33.737] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - current-id-container scans complete
+[12:04:33.738] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:04:33.739] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:04:33.739] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:05:04.030] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:05.229] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:10.556] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.current-id-container
+[12:05:10.558] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:05:10.559] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[12:05:10.560] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - record counter reset
+[12:05:10.560] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - IN_MEMORY_FILE_MOCK cleared
+[12:05:10.561] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set current-id-container -> false
+[12:05:10.561] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:05:10.562] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:05:10.622] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f
+[12:05:10.626] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904
+[12:05:10.647] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:05:10.648] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:05:10.649] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:05:10.649] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:05:10.650] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:05:10.651] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:05:10.651] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:05:10.651] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:05:10.652] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - current-id-container scans complete
+[12:05:10.654] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:05:10.654] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:10.655] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:05:11.893] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:12.643] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:21.263] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:23.698] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[12:05:23.698] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:05:23.699] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[12:05:23.699] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:23.700] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[12:05:23.700] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - stopping scan, clearing stuff
+[12:05:27.672] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[12:05:27.673] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:05:27.674] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[12:05:27.674] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[12:05:27.675] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set transaction-lock
+[12:05:27.676] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set transaction-lock -> true
+[12:05:27.676] [set-controller-thread-45] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:05:27.677] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:05:27.766] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:05:27.767] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:05:27.767] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:05:27.768] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:05:27.768] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - transaction-lock scans complete
+[12:05:27.768] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[12:05:27.769] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:05:27.769] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:05:28.499] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - clearing table
+[12:05:28.500] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:05:28.501] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - buffer cleared
+[12:05:28.501] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$clearTable] - data table cleared
+[12:05:28.502] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$loadTableChangeListener$10] - fetching set current-id-container
+[12:05:28.503] [set-controller-thread-57] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set current-id-container -> true
+[12:05:28.504] [set-controller-thread-57] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:05:28.506] [set-controller-thread-57] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:05:28.567] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f
+[12:05:28.573] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904
+[12:05:28.595] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:05:28.596] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:05:28.597] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:05:28.597] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:05:28.597] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:05:28.598] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:05:28.598] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:05:28.598] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:05:28.599] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - current-id-container scans complete
+[12:05:28.599] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - added new page 0
+[12:05:28.602] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:05:28.603] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:05:28.603] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - column currentId added to the table
+[12:05:30.971] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$selectPageClickedAction$13] - some page selected
+[12:05:30.973] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:05:30.974] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$loadPage] - load page requested for 0
+[12:05:30.975] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$loadPage] - buffer cleared
+[12:05:30.976] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$loadPage] - startIndex 0, endIndex 100
+[12:05:30.977] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$readSavedKeys] - reading saved keys from in memory mock
+[12:05:30.978] [set-controller-thread-45] [INFO ] [c.r.c.c.SetController$readSavedKeys] - returning saved keys from in memory mock
+[12:05:30.979] [set-controller-thread-45] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:05:31.026] [selector0] [INFO ] [c.r.c.c.SetController$1$onRecord] - record added to buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:05:31.027] [selector0] [INFO ] [c.r.c.c.SetController$1$onRecord] - record added to buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:05:31.027] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:05:31.028] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:05:32.530] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:33.463] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:34.992] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - refreshing set: $set.COMMON.current-id-container
+[12:05:34.993] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$resetActionCancelledFlag] - resetting actionCancelled flag
+[12:05:34.994] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - buffer cleared
+[12:05:34.995] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - record counter reset
+[12:05:34.996] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$refreshAction] - IN_MEMORY_FILE_MOCK cleared
+[12:05:34.996] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$createTmpDirectory] - created tmp directory for set current-id-container -> false
+[12:05:34.997] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:05:34.998] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$scanSetAction$11] - submitted scan all request
+[12:05:35.066] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f
+[12:05:35.073] [selector0] [INFO ] [c.r.c.c.SetController$onScanRecordReceived] - record received for key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904
+[12:05:35.092] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - scanned all records
+[12:05:35.093] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - batch processing records from scan...
+[12:05:35.094] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:05:35.095] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e585fe10a0bd6d60a3e2989a8600f84a28cd4b2f)
+[12:05:35.096] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:05:35.096] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - record added to keys buffer (key COMMON:current-id-container:null:e5f79de59782b8a03929297ef7c98152fa54d904)
+[12:05:35.097] [selector0] [INFO ] [c.r.c.c.SetController$batchProcessRecordsFromScan] - added keys to in memory file mock
+[12:05:35.097] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$batchProcessRecordsFromScan$2] - counted page 0
+[12:05:35.098] [selector0] [INFO ] [c.r.c.c.SetController$onScanAllSuccess] - current-id-container scans complete
+[12:05:35.099] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - displaying records from buffer
+[12:05:35.100] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$rowClickedAction$12] - displaying details of record
+[12:05:35.101] [JavaFX Application Thread] [INFO ] [c.r.c.c.SetController$lambda$displayRecordsFromBuffer$8] - data table cleared
+[12:05:57.789] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[12:05:57.791] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[12:05:57.791] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client
+[12:07:57.789] [update-cluster-info-scheduled-thread-42] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$2] - submitting refresh cluster tree view task
+[12:07:57.792] [JavaFX Application Thread] [INFO ] [c.r.c.c.BrowserController$lambda$updateClusterTreeView$1] - refreshing cluster tree view
+[12:07:57.793] [JavaFX Application Thread] [INFO ] [c.r.c.m.ApplicationModel$getAerospikeClient] - returning existing aerospike client

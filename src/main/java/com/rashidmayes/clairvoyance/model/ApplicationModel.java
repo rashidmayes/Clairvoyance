@@ -10,16 +10,15 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ApplicationModel {
 
     public static final ApplicationModel INSTANCE = new ApplicationModel();
 
-    private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(3, r -> {
-        var thread = Executors.defaultThreadFactory()
-                .newThread(r);
+    private static final ExecutorService EXECUTOR = Executors.newFixedThreadPool(3, runnable -> {
+        var thread = Executors.defaultThreadFactory().newThread(runnable);
+        thread.setName("application-background-task-thread-" + thread.threadId());
         thread.setDaemon(true);
         return thread;
     });
@@ -45,7 +44,7 @@ public class ApplicationModel {
     }
 
     public Result<AsyncClient, String> createNewAerospikeClient() {
-        ClairvoyanceLogger.logger.log(Level.INFO, "creating new aerospike client");
+        ClairvoyanceLogger.logger.info("creating new aerospike client");
         var clientResult = aerospikeClientFactory.create(appStorage.getCurrentConnectionInfo());
         if (clientResult.hasError()) {
             return clientResult;
@@ -63,7 +62,7 @@ public class ApplicationModel {
                 return Result.error("cannot create new aerospike client - no connection info");
             }
         }
-        ClairvoyanceLogger.logger.log(Level.INFO, "returning existing aerospike client");
+        ClairvoyanceLogger.logger.info("returning existing aerospike client");
         return Result.of(client);
     }
 
