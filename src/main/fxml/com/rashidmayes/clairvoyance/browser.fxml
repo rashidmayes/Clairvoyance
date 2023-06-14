@@ -35,7 +35,7 @@
         </Menu>
     </MenuBar>
 
-    <SplitPane dividerPositions="0.8, 0.5" orientation="VERTICAL" GridPane.columnIndex="0" GridPane.columnSpan="1"
+    <SplitPane dividerPositions="0.8,0.5" orientation="VERTICAL" GridPane.columnIndex="0" GridPane.columnSpan="1"
                GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
         <SplitPane dividerPositions="0.2">
             <TreeView fx:id="namespacesTree"/>

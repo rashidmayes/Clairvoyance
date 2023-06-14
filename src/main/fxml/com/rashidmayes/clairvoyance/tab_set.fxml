@@ -10,31 +10,21 @@
     <ToolBar GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0"
              GridPane.vgrow="NEVER">
         <HBox>
-            <Button id="refreshSetButton" fx:id="refreshSetButton" onAction="#refreshAction" text="Refresh data"
-                    mnemonicParsing="false"/>
-            <Button id="cancelActionButton" fx:id="cancelActionButton" onAction="#cancelAction" text="Stop"
-                    mnemonicParsing="false"/>
-            <Button id="clearButton" fx:id="clearButton" onAction="#clearAction" text="Clear" mnemonicParsing="false"/>
+            <Button id="refreshSetButton" fx:id="refreshSetButton" mnemonicParsing="false" onAction="#refreshAction" text="Refresh data"/>
+            <Button id="cancelActionButton" fx:id="cancelActionButton" mnemonicParsing="false" onAction="#cancelAction" text="Stop"/>
         </HBox>
     </ToolBar>
 
-    <SplitPane dividerPositions="0.6" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS"
+    <SplitPane dividerPositions="0.6, 0.9" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.hgrow="ALWAYS"
                GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
-        <GridPane>
-            <TableView id="dataTable" fx:id="dataTable" GridPane.columnIndex="1" GridPane.columnSpan="1"
-                       GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1"
-                       GridPane.vgrow="ALWAYS">
-            </TableView>
+        <GridPane fx:id="paginationGrid" GridPane.columnIndex="1" GridPane.columnSpan="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
         </GridPane>
-        <TextArea id="recordDetails" fx:id="recordDetails" editable="false">
+        <TextArea id="recordDetails" fx:id="recordDetails" editable="false" promptText="select record to see details">
             <font>
-                <Font name="Monospaced Regular" size="20.0"/>
+                <Font name="Monospaced Regular" size="14.0"/>
             </font>
         </TextArea>
     </SplitPane>
-
-    <ListView id="pages" fx:id="pages" minWidth="50" prefWidth="50" GridPane.columnIndex="1" GridPane.columnSpan="1"
-              GridPane.rowIndex="1"/>
 
     <stylesheets>
         <URL value="@tab_set.css"/>

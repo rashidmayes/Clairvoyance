@@ -1,7 +1,7 @@
 package com.rashidmayes.clairvoyance;
 
 import com.aerospike.client.AerospikeException;
-import com.aerospike.client.async.AsyncClient;
+import com.aerospike.client.IAerospikeClient;
 import com.rashidmayes.clairvoyance.model.ApplicationModel;
 import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import com.rashidmayes.clairvoyance.util.FileUtil;
@@ -24,7 +24,7 @@ public class ClairvoyanceFxApplication extends Application {
 
     public static final Preferences PREFERENCES = Preferences.userNodeForPackage(ClairvoyanceFxApplication.class);
 
-    public static AsyncClient getClient() throws AerospikeException {
+    public static IAerospikeClient getClient() throws AerospikeException {
         var aerospikeClientResult = ApplicationModel.INSTANCE.getAerospikeClient();
         if (aerospikeClientResult.hasError()) {
             // TODO: 12/06/2023 not sure if this can be run from any thread - probably only from FX thread

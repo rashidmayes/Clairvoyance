@@ -3,9 +3,8 @@ package com.rashidmayes.clairvoyance.controller;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
-import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.AerospikeException;
-import com.aerospike.client.async.AsyncClient;
+import com.aerospike.client.IAerospikeClient;
 import com.aerospike.client.cluster.Node;
 import com.rashidmayes.clairvoyance.ClairvoyanceFxApplication;
 import com.rashidmayes.clairvoyance.SimpleTreeNode;
@@ -27,7 +26,6 @@ import javafx.scene.web.WebView;
 import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
-import java.util.Locale;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Executors;
@@ -252,11 +250,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
         logger.setAdditive(true);
     }
 
-    private void updateTreeView(AerospikeClient client) {
-        buildRoot(client);
-    }
-
-    private void buildRoot(AerospikeClient client) {
+    private void updateTreeView(IAerospikeClient client) {
         var rootNode = createRootModelNode(ApplicationModel.INSTANCE.getConnectionInfo());
         if (namespacesTree.getRoot() == null) {
             var treeRootView = new TreeItem<>(rootNode, new ImageView(rootIcon));
@@ -268,7 +262,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
         buildNodes(client);
     }
 
-    private void buildNodes(AerospikeClient client) {
+    private void buildNodes(IAerospikeClient client) {
         for (Node node : client.getNodes()) {
             buildNode(node);
         }
@@ -363,10 +357,9 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
     private SimpleTreeNode createSetModelNode(SetInfo setInfo) {
         return new SimpleTreeNode(
                 String.format(
-                        "%s (object count: %s, size: %s)",
+                        "%s [count: %s]",
                         setInfo.name,
-                        numberFormat.format(setInfo.objectCount),
-                        FileUtil.getSizeString(setInfo.bytesMemory, Locale.US)
+                        numberFormat.format(setInfo.objectCount)
                 ),
                 setInfo
         );
@@ -381,7 +374,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
         return Optional.empty();
     }
 
-    private static AsyncClient createNewClient() {
+    private static IAerospikeClient createNewClient() {
         var aerospikeClientResult = ApplicationModel.INSTANCE.createNewAerospikeClient();
         if (aerospikeClientResult.hasError()) {
             new Alert(Alert.AlertType.ERROR, aerospikeClientResult.getError())

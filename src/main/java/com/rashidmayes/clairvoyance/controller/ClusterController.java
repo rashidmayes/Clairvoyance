@@ -1,6 +1,5 @@
 package com.rashidmayes.clairvoyance.controller;
 
-import com.aerospike.client.AerospikeClient;
 import com.aerospike.client.cluster.Node;
 import com.rashidmayes.clairvoyance.ClairvoyanceFxApplication;
 import com.rashidmayes.clairvoyance.model.ApplicationModel;
@@ -28,7 +27,7 @@ public class ClusterController {
         ApplicationModel.INSTANCE.runInBackground(() -> {
             ClairvoyanceLogger.logger.info("starting cluster dump");
             try {
-                AerospikeClient client = ClairvoyanceFxApplication.getClient();
+                var client = ClairvoyanceFxApplication.getClient();
                 var stringBuilder = new StringBuilder();
                 for (Node node : client.getNodes()) {
                     var nodeInfo = nodeInfoMapper.getNodeInfo(node);

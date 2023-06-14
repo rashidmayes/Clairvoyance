@@ -1,0 +1,8 @@
+services:
+
+  aerospike:
+    image: 'aerospike/aerospike-server:5.2.0.12'
+    container_name: aerospike-local
+    restart: always
+    ports:
+      - "3000:3000"

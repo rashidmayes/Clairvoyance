@@ -5,6 +5,7 @@ import com.aerospike.client.Record;
 import com.aerospike.client.async.AsyncClient;
 import com.rashidmayes.clairvoyance.ClairvoyanceFxApplication;
 import javafx.application.Platform;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import java.lang.ref.SoftReference;
 import java.util.HashMap;
 import java.util.Objects;
 
+@EqualsAndHashCode(of = "key")
 public class RecordRow {
 
     public static final Record NULL_RECORD = new Record(new HashMap<>(), 0, 0);

@@ -1,13 +1,13 @@
 package com.rashidmayes.clairvoyance.model;
 
-import com.aerospike.client.async.AsyncClient;
+import com.aerospike.client.IAerospikeClient;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 public class AppStorage {
 
     private ConnectionInfo connectionInfo = null;
-    private AsyncClient aerospikeClient = null;
+    private IAerospikeClient aerospikeClient = null;
 
     public void setConnectionInfo(ConnectionInfo connectionInfo) {
         this.connectionInfo = connectionInfo;
@@ -17,11 +17,11 @@ public class AppStorage {
         return connectionInfo;
     }
 
-    public AsyncClient getAerospikeClient() {
+    public IAerospikeClient getAerospikeClient() {
         return this.aerospikeClient;
     }
 
-    public void setAerospikeClient(AsyncClient client) {
+    public void setAerospikeClient(IAerospikeClient client) {
         this.aerospikeClient = client;
     }
 
