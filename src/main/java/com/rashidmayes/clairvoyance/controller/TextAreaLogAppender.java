@@ -18,7 +18,7 @@ public class TextAreaLogAppender extends AppenderBase<ILoggingEvent> {
         if (loggingEvent.getLevel().isGreaterOrEqual(Level.INFO)) {
             var callerData = loggingEvent.getCallerData()[0];
             var debug = callerData.getClassName() + "$" + callerData.getMethodName();
-            String text = debug + " " + "$> " + loggingEvent.getMessage() + "\n";
+            var text = debug + " " + "$> " + loggingEvent.getMessage() + "\n";
             if (this.textArea != null) {
                 textArea.appendText(text);
                 // todo: if there is no space for new logs - remove oldest part of text in the console

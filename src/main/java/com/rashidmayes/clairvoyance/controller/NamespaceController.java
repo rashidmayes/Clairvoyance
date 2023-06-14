@@ -1,6 +1,5 @@
 package com.rashidmayes.clairvoyance.controller;
 
-import com.aerospike.client.AerospikeClient;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.rashidmayes.clairvoyance.ClairvoyanceFxApplication;
 import com.rashidmayes.clairvoyance.model.ApplicationModel;
@@ -30,8 +29,6 @@ public class NamespaceController {
 
     @FXML
     public void initialize() {
-        // TODO: 10/06/2023 as for now it only gets first namespace and dumps info
-        // TODO: 10/06/2023 it should get namespace id and perform dump for it
         ApplicationModel.INSTANCE.runInBackground(() -> {
             ClairvoyanceLogger.logger.info("starting fetching namespace info");
             try {

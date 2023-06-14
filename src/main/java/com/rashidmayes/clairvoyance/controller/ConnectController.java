@@ -1,9 +1,9 @@
 package com.rashidmayes.clairvoyance.controller;
 
-import com.rashidmayes.clairvoyance.model.ApplicationModel;
 import com.rashidmayes.clairvoyance.ClairvoyanceFxApplication;
-import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
+import com.rashidmayes.clairvoyance.model.ApplicationModel;
 import com.rashidmayes.clairvoyance.model.ConnectionInfo;
+import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import com.rashidmayes.clairvoyance.util.Result;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,7 +64,6 @@ public class ConnectController {
 
             Stage stage = (Stage) (this.hostField.getScene().getWindow());
             stage.setScene(scene);
-            //stage.centerOnScreen();
 
             ClairvoyanceFxApplication.PREFERENCES.put("last.host", connectionInfoResult.getData().host());
             ClairvoyanceFxApplication.PREFERENCES.putInt("last.port", connectionInfoResult.getData().port());

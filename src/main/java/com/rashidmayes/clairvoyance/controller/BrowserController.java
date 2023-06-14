@@ -125,6 +125,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
 
     @FXML
     protected void handleReconnect(ActionEvent event) {
+        event.consume();
         try {
             createNewClient();
             updateClusterTreeView().run();
@@ -140,6 +141,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
 
     @FXML
     protected void handleAbout(ActionEvent event) {
+        event.consume();
         try {
             var optionalTab = getTab("about");
             if (optionalTab.isEmpty()) {
@@ -165,6 +167,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
     @FXML
     protected void handleWeb(ActionEvent event) {
         if (event.getSource() instanceof MenuItem) {
+            event.consume();
             try {
                 MenuItem item = (MenuItem) event.getSource();
                 ClairvoyanceLogger.logger.info("opening {}", item.getId());
@@ -191,6 +194,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
 
     @FXML
     protected void handleClusterDump(ActionEvent event) {
+        event.consume();
         try {
             Tab tab = new Tab();
             tab.setId("full-cluster-dump");
@@ -210,11 +214,13 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
 
     @FXML
     protected void handleExit(ActionEvent event) {
+        event.consume();
         System.exit(0);
     }
 
     @FXML
-    public void clearConsole(ActionEvent actionEvent) {
+    public void clearConsole(ActionEvent event) {
+        event.consume();
         console.clear();
     }
 
@@ -356,11 +362,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
 
     private SimpleTreeNode createSetModelNode(SetInfo setInfo) {
         return new SimpleTreeNode(
-                String.format(
-                        "%s [count: %s]",
-                        setInfo.name,
-                        numberFormat.format(setInfo.objectCount)
-                ),
+                String.format("%s [count: %s]", setInfo.name, numberFormat.format(setInfo.objectCount)),
                 setInfo
         );
     }
