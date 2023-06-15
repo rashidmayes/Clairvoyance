@@ -17,14 +17,21 @@ import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.util.Callback;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -38,8 +45,6 @@ public class SetController {
     private TextArea recordDetails;
 
     private static final int ROWS_PER_PAGE = 20;
-    // safety net to prevent from too much of memory consumption
-    private static final int MAX_RECORDS_FETCH = 100_000;
 
     private final ChangeListener<? super Scene> loadTableChangeListener = loadTableChangeListener();
     private final ChangeListener<? super RecordRow> rowClickedListener = rowClickedListener();
@@ -47,10 +52,10 @@ public class SetController {
     private final TableView<RecordRow> dataTable = new TableView<>(FXCollections.observableArrayList());
     private final List<RecordRow> buffer = Collections.synchronizedList(new LinkedList<>());
 
-    private volatile boolean actionCancelled;
     private final AtomicReference<SetScanner> scannerReference = new AtomicReference<>();
 
-    public SetController() {}
+    public SetController() {
+    }
 
     @FXML
     public void initialize() {
@@ -66,15 +71,12 @@ public class SetController {
         event.consume();
         ApplicationModel.INSTANCE.runInBackground(() -> {
             buffer.clear();
-            actionCancelled = false;
             Platform.runLater(() -> {
                 dataTable.getColumns().clear();
                 dataTable.getItems().clear();
-                if (!paginationGrid.getChildren().isEmpty() && paginationGrid.getChildren().get(0).getClass() == Pagination.class) {
-                    System.err.println("removing pagination");
-                    paginationGrid.getChildren().remove(0);
-                }
+                removePagination();
                 recordDetails.setText(null);
+                createLoader();
             });
             var scanner = scannerReference.get();
             scanner.scan();
@@ -85,7 +87,6 @@ public class SetController {
     public void cancelAction(ActionEvent event) {
         event.consume();
         ClairvoyanceLogger.logger.info("canceling scan if any active");
-        actionCancelled = true;
         scannerReference.get().cancelScan();
     }
 
@@ -113,22 +114,12 @@ public class SetController {
             if (newScene != null) {
                 // user opens the tab
                 var info = (SetInfo) rootPane.getUserData();
-                scannerReference.set(new SetScanner(
-                        info.getNamespace(), info.getName(), MAX_RECORDS_FETCH, getAerospikeClient(),
-                        new SetScanner.ScanCallbacks() {
-
-                            @Override
-                            public void scanSuccessCallback(List<RecordRow> buffer) {
-                                Platform.runLater(() -> updateViewFromBuffer(buffer));
-                            }
-
-                            @Override
-                            public void scanTerminated(List<RecordRow> buffer) {
-                                Platform.runLater(() -> updateViewFromBuffer(buffer));
-                            }
-                        }
-                ));
+                scannerReference.set(createScanner(info));
                 ClairvoyanceLogger.logger.info("fetching set {}", info.getName());
+
+                Platform.runLater(() -> {
+                    createLoader();
+                });
 
                 ApplicationModel.INSTANCE.runInBackground(() -> {
                     scannerReference.get().scan();
@@ -137,38 +128,26 @@ public class SetController {
         };
     }
 
-    private List<RecordRow> blockingScanSet(SetInfo info) {
-        var client = getAerospikeClient();
-        var result = new LinkedList<RecordRow>();
-        var index = new AtomicInteger();
+    private SetScanner createScanner(SetInfo info) {
+        return new SetScanner(
+                info.getNamespace(),
+                info.getName(),
+                new SetScanner.ScanCallbacks() {
 
-        client.scanAll(null, info.getNamespace(), info.getName(),
-                (key, record) -> {
-                    if (actionCancelled || result.size() > MAX_RECORDS_FETCH) {
-                        ClairvoyanceLogger.logger.error(
-                                "scan terminated (actionCancelled? {}, max records exceeded? {})",
-                                actionCancelled, result.size() > MAX_RECORDS_FETCH
-                        );
-                        throw new AerospikeException.ScanTerminated();
+                    @Override
+                    public void scanSuccessCallback(List<RecordRow> buffer) {
+                        Platform.runLater(() -> updateViewFromBuffer(buffer));
                     }
-                    var recordRow = new RecordRow(key, record);
-                    recordRow.setIndex(index.getAndIncrement());
-                    result.add(recordRow);
+
+                    @Override
+                    public void scanTerminated(List<RecordRow> buffer) {
+                        Platform.runLater(() -> updateViewFromBuffer(buffer));
+                    }
                 }
         );
-        ClairvoyanceLogger.logger.info("scan completed");
-        return result;
     }
 
-    private IAerospikeClient getAerospikeClient() {
-        var clientResult = ApplicationModel.INSTANCE.getAerospikeClient();
-        if (clientResult.hasError()) {
-            throw new AerospikeException(clientResult.getError());
-        }
-        return clientResult.getData();
-    }
-
-    private void updateViewFromBuffer(List<RecordRow> result) {
+    private void updateViewFromBuffer(List<RecordRow> buffer) {
         var indexColumn = createIndexColumn();
         dataTable.getColumns().add(indexColumn);
 
@@ -178,7 +157,7 @@ public class SetController {
         var columns = getColumnsNames();
         var columnsToAdd = new HashSet<String>();
 
-        for (RecordRow recordRow : result) {
+        for (RecordRow recordRow : buffer) {
             var recordBins = recordRow.getRecord().bins.keySet();
             for (String recordBin : recordBins) {
                 if (!columns.contains(recordBin)) {
@@ -186,18 +165,72 @@ public class SetController {
                     columnsToAdd.add(recordBin);
                 }
             }
-            buffer.add(recordRow);
+            this.buffer.add(recordRow);
         }
 
         dataTable.getColumns().addAll(createDataColumns(columnsToAdd));
-        dataTable.getItems().addAll(result);
+        dataTable.getItems().addAll(buffer);
 
-        var pagination = new Pagination((result.size() / ROWS_PER_PAGE) + 1, 0);
+        createPagination(buffer);
+    }
+
+    private void createPagination(List<RecordRow> buffer) {
+        var pagination = createPaginationComponent(buffer);
+        var textField = new TextArea();
+        textField.setPromptText("jump to page");
+        textField.setPrefRowCount(1);
+        textField.setMaxWidth(90);
+
+        textField.setOnKeyPressed(ke -> {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                textField.setText(textField.getText().trim());
+                textField.positionCaret(textField.getText().length());
+                setCurrentPageFromInput(pagination, textField);
+            }
+        });
+
+        var button = new Button("Go");
+        button.setOnAction(event -> setCurrentPageFromInput(pagination, textField));
+
+        var hbox = new HBox(5);
+        hbox.setAlignment(Pos.CENTER);
+        hbox.getChildren().add(textField);
+        hbox.getChildren().add(button);
+
+        var vbox = new VBox(5.0);
+        vbox.setPadding(new Insets(5));
+        vbox.setAlignment(Pos.CENTER);
+        vbox.setId("pagination-box");
+        vbox.getChildren().add(pagination);
+        vbox.getChildren().add(hbox);
+
+        paginationGrid.getChildren().clear();
+        paginationGrid.getChildren().add(vbox);
+    }
+
+    private void setCurrentPageFromInput(Pagination pagination, TextArea textField) {
+        var index = textField.getText();
+        var page = 0;
+        try {
+            page = Integer.parseInt(index);
+        } catch (NumberFormatException exception) {
+            ClairvoyanceLogger.logger.warn("incorrect integer value");
+        }
+        pagination.setCurrentPageIndex(page - 1);
+    }
+
+    private Pagination createPaginationComponent(List<RecordRow> buffer) {
+        var pagination = new Pagination((buffer.size() / ROWS_PER_PAGE) + 1, 0);
         pagination.setPageFactory(createPage());
         pagination.prefWidthProperty().bind(paginationGrid.widthProperty());
         pagination.prefHeightProperty().bind(paginationGrid.heightProperty());
+        return pagination;
+    }
 
-        paginationGrid.getChildren().add(0, pagination);
+    private void removePagination() {
+        if (!paginationGrid.getChildren().isEmpty() && paginationGrid.getChildren().get(0).getId().equals("pagination-box")) {
+            paginationGrid.getChildren().clear();
+        }
     }
 
     private Set<TableColumn<RecordRow, String>> createDataColumns(HashSet<String> columnsToAdd) {
@@ -234,6 +267,7 @@ public class SetController {
 
     private static TableColumn<RecordRow, Number> createIndexColumn() {
         var indexColumn = new TableColumn<RecordRow, Number>("#");
+        indexColumn.setMinWidth(50);
         indexColumn.setCellValueFactory(param -> {
             RecordRow recordRow = param.getValue();
             if (recordRow != null) {
@@ -244,9 +278,33 @@ public class SetController {
         return indexColumn;
     }
 
+    private void createLoader() {
+        var vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
+        var hbox = new HBox();
+        hbox.setAlignment(Pos.CENTER);
+
+        var iconImage = getClass().getClassLoader().getResourceAsStream("ic_touch.png");
+        Objects.requireNonNull(iconImage, "ic_touch.png is missing");
+        var label = new Label("loading", new ImageView(new Image(iconImage)));
+        label.setFont(Font.font(20));
+
+        hbox.getChildren().add(label);
+        vbox.getChildren().add(hbox);
+
+        vbox.prefWidthProperty().bind(paginationGrid.widthProperty());
+        vbox.prefHeightProperty().bind(paginationGrid.heightProperty());
+
+        paginationGrid.getChildren().add(vbox);
+    }
+
+    private void removeLoader() {
+        paginationGrid.getChildren().clear();
+    }
+
     private static TableColumn<RecordRow, String> createDigestColumn() {
         var digestColumn = new TableColumn<RecordRow, String>("Digest");
-        digestColumn.setMinWidth(200);
+        digestColumn.setMinWidth(220);
         digestColumn.setCellValueFactory(param -> {
             RecordRow recordRow = param.getValue();
             if (recordRow != null) {

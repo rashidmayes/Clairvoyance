@@ -5,7 +5,6 @@ import com.aerospike.client.IAerospikeClient;
 import com.aerospike.client.Key;
 import com.aerospike.client.Record;
 import com.aerospike.client.listener.RecordSequenceListener;
-import com.aerospike.client.policy.Priority;
 import com.aerospike.client.policy.ScanPolicy;
 import com.rashidmayes.clairvoyance.model.ApplicationModel;
 import com.rashidmayes.clairvoyance.model.RecordRow;
@@ -16,7 +15,6 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +22,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class SetScanner {
+
+    // safety net to prevent from too much of memory consumption
+    public static final int MAX_RECORDS_FETCH = 1_000_000;
 
     public interface ScanCallbacks {
 
@@ -35,8 +36,6 @@ public class SetScanner {
 
     private final String namespace;
     private final String set;
-    private final int bufferSize;
-    private final IAerospikeClient aerospikeClient;
     private final ScanCallbacks scanCallbacks;
 
     @Getter
@@ -45,12 +44,10 @@ public class SetScanner {
 
     private final AtomicReference<File> tmpFile;
 
-    public SetScanner(String namespace, String set, int bufferSize, IAerospikeClient aerospikeClient, ScanCallbacks scanCallbacks) {
+    public SetScanner(String namespace, String set, ScanCallbacks scanCallbacks) {
         this.namespace = namespace;
         this.set = set;
-        this.bufferSize = bufferSize;
-        this.aerospikeClient = aerospikeClient;
-        this.buffer = Collections.synchronizedList(new ArrayList<>(bufferSize));
+        this.buffer = Collections.synchronizedList(new LinkedList<>());
         this.scanCallbacks = scanCallbacks;
         this.tmpFile = new AtomicReference<>();
     }
@@ -60,7 +57,8 @@ public class SetScanner {
         var atomicIndex = new AtomicInteger();
         scanCancelled = false;
         try {
-            aerospikeClient.scanAll(
+            var client = getAerospikeClient();
+            client.scanAll(
                     ApplicationModel.INSTANCE.getAerospikeClientFactory().createEventLoop(),
                     new RecordSequenceListener() {
 
@@ -99,7 +97,8 @@ public class SetScanner {
         var atomicIndex = new AtomicInteger();
         scanCancelled = false;
         try {
-            aerospikeClient.scanAll(
+            var client = getAerospikeClient();
+            client.scanAll(
                     createScanPolicy(),
                     namespace,
                     set,
@@ -123,7 +122,7 @@ public class SetScanner {
         if (scanCancelled) {
             throw new AerospikeException.ScanTerminated();
         }
-        if (internalBuffer.size() < bufferSize) {
+        if (internalBuffer.size() < MAX_RECORDS_FETCH) {
             var recordRow = new RecordRow(key, record);
             recordRow.setIndex(index);
             internalBuffer.add(recordRow);
@@ -160,9 +159,18 @@ public class SetScanner {
         this.scanCancelled = true;
     }
 
+    private IAerospikeClient getAerospikeClient() {
+        var clientResult = ApplicationModel.INSTANCE.getAerospikeClient();
+        if (clientResult.hasError()) {
+            throw new AerospikeException(clientResult.getError());
+        }
+        return clientResult.getData();
+    }
+
     private ScanPolicy createScanPolicy() {
         var scanPolicy = new ScanPolicy();
-        scanPolicy.priority = Priority.LOW;
+        scanPolicy.totalTimeout = 4000;
+        scanPolicy.maxRecords = MAX_RECORDS_FETCH;
         return scanPolicy;
     }
 

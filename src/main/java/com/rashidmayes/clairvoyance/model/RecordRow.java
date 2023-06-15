@@ -2,9 +2,8 @@ package com.rashidmayes.clairvoyance.model;
 
 import com.aerospike.client.Key;
 import com.aerospike.client.Record;
-import com.aerospike.client.async.AsyncClient;
 import com.rashidmayes.clairvoyance.ClairvoyanceFxApplication;
-import javafx.application.Platform;
+import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +34,7 @@ public class RecordRow {
     public Record getRecord() {
         // TODO: 12/06/2023 it fetches record from server and in case of collection it will operate over and over again
         if (referent == null || referent.get() == null) {
+            ClairvoyanceLogger.logger.info("fetching record from server...");
             var client = ClairvoyanceFxApplication.getClient();
             var record = client.get(null, key);
             referent = new SoftReference<>(Objects.requireNonNullElse(record, NULL_RECORD));

@@ -5,31 +5,17 @@ import com.aerospike.client.AerospikeException;
 import com.aerospike.client.IAerospikeClient;
 import com.aerospike.client.async.EventLoop;
 import com.aerospike.client.async.EventLoops;
-import com.aerospike.client.async.NettyEventLoops;
+import com.aerospike.client.async.NioEventLoops;
 import com.aerospike.client.policy.ClientPolicy;
 import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import com.rashidmayes.clairvoyance.util.Result;
-import io.netty.channel.nio.NioEventLoopGroup;
-
-import java.util.concurrent.*;
 
 public class AerospikeClientFactory {
-
-    private static final ExecutorService executor = new ThreadPoolExecutor(
-            2, 4, 5, TimeUnit.MINUTES, new LinkedBlockingQueue<>(),
-            runnable -> {
-                var thread = Executors.defaultThreadFactory().newThread(runnable);
-                thread.setName("event-loop-thread-" + thread.threadId());
-                thread.setDaemon(true);
-                return thread;
-            }
-    );
 
     private static final EventLoops eventLoops;
 
     static {
-        var group = new NioEventLoopGroup(4, executor);
-        eventLoops = new NettyEventLoops(group);
+        eventLoops = new NioEventLoops(4);
     }
 
     public Result<IAerospikeClient, String> create(ConnectionInfo connectionInfo) {
