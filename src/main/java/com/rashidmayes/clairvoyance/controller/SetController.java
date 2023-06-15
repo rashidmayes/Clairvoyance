@@ -1,7 +1,7 @@
 package com.rashidmayes.clairvoyance.controller;
 
-import com.aerospike.client.AerospikeException;
-import com.aerospike.client.IAerospikeClient;
+import com.aerospike.client.Key;
+import com.aerospike.client.Value;
 import com.rashidmayes.clairvoyance.NoSQLCellFactory;
 import com.rashidmayes.clairvoyance.SetScanner;
 import com.rashidmayes.clairvoyance.model.ApplicationModel;
@@ -30,6 +30,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
+import lombok.SneakyThrows;
+import org.luaj.vm2.LuaValue;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -37,6 +39,8 @@ import java.util.stream.Collectors;
 
 public class SetController {
 
+    @FXML
+    public TextField searchKeyField;
     @FXML
     private GridPane rootPane;
     @FXML
@@ -53,6 +57,7 @@ public class SetController {
     private final List<RecordRow> buffer = Collections.synchronizedList(new LinkedList<>());
 
     private final AtomicReference<SetScanner> scannerReference = new AtomicReference<>();
+    private final AtomicReference<SetInfo> setInfoReference = new AtomicReference<>();
 
     public SetController() {
     }
@@ -114,12 +119,11 @@ public class SetController {
             if (newScene != null) {
                 // user opens the tab
                 var info = (SetInfo) rootPane.getUserData();
+                setInfoReference.set(info);
                 scannerReference.set(createScanner(info));
                 ClairvoyanceLogger.logger.info("fetching set {}", info.getName());
 
-                Platform.runLater(() -> {
-                    createLoader();
-                });
+                Platform.runLater(this::createLoader);
 
                 ApplicationModel.INSTANCE.runInBackground(() -> {
                     scannerReference.get().scan();
@@ -176,9 +180,9 @@ public class SetController {
 
     private void createPagination(List<RecordRow> buffer) {
         var pagination = createPaginationComponent(buffer);
-        var textField = new TextArea();
+        var textField = new TextField();
         textField.setPromptText("jump to page");
-        textField.setPrefRowCount(1);
+//        textField.setPrefRowCount(1);
         textField.setMaxWidth(90);
 
         textField.setOnKeyPressed(ke -> {
@@ -208,7 +212,7 @@ public class SetController {
         paginationGrid.getChildren().add(vbox);
     }
 
-    private void setCurrentPageFromInput(Pagination pagination, TextArea textField) {
+    private void setCurrentPageFromInput(Pagination pagination, TextField textField) {
         var index = textField.getText();
         var page = 0;
         try {
@@ -313,6 +317,41 @@ public class SetController {
             return new SimpleStringProperty("");
         });
         return digestColumn;
+    }
+
+    public void searchByKey(ActionEvent event) {
+        event.consume();
+        var key = searchKeyField.getText();
+        ClairvoyanceLogger.logger.info("searching {}...", key);
+        if (key == null || key.isBlank()) {
+            Platform.runLater(() -> dataTable.getItems().setAll(buffer));
+        } else {
+            var recordRow = searchForRecord(key);
+            Platform.runLater(() -> dataTable.getItems().setAll(recordRow));
+        }
+    }
+
+    @SneakyThrows
+    private List<RecordRow> searchForRecord(String key) {
+        var set = setInfoReference.get();
+        var luaValueClass = LuaValue.class;
+        getClass().getClassLoader().getParent().loadClass(luaValueClass.getName());
+        Key newKey = null;
+//        try {
+            newKey = new Key(set.getNamespace(), set.getName(), Value.get(key));
+
+
+            // TODO: 15/06/2023 no class def found
+//        } catch (Throwable exception) {
+//            ClairvoyanceLogger.logger.error(exception.getMessage());
+//        }
+        var result = new LinkedList<RecordRow>();
+        for (var recordRow : buffer) {
+            if (newKey != null && Arrays.equals(recordRow.getKey().digest, newKey.digest)) {
+                result.add(recordRow);
+            }
+        }
+        return result;
     }
 
 }

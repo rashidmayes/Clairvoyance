@@ -2,10 +2,19 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 <GridPane prefHeight="66.0" prefWidth="494.0" xmlns="http://javafx.com/javafx/17.0.2-ea">
-    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0"
-           prefWidth="491.0"
-           text="This project is a fork of repository https://github.com/rashidmayes/Clairvoyance done by Radek"
-           textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER"
-           GridPane.hgrow="ALWAYS" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS"/>
+    <HBox alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+        <VBox alignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                   prefHeight="57.0" prefWidth="491.0"
+                   text="This project is a fork of repository https://github.com/rashidmayes/Clairvoyance done by Radek"
+                   textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS"
+                   GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                <font>
+                    <Font name="System Bold" size="18.0"/>
+                </font>
+            </Label>
+        </VBox>
+    </HBox>
 </GridPane>

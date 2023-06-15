@@ -36,7 +36,7 @@ public class ClairvoyanceFxApplication extends Application {
     }
 
     public static void main(String[] args) {
-        Application.launch(ClairvoyanceFxApplication.class, args);
+        launch();
     }
 
     @Override

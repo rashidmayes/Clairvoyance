@@ -12,6 +12,8 @@
         <HBox>
             <Button id="refreshSetButton" fx:id="refreshSetButton" mnemonicParsing="false" onAction="#refreshAction" text="Refresh data"/>
             <Button id="cancelActionButton" fx:id="cancelActionButton" mnemonicParsing="false" onAction="#cancelAction" text="Stop"/>
+            <TextField fx:id="searchKeyField"/>
+            <Button fx:id="startSearchButton" onAction="#searchByKey" text="Search"/>
         </HBox>
     </ToolBar>
 
