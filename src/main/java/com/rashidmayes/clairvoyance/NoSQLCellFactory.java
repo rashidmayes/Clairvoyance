@@ -23,7 +23,6 @@ public class NoSQLCellFactory implements Callback<CellDataFeatures<RecordRow, St
 
     private static final Gson gson = new Gson();
 
-
     public NoSQLCellFactory(String binName) {
         this.mBinName = binName;
     }

@@ -54,7 +54,7 @@ public class SetController {
 
     private final TableView<RecordRow> dataTable = new TableView<>(FXCollections.observableArrayList());
     private final List<RecordRow> buffer = Collections.synchronizedList(new LinkedList<>());
-    private final List<RecordRow> searchBuffer = Collections.synchronizedList(new LinkedList<>());
+    private final RecordSearcher recordSearcher = new RecordSearcher();
 
     private final AtomicReference<SetScanner> scannerReference = new AtomicReference<>();
     private final AtomicReference<SetInfo> setInfoReference = new AtomicReference<>();
@@ -81,6 +81,8 @@ public class SetController {
                 dataTable.getItems().clear();
                 removePagination();
                 recordDetails.setText(null);
+                searchKeyField.setText("");
+                recordSearcher.reset();
                 createLoader();
             });
             var scanner = scannerReference.get();
@@ -95,9 +97,25 @@ public class SetController {
         scannerReference.get().cancelScan();
     }
 
+    @FXML
+    public void searchByKey(ActionEvent event) {
+        event.consume();
+        var set = setInfoReference.get();
+        var keyText = searchKeyField.getText();
+
+        if (keyText == null || keyText.isBlank()) {
+            recordSearcher.reset();
+            Platform.runLater(() -> updateViewFromBuffer(buffer));
+        } else {
+            var key = new Key(set.getNamespace(), set.getName(), keyText);
+            recordSearcher.search(key, buffer);
+            Platform.runLater(() -> updateViewFromBuffer(recordSearcher.getSearchResult()));
+        }
+    }
+
     private Callback<Integer, Node> createPage() {
         return index -> {
-            var list = searchBuffer.isEmpty() ? buffer : searchBuffer;
+            var list = recordSearcher.isActiveSearch() ? recordSearcher.getSearchResult() : buffer;
             if (index > list.size() - 1) {
                 index = 0;
             }
@@ -171,8 +189,6 @@ public class SetController {
                     columnsToAdd.add(recordBin);
                 }
             }
-            // TODO: 15/06/2023 It can't be here!
-            //this.buffer.add(recordRow);
         }
 
         var c = new LinkedList<TableColumn<RecordRow, ?>>();
@@ -314,41 +330,6 @@ public class SetController {
             return new SimpleStringProperty("");
         });
         return digestColumn;
-    }
-
-    public void searchByKey(ActionEvent event) {
-        event.consume();
-        // TODO: 15/06/2023 try to simplify this logic
-        var set = setInfoReference.get();
-        var keyText = searchKeyField.getText();
-        if (keyText == null || keyText.isBlank()) {
-            //updateViewFromBuffer(buffer);
-            Platform.runLater(() -> {
-                searchBuffer.clear();
-                updateViewFromBuffer(buffer);
-            });
-        } else {
-            var key = new Key(set.getNamespace(), set.getName(), keyText);
-            System.err.println(key);
-            var result = searchForRecord(key);
-            System.err.println(result.size());
-            Platform.runLater(() -> {
-                searchBuffer.clear();
-                searchBuffer.addAll(result);
-                updateViewFromBuffer(result);
-                //searchBuffer.clear();
-            });
-        }
-    }
-
-    private List<RecordRow> searchForRecord(Key key) {
-        var result = new LinkedList<RecordRow>();
-        for (var recordRow : buffer) {
-            if (recordRow.getKey().equals(key)) {
-                result.add(recordRow);
-            }
-        }
-        return result;
     }
 
 }
