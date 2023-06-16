@@ -51,9 +51,9 @@ public class ClairvoyanceFxApplication extends Application {
         stage.setY(primaryScreenBounds.getMinY());
         stage.setWidth(primaryScreenBounds.getWidth());
         stage.setHeight(primaryScreenBounds.getHeight());
-        stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("icon.png")));
+        stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("images/icon.png")));
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("connect.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/connect.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);

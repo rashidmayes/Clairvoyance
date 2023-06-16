@@ -64,19 +64,19 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
     public BrowserController() {
         var classLoader = getClass().getClassLoader();
 
-        var rootIconImage = classLoader.getResourceAsStream("ic_cluster.png");
+        var rootIconImage = classLoader.getResourceAsStream("images/ic_cluster.png");
         Objects.requireNonNull(rootIconImage, "ic_cluster.png is missing");
         this.rootIcon = new Image(rootIconImage);
 
-        var nodeIconImage = classLoader.getResourceAsStream("node.png");
+        var nodeIconImage = classLoader.getResourceAsStream("images/node.png");
         Objects.requireNonNull(nodeIconImage, "node.png is missing");
         this.nodeIcon = new Image(nodeIconImage);
 
-        var namespaceIconImage = classLoader.getResourceAsStream("ic_storage.png");
+        var namespaceIconImage = classLoader.getResourceAsStream("images/ic_storage.png");
         Objects.requireNonNull(namespaceIconImage, "ic_storage.png is missing");
         this.namespaceIcon = new Image(namespaceIconImage);
 
-        var setIconImage = classLoader.getResourceAsStream("ic_set.png");
+        var setIconImage = classLoader.getResourceAsStream("images/ic_set.png");
         Objects.requireNonNull(setIconImage, "ic_set.png is missing");
         this.setIcon = new Image(setIconImage);
     }
@@ -106,11 +106,11 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
                 var identifiable = newValue.getValue().value;
 
                 if (identifiable instanceof NamespaceInfo) {
-                    tab.setContent(FXMLLoader.load(getClass().getClassLoader().getResource("tab_namespace.fxml")));
+                    tab.setContent(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/tab_namespace.fxml")));
                 } else if (identifiable instanceof SetInfo) {
-                    tab.setContent(FXMLLoader.load(getClass().getClassLoader().getResource("tab_set.fxml")));
+                    tab.setContent(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/tab_set.fxml")));
                 } else {
-                    tab.setContent(FXMLLoader.load(getClass().getClassLoader().getResource("tab_cluster.fxml")));
+                    tab.setContent(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/tab_cluster.fxml")));
                 }
                 tab.getContent().setUserData(identifiable);
                 tabs.getTabs().add(tab);
@@ -149,7 +149,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
                 tab.setId("about");
                 tab.setText("About");
 
-                var resource = getClass().getClassLoader().getResource("tab_about.fxml");
+                var resource = getClass().getClassLoader().getResource("fxml/tab_about.fxml");
                 Objects.requireNonNull(resource, "tab_about.fxml is missing");
                 Parent root = FXMLLoader.load(resource);
                 tab.setContent(root);
@@ -176,7 +176,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
                 tab.setId(item.getId());
                 tab.setText(item.getText());
 
-                var resource = getClass().getClassLoader().getResource("tab_web.fxml");
+                var resource = getClass().getClassLoader().getResource("fxml/tab_web.fxml");
                 Objects.requireNonNull(resource, "tab_web.fxml is missing");
                 Parent root = FXMLLoader.load(resource);
                 tab.setContent(root);
@@ -200,7 +200,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
             tab.setId("full-cluster-dump");
             tab.setText("Full cluster dump");
 
-            var resource = getClass().getClassLoader().getResource("tab_cluster.fxml");
+            var resource = getClass().getClassLoader().getResource("fxml/tab_cluster.fxml");
             Objects.requireNonNull(resource, "tab_cluster.fxml cannot be null");
             Parent root = FXMLLoader.load(resource);
             tab.setContent(root);

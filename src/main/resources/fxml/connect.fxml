@@ -17,7 +17,7 @@
     <ImageView GridPane.columnIndex="0" GridPane.rowIndex="0"
                GridPane.columnSpan="2" fitHeight="300" fitWidth="250" preserveRatio="true">
         <image>
-            <Image url="@splash.png"/>
+            <Image url="@/images/splash.png"/>
         </image>
     </ImageView>
 
@@ -43,7 +43,7 @@
     </HBox>
 
     <stylesheets>
-        <URL value="@connect.css"/>
+        <URL value="@/css/connect.css"/>
     </stylesheets>
 
 </GridPane>

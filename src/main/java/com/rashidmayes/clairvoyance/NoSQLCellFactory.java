@@ -56,7 +56,6 @@ public class NoSQLCellFactory implements Callback<CellDataFeatures<RecordRow, St
                     Map<String, Object> bins = record.bins;
                     if (bins != null) {
                         Object value = bins.get(mBinName);
-
                         if (value != null) {
                             if (value instanceof String || value instanceof Number) {
                                 return new SimpleStringProperty(value.toString());

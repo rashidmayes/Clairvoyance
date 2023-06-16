@@ -14,19 +14,19 @@
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
         </Menu>
         <Menu mnemonicParsing="false" text="Documentation">
-            <MenuItem id="http://www.aerospike.com/docs/" mnemonicParsing="false" onAction="#handleWeb"
+            <MenuItem id="https://www.aerospike.com/docs/" mnemonicParsing="false" onAction="#handleWeb"
                       text="Overview"/>
-            <MenuItem id="http://www.aerospike.com/docs/deploy_guides/aws" mnemonicParsing="false"
+            <MenuItem id="https://www.aerospike.com/docs/deploy_guides/aws" mnemonicParsing="false"
                       onAction="#handleWeb" text="Deployment Guides"/>
-            <MenuItem id="http://www.aerospike.com/download/client/" mnemonicParsing="false"
+            <MenuItem id="https://www.aerospike.com/download/client/" mnemonicParsing="false"
                       onAction="#handleWeb" text="Clients"/>
-            <MenuItem id="http://www.aerospike.com/docs/connectors/" mnemonicParsing="false"
+            <MenuItem id="https://www.aerospike.com/docs/connectors/" mnemonicParsing="false"
                       onAction="#handleWeb" text="Connectors"/>
-            <MenuItem id="http://www.aerospike.com/docs/operations/plan/capacity/" mnemonicParsing="false"
+            <MenuItem id="https://www.aerospike.com/docs/operations/plan/capacity/" mnemonicParsing="false"
                       onAction="#handleWeb" text="Capacity Planning"/>
-            <MenuItem id="http://www.aerospike.com/docs/guide/limitations.html" mnemonicParsing="false"
+            <MenuItem id="https://www.aerospike.com/docs/guide/limitations.html" mnemonicParsing="false"
                       onAction="#handleWeb" text="Limitations"/>
-            <MenuItem id="http://www.aerospike.com/datamodeling/modeling-data-aerospike" mnemonicParsing="false"
+            <MenuItem id="https://www.aerospike.com/datamodeling/modeling-data-aerospike" mnemonicParsing="false"
                       onAction="#handleWeb" text="Data Modeling"/>
         </Menu>
         <Menu mnemonicParsing="false" text="Help">
@@ -47,7 +47,7 @@
 
         <TextArea id="console" fx:id="console" editable="false" wrapText="true"/>
         <stylesheets>
-            <URL value="@browser.css"/>
+            <URL value="@/css/browser.css"/>
         </stylesheets>
     </SplitPane>
 

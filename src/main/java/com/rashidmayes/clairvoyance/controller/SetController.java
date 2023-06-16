@@ -1,7 +1,6 @@
 package com.rashidmayes.clairvoyance.controller;
 
 import com.aerospike.client.Key;
-import com.aerospike.client.Value;
 import com.rashidmayes.clairvoyance.NoSQLCellFactory;
 import com.rashidmayes.clairvoyance.SetScanner;
 import com.rashidmayes.clairvoyance.model.ApplicationModel;
@@ -30,12 +29,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
-import lombok.SneakyThrows;
-import org.luaj.vm2.LuaValue;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 
 public class SetController {
 
@@ -55,6 +54,7 @@ public class SetController {
 
     private final TableView<RecordRow> dataTable = new TableView<>(FXCollections.observableArrayList());
     private final List<RecordRow> buffer = Collections.synchronizedList(new LinkedList<>());
+    private final List<RecordRow> searchBuffer = Collections.synchronizedList(new LinkedList<>());
 
     private final AtomicReference<SetScanner> scannerReference = new AtomicReference<>();
     private final AtomicReference<SetInfo> setInfoReference = new AtomicReference<>();
@@ -97,13 +97,17 @@ public class SetController {
 
     private Callback<Integer, Node> createPage() {
         return index -> {
+            var list = searchBuffer.isEmpty() ? buffer : searchBuffer;
+            if (index > list.size() - 1) {
+                index = 0;
+            }
             ClairvoyanceLogger.logger.info("page index {}", index);
             int fromIndex = index * ROWS_PER_PAGE;
-            int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, buffer.size());
+            int toIndex = Math.min(fromIndex + ROWS_PER_PAGE, list.size());
             if (fromIndex > toIndex) {
                 return null;
             }
-            var page = buffer.subList(fromIndex, toIndex);
+            var page = list.subList(fromIndex, toIndex);
             dataTable.setItems(FXCollections.observableArrayList(page));
             return dataTable;
         };
@@ -140,40 +144,45 @@ public class SetController {
 
                     @Override
                     public void scanSuccessCallback(List<RecordRow> buffer) {
-                        Platform.runLater(() -> updateViewFromBuffer(buffer));
+                        scanDoneCallback(buffer);
                     }
 
                     @Override
                     public void scanTerminated(List<RecordRow> buffer) {
-                        Platform.runLater(() -> updateViewFromBuffer(buffer));
+                        scanDoneCallback(buffer);
                     }
                 }
         );
     }
 
+    private void scanDoneCallback(List<RecordRow> buffer) {
+        this.buffer.clear();
+        this.buffer.addAll(buffer);
+        Platform.runLater(() -> updateViewFromBuffer(this.buffer));
+    }
+
     private void updateViewFromBuffer(List<RecordRow> buffer) {
-        var indexColumn = createIndexColumn();
-        dataTable.getColumns().add(indexColumn);
+        var columnsToAdd = new LinkedList<String>();
 
-        var digestColumn = createDigestColumn();
-        dataTable.getColumns().add(digestColumn);
-
-        var columns = getColumnsNames();
-        var columnsToAdd = new HashSet<String>();
-
-        for (RecordRow recordRow : buffer) {
+        for (var recordRow : buffer) {
             var recordBins = recordRow.getRecord().bins.keySet();
             for (String recordBin : recordBins) {
-                if (!columns.contains(recordBin)) {
-                    columns.add(recordBin);
+                if (!columnsToAdd.contains(recordBin)) {
                     columnsToAdd.add(recordBin);
                 }
             }
-            this.buffer.add(recordRow);
+            // TODO: 15/06/2023 It can't be here!
+            //this.buffer.add(recordRow);
         }
 
-        dataTable.getColumns().addAll(createDataColumns(columnsToAdd));
-        dataTable.getItems().addAll(buffer);
+        var c = new LinkedList<TableColumn<RecordRow, ?>>();
+        c.add(createIndexColumn());
+        c.add(createDigestColumn());
+        c.addAll(createDataColumns(columnsToAdd));
+
+
+        dataTable.getColumns().setAll(c);
+        dataTable.getItems().setAll(buffer);
 
         createPagination(buffer);
     }
@@ -182,7 +191,6 @@ public class SetController {
         var pagination = createPaginationComponent(buffer);
         var textField = new TextField();
         textField.setPromptText("jump to page");
-//        textField.setPrefRowCount(1);
         textField.setMaxWidth(90);
 
         textField.setOnKeyPressed(ke -> {
@@ -237,7 +245,7 @@ public class SetController {
         }
     }
 
-    private Set<TableColumn<RecordRow, String>> createDataColumns(HashSet<String> columnsToAdd) {
+    private List<TableColumn<RecordRow, String>> createDataColumns(List<String> columnsToAdd) {
         return columnsToAdd.stream()
                 .map(text -> {
                     var column = new TableColumn<RecordRow, String>(text);
@@ -245,14 +253,7 @@ public class SetController {
                     column.setCellValueFactory(new NoSQLCellFactory(text));
                     return column;
                 })
-                .collect(Collectors.toSet());
-    }
-
-    public Set<String> getColumnsNames() {
-        return dataTable.getColumns()
-                .stream()
-                .map(TableColumnBase::getText)
-                .collect(Collectors.toSet());
+                .toList();
     }
 
     private ChangeListener<? super RecordRow> rowClickedListener() {
@@ -288,7 +289,7 @@ public class SetController {
         var hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
 
-        var iconImage = getClass().getClassLoader().getResourceAsStream("ic_touch.png");
+        var iconImage = getClass().getClassLoader().getResourceAsStream("images/ic_touch.png");
         Objects.requireNonNull(iconImage, "ic_touch.png is missing");
         var label = new Label("loading", new ImageView(new Image(iconImage)));
         label.setFont(Font.font(20));
@@ -300,10 +301,6 @@ public class SetController {
         vbox.prefHeightProperty().bind(paginationGrid.heightProperty());
 
         paginationGrid.getChildren().add(vbox);
-    }
-
-    private void removeLoader() {
-        paginationGrid.getChildren().clear();
     }
 
     private static TableColumn<RecordRow, String> createDigestColumn() {
@@ -321,33 +318,33 @@ public class SetController {
 
     public void searchByKey(ActionEvent event) {
         event.consume();
-        var key = searchKeyField.getText();
-        ClairvoyanceLogger.logger.info("searching {}...", key);
-        if (key == null || key.isBlank()) {
-            Platform.runLater(() -> dataTable.getItems().setAll(buffer));
+        // TODO: 15/06/2023 try to simplify this logic
+        var set = setInfoReference.get();
+        var keyText = searchKeyField.getText();
+        if (keyText == null || keyText.isBlank()) {
+            //updateViewFromBuffer(buffer);
+            Platform.runLater(() -> {
+                searchBuffer.clear();
+                updateViewFromBuffer(buffer);
+            });
         } else {
-            var recordRow = searchForRecord(key);
-            Platform.runLater(() -> dataTable.getItems().setAll(recordRow));
+            var key = new Key(set.getNamespace(), set.getName(), keyText);
+            System.err.println(key);
+            var result = searchForRecord(key);
+            System.err.println(result.size());
+            Platform.runLater(() -> {
+                searchBuffer.clear();
+                searchBuffer.addAll(result);
+                updateViewFromBuffer(result);
+                //searchBuffer.clear();
+            });
         }
     }
 
-    @SneakyThrows
-    private List<RecordRow> searchForRecord(String key) {
-        var set = setInfoReference.get();
-        var luaValueClass = LuaValue.class;
-        getClass().getClassLoader().getParent().loadClass(luaValueClass.getName());
-        Key newKey = null;
-//        try {
-            newKey = new Key(set.getNamespace(), set.getName(), Value.get(key));
-
-
-            // TODO: 15/06/2023 no class def found
-//        } catch (Throwable exception) {
-//            ClairvoyanceLogger.logger.error(exception.getMessage());
-//        }
+    private List<RecordRow> searchForRecord(Key key) {
         var result = new LinkedList<RecordRow>();
         for (var recordRow : buffer) {
-            if (newKey != null && Arrays.equals(recordRow.getKey().digest, newKey.digest)) {
+            if (recordRow.getKey().equals(key)) {
                 result.add(recordRow);
             }
         }

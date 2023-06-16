@@ -57,7 +57,7 @@ public class ConnectController {
             return;
         }
         try {
-            URL resource = getClass().getClassLoader().getResource("browser.fxml");
+            URL resource = getClass().getClassLoader().getResource("fxml/browser.fxml");
             Objects.requireNonNull(resource, "browser.fxml is null");
             Parent root = FXMLLoader.load(resource);
             Scene scene = new Scene(root);

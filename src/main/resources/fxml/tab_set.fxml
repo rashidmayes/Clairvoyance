@@ -9,10 +9,10 @@
 
     <ToolBar GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0"
              GridPane.vgrow="NEVER">
-        <HBox>
+        <HBox spacing="5">
             <Button id="refreshSetButton" fx:id="refreshSetButton" mnemonicParsing="false" onAction="#refreshAction" text="Refresh data"/>
             <Button id="cancelActionButton" fx:id="cancelActionButton" mnemonicParsing="false" onAction="#cancelAction" text="Stop"/>
-            <TextField fx:id="searchKeyField"/>
+            <TextField fx:id="searchKeyField" promptText="search by key"/>
             <Button fx:id="startSearchButton" onAction="#searchByKey" text="Search"/>
         </HBox>
     </ToolBar>
@@ -29,7 +29,7 @@
     </SplitPane>
 
     <stylesheets>
-        <URL value="@tab_set.css"/>
+        <URL value="@/css/tab_set.css"/>
     </stylesheets>
 
 </GridPane>
