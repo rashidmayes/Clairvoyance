@@ -62,23 +62,10 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
     private final NodeInfoMapper nodeInfoMapper = new NodeInfoMapper();
 
     public BrowserController() {
-        var classLoader = getClass().getClassLoader();
-
-        var rootIconImage = classLoader.getResourceAsStream("images/ic_cluster.png");
-        Objects.requireNonNull(rootIconImage, "ic_cluster.png is missing");
-        this.rootIcon = new Image(rootIconImage);
-
-        var nodeIconImage = classLoader.getResourceAsStream("images/node.png");
-        Objects.requireNonNull(nodeIconImage, "node.png is missing");
-        this.nodeIcon = new Image(nodeIconImage);
-
-        var namespaceIconImage = classLoader.getResourceAsStream("images/ic_storage.png");
-        Objects.requireNonNull(namespaceIconImage, "ic_storage.png is missing");
-        this.namespaceIcon = new Image(namespaceIconImage);
-
-        var setIconImage = classLoader.getResourceAsStream("images/ic_set.png");
-        Objects.requireNonNull(setIconImage, "ic_set.png is missing");
-        this.setIcon = new Image(setIconImage);
+        this.rootIcon = new Image("images/ic_cluster.png");
+        this.nodeIcon = new Image("images/node.png");
+        this.namespaceIcon = new Image("images/ic_storage.png");
+        this.setIcon = new Image("images/ic_set.png");
     }
 
     @FXML
@@ -106,7 +93,9 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
                 var identifiable = newValue.getValue().value;
 
                 if (identifiable instanceof NamespaceInfo) {
-                    tab.setContent(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/tab_namespace.fxml")));
+                    var resource = getClass().getClassLoader().getResource("fxml/tab_namespace.fxml");
+                    javafx.scene.Node load = FXMLLoader.load(resource);
+                    tab.setContent(load);
                 } else if (identifiable instanceof SetInfo) {
                     tab.setContent(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/tab_set.fxml")));
                 } else {
@@ -379,8 +368,7 @@ public class BrowserController implements ChangeListener<TreeItem<SimpleTreeNode
     private static IAerospikeClient createNewClient() {
         var aerospikeClientResult = ApplicationModel.INSTANCE.createNewAerospikeClient();
         if (aerospikeClientResult.hasError()) {
-            new Alert(Alert.AlertType.ERROR, aerospikeClientResult.getError())
-                    .showAndWait();
+            ClairvoyanceFxApplication.displayAlert(aerospikeClientResult.getError());
             throw new AerospikeException(aerospikeClientResult.getError());
         }
         return aerospikeClientResult.getData();

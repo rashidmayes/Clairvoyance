@@ -44,16 +44,14 @@ public class ConnectController {
     protected void handleConnectAction(ActionEvent event) {
         var connectionInfoResult = getConnectionInfo(event.getSource() == connectAlternateButton);
         if (connectionInfoResult.hasError()) {
-            new Alert(Alert.AlertType.ERROR, connectionInfoResult.getError())
-                    .showAndWait();
+            ClairvoyanceFxApplication.displayAlert(connectionInfoResult.getError());
             return;
         }
         ApplicationModel.INSTANCE.setConnectionInfo(connectionInfoResult.getData());
         var aerospikeClientResult = ApplicationModel.INSTANCE.createNewAerospikeClient();
         if (aerospikeClientResult.hasError()) {
             ClairvoyanceLogger.logger.warn("could not connect to cluster: {}", aerospikeClientResult.getError());
-            new Alert(Alert.AlertType.ERROR, "could not connect to cluster")
-                    .showAndWait();
+            ClairvoyanceFxApplication.displayAlert("could not connect to cluster");
             return;
         }
         try {
@@ -70,8 +68,7 @@ public class ConnectController {
 
         } catch (Exception e) {
             ClairvoyanceLogger.logger.error(e.getMessage(), e);
-            Alert alert = new Alert(AlertType.ERROR, String.format("Error connecting: %s", e.getMessage()));
-            alert.showAndWait();
+            ClairvoyanceFxApplication.displayAlert(String.format("Error connecting: %s", e.getMessage()));
         }
     }
 

@@ -27,7 +27,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 
 import java.util.Collections;
@@ -305,12 +304,11 @@ public class SetController {
         var hbox = new HBox();
         hbox.setAlignment(Pos.CENTER);
 
-        var iconImage = getClass().getClassLoader().getResourceAsStream("images/ic_touch.png");
+        var iconImage = getClass().getClassLoader().getResourceAsStream("images/spinner.gif");
         Objects.requireNonNull(iconImage, "ic_touch.png is missing");
-        var label = new Label("loading", new ImageView(new Image(iconImage)));
-        label.setFont(Font.font(20));
+        var loaderGif = new ImageView(new Image(iconImage));
 
-        hbox.getChildren().add(label);
+        hbox.getChildren().add(loaderGif);
         vbox.getChildren().add(hbox);
 
         vbox.prefWidthProperty().bind(paginationGrid.widthProperty());

@@ -6,6 +6,7 @@ import com.rashidmayes.clairvoyance.model.ApplicationModel;
 import com.rashidmayes.clairvoyance.util.ClairvoyanceLogger;
 import com.rashidmayes.clairvoyance.util.FileUtil;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -17,6 +18,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.util.Objects;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
@@ -27,12 +29,14 @@ public class ClairvoyanceFxApplication extends Application {
     public static IAerospikeClient getClient() throws AerospikeException {
         var aerospikeClientResult = ApplicationModel.INSTANCE.getAerospikeClient();
         if (aerospikeClientResult.hasError()) {
-            // TODO: 12/06/2023 not sure if this can be run from any thread - probably only from FX thread
-            new Alert(Alert.AlertType.ERROR, aerospikeClientResult.getError())
-                    .showAndWait();
             throw new AerospikeException(aerospikeClientResult.getError());
         }
         return aerospikeClientResult.getData();
+    }
+
+    public static void displayAlert(String text) {
+        Platform.runLater(() -> new Alert(Alert.AlertType.ERROR, text)
+                .showAndWait());
     }
 
     public static void main(String[] args) {
@@ -51,9 +55,13 @@ public class ClairvoyanceFxApplication extends Application {
         stage.setY(primaryScreenBounds.getMinY());
         stage.setWidth(primaryScreenBounds.getWidth());
         stage.setHeight(primaryScreenBounds.getHeight());
-        stage.getIcons().add(new Image(getClass().getClassLoader().getResourceAsStream("images/icon.png")));
+        var iconStream = getClass().getClassLoader().getResourceAsStream("images/icon.png");
+        Objects.requireNonNull(iconStream, "icon.png is missing");
+        stage.getIcons().add(new Image("images/icon.png"));
 
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/connect.fxml"));
+        var resource = getClass().getClassLoader().getResource("fxml/connect.fxml");
+        Objects.requireNonNull(resource, "connect.fxml is missing");
+        Parent root = FXMLLoader.load(resource);
         Scene scene = new Scene(root);
 
         stage.setScene(scene);

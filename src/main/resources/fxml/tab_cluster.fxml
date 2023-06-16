@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<GridPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rashidmayes.clairvoyance.controller.ClusterController">
-    <TextArea id="dumpTextArea" fx:id="dumpTextArea" editable="false" wrapText="true" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-      <font>
-         <Font name="Monospaced Regular" size="14.0" />
-      </font>
-    </TextArea>
-</GridPane>
+<?import javafx.scene.web.WebView?>
+<WebView xmlns:fx="http://javafx.com/fxml/1" fx:id="clusterWebView"
+         fx:controller="com.rashidmayes.clairvoyance.controller.ClusterController"/>
